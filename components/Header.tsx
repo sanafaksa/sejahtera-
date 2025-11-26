@@ -56,7 +56,7 @@ export default function Header() {
           <div className="flex items-center justify-between py-2 text-sm">
             <div className="flex items-center gap-6">
               <a
-                href="tel:+6281213696772"
+                href="tel:+628121369677"
                 className="flex items-center gap-2 hover:text-green-200 transition-colors"
               >
                 <Phone className="w-4 h-4" />
@@ -85,7 +85,7 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 group relative z-10"
+            className="flex items-center gap-3 group relative z-50"
           >
             <div className="relative w-10 h-10 sm:w-12 sm:h-12">
               <Image
@@ -147,7 +147,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative z-50 p-2 text-gray-700 hover:text-green-600 transition-colors"
+            className="lg:hidden relative z-[60] p-2 text-gray-700 hover:text-green-600 transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -165,7 +165,8 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-[55]"
+              style={{ top: 0, left: 0, right: 0, bottom: 0 }}
               onClick={() => setIsOpen(false)}
             />
 
@@ -175,7 +176,8 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl lg:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl lg:hidden overflow-y-auto z-[60]"
+              style={{ height: "100vh" }}
             >
               <div className="flex flex-col h-full">
                 {/* Mobile Menu Header */}
@@ -183,7 +185,7 @@ export default function Header() {
                   <div className="flex items-center gap-3">
                     <div className="relative w-12 h-12">
                       <Image
-                        src="/favicon.jpg"
+                        src="/favicon.ico"
                         alt="Ilavio Logo"
                         fill
                         className="object-contain"
@@ -235,11 +237,11 @@ export default function Header() {
                   </Link>
                   <div className="space-y-2 text-sm text-gray-600">
                     <a
-                      href="tel:+6281234567890"
+                      href="tel:+628121369677"
                       className="flex items-center gap-2 hover:text-green-600 transition-colors"
                     >
                       <Phone className="w-4 h-4" />
-                      <span>+62 812-3456-7890</span>
+                      <span>+62 8121-3696-772</span>
                     </a>
                     <a
                       href="mailto:marketing@ilavioo.com"

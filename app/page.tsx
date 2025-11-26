@@ -485,10 +485,6 @@ export default async function Home() {
       </section>
 
       <section className="py-20 bg-gradient-to-r from-green-600 to-forest-700 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/copper-texture.png')] bg-repeat"></div>
-        </div>
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <FadeInView direction="up">

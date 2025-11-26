@@ -165,10 +165,6 @@ export default async function ProductsPage({
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
       <section className="relative bg-gradient-to-r from-green-600 via-green-600 to-forest-700 text-white py-24 sm:py-28 lg:py-48 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/copper-pattern.svg')] bg-repeat animate-pulse"></div>
-        </div>
-
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-600/50 to-green-700"></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -215,9 +211,6 @@ export default async function ProductsPage({
           {products.length > 0 && (
             <FadeInView direction="up" className="mt-16">
               <div className="bg-gradient-to-r from-green-600 to-forest-600 rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute inset-0 bg-[url('/copper-texture.png')] bg-repeat"></div>
-                </div>
                 <div className="relative z-10">
                   <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
                     Can&apos;t Find What You&apos;re Looking For?

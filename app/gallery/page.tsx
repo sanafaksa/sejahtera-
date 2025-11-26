@@ -66,12 +66,7 @@ export default async function GalleryPage({
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-600 to-forest-600 text-white py-24 lg:py-44 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/copper-pattern.svg')] bg-repeat"></div>
-        </div>
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <FadeInView direction="up">
             <div className="max-w-4xl mx-auto text-center">
@@ -102,22 +97,16 @@ export default async function GalleryPage({
         </div>
       </section>
 
-      {/* Gallery Grid */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <GalleryGrid items={items} />
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInView direction="up">
             <div className="bg-gradient-to-r from-green-600 to-forest-600 rounded-3xl p-12 text-white text-center relative overflow-hidden">
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0 bg-[url('/copper-texture.png')] bg-repeat"></div>
-              </div>
-
               <div className="relative z-10">
                 <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
                   Ready to Experience Tumang Craftsmanship?

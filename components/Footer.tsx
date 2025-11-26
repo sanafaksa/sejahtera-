@@ -3,12 +3,11 @@ import Image from "next/image";
 import {
   Facebook,
   Instagram,
-  Twitter,
-  Youtube,
   Mail,
   Phone,
   MapPin,
   ArrowRight,
+  Twitter,
 } from "lucide-react";
 
 export default function Footer() {
@@ -38,7 +37,7 @@ export default function Footer() {
     },
     {
       name: "Instagram",
-      href: "https://instagram.com",
+      href: "https://instagram.com/ilavioo_nusantara",
       icon: Instagram,
       color: "hover:bg-pink-600",
     },
@@ -47,12 +46,6 @@ export default function Footer() {
       href: "https://twitter.com",
       icon: Twitter,
       color: "hover:bg-sky-500",
-    },
-    {
-      name: "Youtube",
-      href: "https://youtube.com",
-      icon: Youtube,
-      color: "hover:bg-red-600",
     },
   ];
 

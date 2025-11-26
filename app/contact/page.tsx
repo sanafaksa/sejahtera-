@@ -35,7 +35,6 @@ export default function ContactPage() {
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus("success");
@@ -47,17 +46,10 @@ export default function ContactPage() {
         message: "",
       });
 
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setSubmitStatus("idle");
       }, 5000);
     }, 2000);
-
-    // TODO: Replace with actual form submission logic
-    // const response = await fetch('/api/contact', {
-    //   method: 'POST',
-    //   body: JSON.stringify(formData),
-    // });
   };
 
   const handleChange = (
@@ -73,13 +65,7 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-600 to-forest-600 text-white py-24 lg:py-44 overflow-hidden">
-        {/* Decorative Background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/copper-pattern.svg')] bg-repeat"></div>
-        </div>
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <FadeInView direction="up">
             <div className="max-w-4xl mx-auto text-center">
@@ -96,7 +82,6 @@ export default function ContactPage() {
           </FadeInView>
         </div>
 
-        {/* Decorative Wave */}
         <div className="absolute bottom-0 left-0 right-0 block leading-[0]">
           <svg
             viewBox="0 0 1440 120"
@@ -113,7 +98,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Cards */}
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
@@ -181,11 +165,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Form & Map Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
             <FadeInView direction="left">
               <div>
                 <h2 className="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -197,7 +179,6 @@ export default function ContactPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name */}
                   <div>
                     <label
                       htmlFor="name"
@@ -217,7 +198,6 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* Email & Phone */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -256,7 +236,6 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Subject */}
                   <div>
                     <label
                       htmlFor="subject"
@@ -281,7 +260,6 @@ export default function ContactPage() {
                     </select>
                   </div>
 
-                  {/* Message */}
                   <div>
                     <label
                       htmlFor="message"
@@ -301,7 +279,6 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -320,7 +297,6 @@ export default function ContactPage() {
                     )}
                   </button>
 
-                  {/* Success/Error Messages */}
                   {submitStatus === "success" && (
                     <div className="flex items-center gap-3 p-4 bg-green-50 border-2 border-green-200 rounded-xl">
                       <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
@@ -344,10 +320,8 @@ export default function ContactPage() {
               </div>
             </FadeInView>
 
-            {/* Showroom Info & Map */}
             <FadeInView direction="right">
               <div className="lg:sticky lg:top-24 space-y-6">
-                {/* Showroom Card */}
                 <div className="bg-gradient-to-br from-green-50 to-copper-50 rounded-2xl p-8 border-2 border-green-100">
                   <div className="flex items-start gap-4 mb-6">
                     <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
@@ -395,22 +369,10 @@ export default function ContactPage() {
                       </div>
                     </div>
                   </div>
-
-                  <a
-                    href="https://maps.google.com/?q=Tumang+Boyolali"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center justify-center w-full px-6 py-3 bg-white hover:bg-gray-50 text-green-600 border-2 border-green-600 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
-                  >
-                    <MapPin className="w-5 h-5 mr-2" />
-                    Get Directions
-                  </a>
                 </div>
 
-                {/* Map Embed */}
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-100">
                   <div className="aspect-video bg-gray-100">
-                    {/* Google Maps Embed - Replace with your actual location */}
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56347862248!2d110.59373845820312!3d-7.470445900000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1418e0a9be29%3A0x5027a76b021e0!2sTumang%2C%20Cepogo%2C%20Boyolali%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1234567890"
                       width="100%"
@@ -429,7 +391,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className="py-16 bg-gradient-to-br from-cream-50 to-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInView direction="up" className="text-center mb-12">

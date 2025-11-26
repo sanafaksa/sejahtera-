@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, Search, Menu, ChevronDown } from "lucide-react";
+import { Bell, Search, Menu } from "lucide-react";
 import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface AdminTopbarProps {
   session: Session | null;
