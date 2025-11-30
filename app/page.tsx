@@ -234,7 +234,7 @@ export default async function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInView direction="up" className="text-center mb-16">
             <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
-              Why Choose <span className="text-green-600">Ilavio</span>
+              Why Choose <span className="text-green-600">Ilavioo</span>
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
               We combine traditional craftsmanship with modern excellence

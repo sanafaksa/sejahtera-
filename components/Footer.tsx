@@ -215,7 +215,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
             <p>
               © {currentYear}{" "}
-              <span className="text-green-400 font-semibold">Ilavio</span>. All
+              <span className="text-green-400 font-semibold">Ilavioo</span>. All
               rights reserved.
             </p>
             <div className="flex items-center gap-6">
