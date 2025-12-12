@@ -121,7 +121,7 @@ export default function ContactPage() {
                 <div className="w-14 h-14 bg-copper-100 rounded-full flex items-center justify-center mb-4">
                   <FaWhatsapp className="w-7 h-7 text-copper-600" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2">Call Us</h3>
+                <h3 className="font-bold text-gray-900 mb-2">Whatsapp</h3>
                 <a
                   href="tel:+6281213696772"
                   className="text-green-600 hover:text-green-700 font-medium"
