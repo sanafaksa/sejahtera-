@@ -12,7 +12,6 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -21,7 +20,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
@@ -34,7 +32,6 @@ export default function Header() {
     { name: "Contact", href: "/contact" },
   ];
 
-  // Function to check if link is active
   const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/";
@@ -50,13 +47,12 @@ export default function Header() {
           : "bg-white/80 backdrop-blur-sm"
       }`}
     >
-      {/* Top Bar - Hidden on mobile */}
       <div className="hidden lg:block bg-gradient-to-r from-green-600 to-forest-600 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-2 text-sm">
             <div className="flex items-center gap-6">
               <a
-                href="tel:+628121369677"
+                href="tel:+6282813696772"
                 className="flex items-center gap-2 hover:text-green-200 transition-colors"
               >
                 <Phone className="w-4 h-4" />
@@ -79,10 +75,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main Navigation */}
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-3 group relative z-50"
@@ -105,7 +99,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -134,17 +127,16 @@ export default function Header() {
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
           <div className="hidden lg:block">
-            <Link
-              href="/contact"
+            <a
+              href="/catalog/Catalog-of-Product-Ilavioo-Nusantara-Sejahtera.pdf"
+              download="Catalog of Product Ilavioo Nusantara Sejahtera.pdf"
               className="inline-flex items-center px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
             >
-              Get Quote
-            </Link>
+              Catalog
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden relative z-[60] p-2 text-gray-700 hover:text-green-600 transition-colors"
@@ -155,11 +147,9 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -170,7 +160,6 @@ export default function Header() {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -180,7 +169,6 @@ export default function Header() {
               style={{ height: "100vh" }}
             >
               <div className="flex flex-col h-full">
-                {/* Mobile Menu Header */}
                 <div className="p-6 border-b border-gray-100">
                   <div className="flex items-center gap-3">
                     <div className="relative w-12 h-12">
@@ -202,7 +190,6 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* Mobile Menu Links */}
                 <nav className="flex-1 p-6">
                   <ul className="space-y-2">
                     {navLinks.map((link, index) => (
@@ -227,17 +214,17 @@ export default function Header() {
                   </ul>
                 </nav>
 
-                {/* Mobile Menu Footer */}
                 <div className="p-6 border-t border-gray-100 space-y-4">
-                  <Link
-                    href="/contact"
+                  <a
+                    href="/catalog/Catalog-of-Product-Ilavioo-Nusantara-Sejahtera.pdf"
+                    download="Catalog-Ilavioo-Product.pdf"
                     className="block w-full text-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300"
                   >
-                    Get Quote
-                  </Link>
+                    Catalog
+                  </a>
                   <div className="space-y-2 text-sm text-gray-600">
                     <a
-                      href="tel:+628121369677"
+                      href="tel:+6282813696772"
                       className="flex items-center gap-2 hover:text-green-600 transition-colors"
                     >
                       <Phone className="w-4 h-4" />

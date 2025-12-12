@@ -7,7 +7,6 @@ import StaggerContainer, {
 } from "@/components/animations/StaggerContainer";
 import {
   Mail,
-  Phone,
   MapPin,
   Clock,
   Send,
@@ -16,6 +15,7 @@ import {
   AlertCircle,
   MessageSquare,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -119,7 +119,7 @@ export default function ContactPage() {
             <StaggerItem>
               <div className="bg-white rounded-2xl p-6 shadow-xl border-2 border-gray-100 hover:border-green-200 transition-all hover:shadow-2xl hover:-translate-y-1">
                 <div className="w-14 h-14 bg-copper-100 rounded-full flex items-center justify-center mb-4">
-                  <Phone className="w-7 h-7 text-copper-600" />
+                  <FaWhatsapp className="w-7 h-7 text-copper-600" />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">Call Us</h3>
                 <a
