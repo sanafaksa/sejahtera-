@@ -37,7 +37,7 @@ export default function Footer() {
     },
     {
       name: "Instagram",
-      href: "https://instagram.com/ilavioo_nusantara",
+      href: "https://instagram.com/ilavioocopper_art",
       icon: Instagram,
       color: "hover:bg-pink-600",
     },
