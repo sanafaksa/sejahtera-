@@ -143,7 +143,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="text-green-600 hover:text-green-700 font-medium"
                 >
-                  @ilavioo_nusantara
+                  @ilavioocopper_art
                 </a>
               </div>
             </StaggerItem>
