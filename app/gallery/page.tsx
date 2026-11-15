@@ -1,139 +1,95 @@
 import { Metadata } from "next";
-import GalleryGrid from "@/components/gallery/GalleryGrid";
 import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Gallery | Ilavio - Tumang Copper Crafts",
   description:
-    "Explore our stunning collection of handcrafted copper masterpieces from Tumang, Boyolali",
+    "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Tumang, Boyolali.",
 };
 
-async function getGallery(sp?: {
-  q?: string;
-  type?: string;
-  category?: string;
-  featured?: string;
-}) {
-  try {
-    const where: Prisma.GalleryAssetWhereInput = {};
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-    if (sp?.q) {
-      where.OR = [
-        { title: { contains: sp.q, mode: "insensitive" } },
-        { description: { contains: sp.q, mode: "insensitive" } },
-      ];
-    }
-    if (sp?.type) {
-      where.type = sp.type;
-    }
-    if (sp?.category) {
-      where.category = sp.category;
-    }
-    if (sp?.featured === "true") {
-      where.isFeatured = true;
+async function getGalleryItems(): Promise<GalleryAssetItem[]> {
+  try {
+    const dbUrl = process.env.DATABASE_URL || "";
+    if (
+      !dbUrl ||
+      dbUrl.includes("[YOUR-PROJECT-REF]") ||
+      dbUrl.includes("[YOUR-PASSWORD]")
+    ) {
+      return [];
     }
 
     const rawItems = await prisma.galleryAsset.findMany({
-      where,
       orderBy: { createdAt: "desc" },
     });
 
     return rawItems.map((item) => ({
-      ...item,
-      type: item.type as "video" | "image",
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      url: item.url,
+      type: (item.type === "video" ? "video" : "image") as "image" | "video",
+      category: item.category,
+      tags: item.tags || [],
+      isFeatured: Boolean(item.isFeatured),
     }));
   } catch (error) {
-    console.error("Error fetching gallery:", error);
+    console.warn("Gallery assets fetch:", error);
     return [];
   }
 }
 
-export default async function GalleryPage({
-  searchParams,
-}: {
-  searchParams: Promise<{
-    q?: string;
-    type?: string;
-    category?: string;
-    featured?: string;
-  }>;
-}) {
-  const sp = await searchParams;
-  const items = await getGallery(sp);
+export default async function GalleryPage() {
+  const items = await getGalleryItems();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      <section className="relative bg-gradient-to-r from-green-600 to-forest-600 text-white py-24 lg:py-44 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="bg-[#faf8f5] pt-28 sm:pt-36 pb-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        {/* Modern Mosaic Gallery */}
+        <ModernMosaicGallery initialItems={items} />
+
+        {/* Refined Bespoke Custom Work CTA */}
+        <div className="mt-20 pt-12 border-t border-stone-200/80">
           <FadeInView direction="up">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Gallery <span className="text-green-200">Collection</span>
-              </h1>
-              <p className="text-xl text-green-50 leading-relaxed max-w-3xl mx-auto">
-                Discover stunning pieces crafted by master artisans from Tumang,
-                Boyolali
-              </p>
-            </div>
-          </FadeInView>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 block leading-0">
-          <svg
-            viewBox="0 0 1440 110"
-            className="w-full h-auto block"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
-
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <GalleryGrid items={items} />
-        </div>
-      </section>
-
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeInView direction="up">
-            <div className="bg-gradient-to-r from-green-600 to-forest-600 rounded-3xl p-12 text-white text-center relative overflow-hidden">
-              <div className="relative z-10">
-                <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                  Ready to Experience Tumang Craftsmanship?
-                </h2>
-                <p className="text-xl text-green-50 mb-8 max-w-2xl mx-auto">
-                  Explore our collection or contact us for custom designs
-                  tailored to your unique vision.
+            <div className="bg-[#17120d] text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+              <div className="relative z-10 max-w-xl text-center md:text-left">
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#e5be9c]">
+                  Bespoke Architectural Craftsmanship
+                </span>
+                <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-3">
+                  Have a Custom Design in Mind?
+                </h3>
+                <p className="text-stone-300 text-sm leading-relaxed">
+                  Every piece in our gallery can be customized to your architectural drawings and specifications. Consult directly with our master copper smiths in Tumang, Boyolali.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/products"
-                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-green-600 hover:bg-cream-50 rounded-full font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
-                  >
-                    Browse Products
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center justify-center px-8 py-4 bg-green-700/50 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 border-2 border-white/30"
-                  >
-                    Contact Us
-                  </Link>
-                </div>
+              </div>
+
+              <div className="relative z-10 flex flex-wrap gap-3.5 justify-center">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#b87333] hover:bg-[#a0632a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Inquire Custom Work</span>
+                </Link>
+                <Link
+                  href="/products"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider transition-all border border-white/20"
+                >
+                  <span>Explore Catalog</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </FadeInView>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }

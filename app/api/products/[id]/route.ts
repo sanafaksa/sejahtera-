@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { cloudinary } from "@/lib/cloudinary";
 
 // Define types for request body
 type HighlightInput = {
@@ -200,6 +201,7 @@ export async function DELETE(
     // Check if product exists
     const product = await prisma.product.findUnique({
       where: { id: productId },
+      include: { images: true },
     });
 
     if (!product) {
@@ -207,6 +209,27 @@ export async function DELETE(
         { message: "Product not found" },
         { status: 404 }
       );
+    }
+
+    // Clean up images from Cloudinary if applicable
+    if (product.images && product.images.length > 0) {
+      for (const img of product.images) {
+        if (img.imageUrl.includes("res.cloudinary.com")) {
+          try {
+            const parts = img.imageUrl.split("/upload/");
+            if (parts[1]) {
+              const pathWithoutVersion = parts[1].replace(/^v\d+\//, "");
+              const publicId = pathWithoutVersion.substring(
+                0,
+                pathWithoutVersion.lastIndexOf(".")
+              );
+              await cloudinary.uploader.destroy(publicId);
+            }
+          } catch (e) {
+            console.warn("Cloudinary product image cleanup warning:", e);
+          }
+        }
+      }
     }
 
     // Delete product (cascade will handle related data)

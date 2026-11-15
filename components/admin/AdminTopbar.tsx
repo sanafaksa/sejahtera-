@@ -73,7 +73,7 @@ export default function AdminTopbar({
                 </p>
                 <p className="text-xs text-gray-500">Administrator</p>
               </div>
-              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-semibold">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#b87333] to-[#8c4f1c] rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
                 {session?.user?.name?.charAt(0) || "A"}
               </div>
             </button>

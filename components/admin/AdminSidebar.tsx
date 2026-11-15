@@ -77,14 +77,14 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                   onClick={onClose}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all relative ${
                     isActive
-                      ? "bg-green-50 text-green-600 font-semibold"
+                      ? "bg-amber-50 text-[#b87333] font-semibold"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute left-0 top-0 bottom-0 w-1 bg-green-600 rounded-r"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-[#b87333] rounded-r"
                       transition={{
                         type: "spring",
                         stiffness: 380,

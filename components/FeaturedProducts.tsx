@@ -10,7 +10,11 @@ async function getFeaturedProducts() {
       take: 4,
       include: {
         images: {
-          where: { isCatalog: true },
+          orderBy: [
+            { isCatalog: "desc" },
+            { isFeatured: "desc" },
+            { id: "asc" },
+          ],
           take: 1,
         },
         specifications: true,

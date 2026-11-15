@@ -116,18 +116,22 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeInView direction="left">
-              <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/assets/about.jpg"
-                  alt="Tumang Copper Artisan"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+              <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-[#17120d]">
+                <video
+                  src="/assets/by-aksa.mp4"
+                  poster="/assets/copper-hero-craft.jpg"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white">
-                  <p className="text-lg font-bold mb-1">Tumang, Boyolali</p>
-                  <p className="text-sm opacity-90">Central Java, Indonesia</p>
+                <div className="absolute top-4 left-4 z-10 pointer-events-none">
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium tracking-wide border border-white/10 shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-[#b87333] animate-pulse" />
+                    Tumang, Boyolali · Central Java
+                  </span>
                 </div>
               </div>
             </FadeInView>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { uploadMediaFile } from "@/lib/upload";
 import { supabase } from "@/lib/supabase";
 import { Upload, Loader2, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -63,30 +64,20 @@ export default function GalleryForm({ mode, initial }: Props) {
       const files = Array.from(e.target.files!);
       const uploaded: GalleryAssetDTO[] = [];
       for (const file of files) {
-        const ext = file.name.split(".").pop()?.toLowerCase() ?? "bin";
-        const isVideo = ["mp4", "webm", "mov"].includes(ext);
-        const path = `gallery/${Date.now()}-${Math.random()
-          .toString(36)
-          .slice(2)}.${ext}`;
-        const { error } = await supabase.storage
-          .from("gallery-assets")
-          .upload(path, file, { cacheControl: "3600", upsert: false });
-        if (error) {
-          alert(error.message);
-          continue;
+        try {
+          const res = await uploadMediaFile(file, "ilavioo/gallery");
+          uploaded.push({
+            url: res.url,
+            type: res.type,
+            title: "",
+            description: "",
+            category: "",
+            tags: [],
+            isFeatured: false,
+          });
+        } catch (err: any) {
+          alert(`Gagal upload ${file.name}: ${err.message}`);
         }
-        const { data: pub } = supabase.storage
-          .from("gallery-assets")
-          .getPublicUrl(path);
-        uploaded.push({
-          url: pub.publicUrl,
-          type: isVideo ? "video" : "image",
-          title: "",
-          description: "",
-          category: "",
-          tags: [],
-          isFeatured: false,
-        });
       }
       setItems((prev) => [...prev, ...uploaded]);
       if (e.target) e.target.value = "";

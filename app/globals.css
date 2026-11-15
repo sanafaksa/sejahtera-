@@ -8,48 +8,48 @@
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
-    /* Custom Copper Colors */
-    --color-copper-50: #fef6ee;
-    --color-copper-100: #fce8d6;
-    --color-copper-200: #f8cdac;
-    --color-copper-300: #f4ab78;
-    --color-copper-400: #ee7d42;
-    --color-copper-500: #e85d1f;
-    --color-copper-600: #d94315;
-    --color-copper-700: #b43214;
-    --color-copper-800: #902918;
-    --color-copper-900: #742416;
+    /* Custom Copper Colors (Tembaga Klasik & Modern) */
+    --color-copper-50: #fdf8f4;
+    --color-copper-100: #f7ebe1;
+    --color-copper-200: #eed3bf;
+    --color-copper-300: #dfb294;
+    --color-copper-400: #cb8962;
+    --color-copper-500: #b87333;
+    --color-copper-600: #9e5b24;
+    --color-copper-700: #7d441a;
+    --color-copper-800: #643618;
+    --color-copper-900: #4a2610;
 
     /* Custom Cream Colors */
-    --color-cream-50: #fdfcf7;
-    --color-cream-100: #f9f6e8;
-    --color-cream-200: #f3ecd0;
-    --color-cream-300: #e8dca8;
-    --color-cream-400: #dbc479;
+    --color-cream-50: #fdfcf9;
+    --color-cream-100: #f9f5ed;
+    --color-cream-200: #f3ebd9;
+    --color-cream-300: #e8dabf;
+    --color-cream-400: #dbc49e;
 
-    /* Green Colors - matching logo */
-    --color-green-50: #f0fdf4;
-    --color-green-100: #dcfce7;
-    --color-green-200: #bbf7d0;
-    --color-green-300: #86efac;
-    --color-green-400: #4ade80;
-    --color-green-500: #22c55e;
-    --color-green-600: #16a34a;
-    --color-green-700: #15803d;
-    --color-green-800: #166534;
-    --color-green-900: #14532d;
+    /* Primary Theme Colors: Coklat Tembaga (Copper Brown) */
+    --color-green-50: #fdf8f4;
+    --color-green-100: #f7ebe1;
+    --color-green-200: #eed3bf;
+    --color-green-300: #dfb294;
+    --color-green-400: #cb8962;
+    --color-green-500: #b87333;
+    --color-green-600: #9e5b24;
+    --color-green-700: #7d441a;
+    --color-green-800: #643618;
+    --color-green-900: #4a2610;
 
-    /* Forest Green for depth */
-    --color-forest-50: #f0f9f4;
-    --color-forest-100: #daf2e4;
-    --color-forest-200: #a8d8b9;
-    --color-forest-300: #6db98d;
-    --color-forest-400: #3b7a57;
-    --color-forest-500: #2e5b3a;
-    --color-forest-600: #234829;
-    --color-forest-700: #1a3620;
-    --color-forest-800: #142818;
-    --color-forest-900: #0f1e12;
+    /* Deep Bronze / Dark Copper */
+    --color-forest-50: #fcf9f6;
+    --color-forest-100: #f5ece4;
+    --color-forest-200: #e8d5c4;
+    --color-forest-300: #d4b59c;
+    --color-forest-400: #b0825f;
+    --color-forest-500: #8a5732;
+    --color-forest-600: #6d4122;
+    --color-forest-700: #553118;
+    --color-forest-800: #402310;
+    --color-forest-900: #2c1609;
 
     /* Fonts */
     --font-display: var(--font-playfair);
@@ -94,9 +94,9 @@ body {
     font-family: var(--font-body), sans-serif;
   }
 
-  /* Gradient text utility */
+  /* Gradient text utility - Luxury Polished Copper */
   .gradient-text {
-    background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #b87333 100%);
+    background: linear-gradient(135deg, #b87333 0%, #d48c46 45%, #7d441a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -131,5 +131,41 @@ body {
     100% {
       left: 100%;
     }
+  }
+
+  /* Infinite marquee running text */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    display: flex;
+    width: max-content;
+    animation: marquee-reverse 40s linear infinite;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee-reverse:hover {
+    animation-play-state: paused;
   }
 }

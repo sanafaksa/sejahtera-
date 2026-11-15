@@ -67,7 +67,7 @@ export default function ProductTabs({
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative flex items-center gap-2 px-6 py-4 font-semibold transition-colors whitespace-nowrap ${
                   activeTab === tab.id
-                    ? "text-green-600"
+                    ? "text-[#b87333]"
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
@@ -76,7 +76,7 @@ export default function ProductTabs({
                 {activeTab === tab.id && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-[#b87333]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -96,7 +96,7 @@ export default function ProductTabs({
             transition={{ duration: 0.3 }}
           >
             <h3 className="font-display text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <FileText className="w-6 h-6 text-green-600" />
+              <FileText className="w-6 h-6 text-[#b87333]" />
               Product Details
             </h3>
             <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
@@ -117,18 +117,18 @@ export default function ProductTabs({
             transition={{ duration: 0.3 }}
           >
             <h3 className="font-display text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <Ruler className="w-6 h-6 text-green-600" />
+              <Ruler className="w-6 h-6 text-[#b87333]" />
               Technical Specifications
             </h3>
 
             <div className="flex flex-wrap gap-6">
               {specifications.size && (
-                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-green-50 rounded-xl border border-green-100">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-amber-50 rounded-xl border border-amber-200/60">
+                  <div className="w-12 h-12 bg-[#b87333] rounded-lg flex items-center justify-center flex-shrink-0">
                     <Ruler className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-green-700 mb-1">
+                    <p className="text-sm font-semibold text-amber-800 mb-1">
                       Size / Dimensions
                     </p>
                     <p className="text-lg font-bold text-gray-900 break-words">
@@ -139,12 +139,12 @@ export default function ProductTabs({
               )}
 
               {specifications.finishing && (
-                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-copper-50 rounded-xl border border-copper-100">
-                  <div className="w-12 h-12 bg-copper-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-6 h-6 text-white" />
+                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-stone-50 rounded-xl border border-stone-200">
+                  <div className="w-12 h-12 bg-[#17120d] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-6 h-6 text-[#e5be9c]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-copper-700 mb-1">
+                    <p className="text-sm font-semibold text-stone-700 mb-1">
                       Finishing Type
                     </p>
                     <p className="text-lg font-bold text-gray-900 break-words">
@@ -155,12 +155,12 @@ export default function ProductTabs({
               )}
 
               {specifications.material && (
-                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-green-50 rounded-xl border border-green-100">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-amber-50 rounded-xl border border-amber-200/60">
+                  <div className="w-12 h-12 bg-[#b87333] rounded-lg flex items-center justify-center flex-shrink-0">
                     <Package className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-green-700 mb-1">
+                    <p className="text-sm font-semibold text-amber-800 mb-1">
                       Material
                     </p>
                     <p className="text-lg font-bold text-gray-900 break-words">
@@ -171,13 +171,13 @@ export default function ProductTabs({
               )}
 
               {specifications.price && (
-                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-copper-50 rounded-xl border border-copper-100">
-                  <div className="w-12 h-12 bg-copper-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Tag className="w-6 h-6 text-white" />
+                <div className="flex-1 min-w-[calc(50%-12px)] max-w-full flex items-start gap-4 p-5 bg-stone-50 rounded-xl border border-stone-200">
+                  <div className="w-12 h-12 bg-[#17120d] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Tag className="w-6 h-6 text-[#e5be9c]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-copper-700 mb-1">
-                      Starting Price
+                    <p className="text-sm font-semibold text-stone-700 mb-1">
+                      Pricing
                     </p>
                     <p className="text-lg font-bold text-gray-900 break-words">
                       {specifications.price}

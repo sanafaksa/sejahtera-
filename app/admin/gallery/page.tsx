@@ -3,8 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { Image as ImageIcon, Video, Plus, Star, Play } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 async function getAssets() {
-  return prisma.galleryAsset.findMany({ orderBy: { createdAt: "desc" } });
+  try {
+    return await prisma.galleryAsset.findMany({ orderBy: { createdAt: "desc" } });
+  } catch (error) {
+    console.warn("Failed to fetch gallery assets for admin:", error);
+    return [];
+  }
 }
 
 export default async function GalleryListPage() {

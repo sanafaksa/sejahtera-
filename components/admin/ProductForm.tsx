@@ -15,7 +15,7 @@ import {
   Loader2,
   Check,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { uploadMediaFile } from "@/lib/upload";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -138,31 +138,10 @@ export default function ProductForm({ product }: ProductFormProps) {
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${Math.random()
-          .toString(36)
-          .substring(2)}-${Date.now()}-${i}.${fileExt}`;
-        const filePath = `products/${fileName}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("product-images")
-          .upload(filePath, file, {
-            cacheControl: "3600",
-            upsert: false,
-          });
-
-        if (uploadError) {
-          throw new Error(
-            `Failed to upload ${file.name}: ${uploadError.message}`
-          );
-        }
-
-        const {
-          data: { publicUrl },
-        } = supabase.storage.from("product-images").getPublicUrl(filePath);
+        const res = await uploadMediaFile(file, "ilavioo/products");
 
         uploadedImages.push({
-          url: publicUrl,
+          url: res.url,
           isFeatured: false,
           isCatalog: false,
         });

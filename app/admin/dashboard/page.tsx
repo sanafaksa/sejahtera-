@@ -14,27 +14,36 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 async function getDashboardStats() {
-  const [totalProducts, totalImages] = await Promise.all([
-    prisma.product.count(),
-    prisma.productImage.count(),
-  ]);
+  try {
+    const [totalProducts, totalImages] = await Promise.all([
+      prisma.product.count(),
+      prisma.productImage.count(),
+    ]);
 
-  const recentProducts = await prisma.product.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-    include: {
-      images: {
-        where: { isFeatured: true },
-        take: 1,
+    const recentProducts = await prisma.product.findMany({
+      take: 5,
+      orderBy: { createdAt: "desc" },
+      include: {
+        images: {
+          where: { isFeatured: true },
+          take: 1,
+        },
       },
-    },
-  });
+    });
 
-  return {
-    totalProducts,
-    totalImages,
-    recentProducts,
-  };
+    return {
+      totalProducts,
+      totalImages,
+      recentProducts,
+    };
+  } catch (error) {
+    console.warn("Database lookup in dashboard stats failed:", error);
+    return {
+      totalProducts: 0,
+      totalImages: 0,
+      recentProducts: [],
+    };
+  }
 }
 
 export default async function AdminDashboardPage() {

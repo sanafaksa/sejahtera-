@@ -47,7 +47,11 @@ async function getProducts(searchParams: SearchParams) {
       where,
       include: {
         images: {
-          where: { isCatalog: true },
+          orderBy: [
+            { isCatalog: "desc" },
+            { isFeatured: "desc" },
+            { id: "asc" },
+          ],
           take: 1,
         },
         specifications: true,
@@ -110,14 +114,14 @@ async function ProductsList({
           {hasSearch ? (
             <Link
               href="/products"
-              className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 py-3 bg-[#b87333] hover:bg-[#a0632a] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               View All Products
             </Link>
           ) : (
             <Link
               href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 py-3 bg-[#b87333] hover:bg-[#a0632a] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <Sparkles className="w-5 h-5 mr-2" />
               Request Custom Order
@@ -163,20 +167,22 @@ export default async function ProductsPage({
   const products = await getProducts(params);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      <section className="relative bg-gradient-to-r from-green-600 via-green-600 to-forest-700 text-white py-24 sm:py-28 lg:py-48 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-600/50 to-green-700"></div>
+    <main className="min-h-screen bg-[#faf8f5]">
+      <section className="relative bg-gradient-to-b from-[#17120d] via-[#241a12] to-[#17120d] text-white py-24 sm:py-28 lg:py-40 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(#b87333_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
           <FadeInView direction="up">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-10">
-                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#e5be9c] mb-3 inline-block">
+                  Authentic Indonesian Metal Art
+                </span>
+                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-white">
                   Handcrafted Copper Collection
                 </h1>
-                <p className="text-lg sm:text-xl text-green-50 leading-relaxed max-w-2xl mx-auto">
-                  Discover exquisite pieces crafted by master artisans from
-                  Tumang, Boyolali
+                <p className="text-base sm:text-lg text-stone-300 leading-relaxed max-w-2xl mx-auto font-light">
+                  Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Tumang, Boyolali.
                 </p>
               </div>
 
@@ -192,7 +198,7 @@ export default async function ProductsPage({
             preserveAspectRatio="none"
           >
             <path
-              fill="#ffffff"
+              fill="#faf8f5"
               d="M0,80L80,85.3C160,91,320,101,480,96C640,91,800,69,960,64C1120,59,1280,69,1360,74.7L1440,80L1440,140L1360,140C1280,140,1120,140,960,140C800,140,640,140,480,140C320,140,160,140,80,140L0,140Z"
             ></path>
           </svg>

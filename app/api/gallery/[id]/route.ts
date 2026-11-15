@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { supabase } from "@/lib/supabase";
+import { cloudinary } from "@/lib/cloudinary";
 
 export async function GET(
   _req: Request,
@@ -57,21 +58,30 @@ export async function DELETE(
 
     if (asset.url) {
       try {
-        const urlParts = asset.url.split(
-          "/storage/v1/object/public/gallery-assets/"
-        );
+        if (asset.url.includes("res.cloudinary.com")) {
+          const parts = asset.url.split("/upload/");
+          if (parts[1]) {
+            const pathWithoutVersion = parts[1].replace(/^v\d+\//, "");
+            const publicId = pathWithoutVersion.substring(0, pathWithoutVersion.lastIndexOf("."));
+            await cloudinary.uploader.destroy(publicId, {
+              resource_type: "auto",
+            });
+          }
+        } else {
+          const urlParts = asset.url.split(
+            "/storage/v1/object/public/gallery-assets/"
+          );
 
-        if (urlParts.length > 1) {
-          const filename = urlParts[1];
+          if (urlParts.length > 1) {
+            const filename = urlParts[1];
 
-          const { error: storageError } = await supabase.storage
-            .from("gallery-assets")
-            .remove([filename]);
+            const { error: storageError } = await supabase.storage
+              .from("gallery-assets")
+              .remove([filename]);
 
-          if (storageError) {
-            console.error("⚠️ Failed to delete from storage:", storageError);
-          } else {
-            console.log("✅ Deleted from storage:", filename);
+            if (storageError) {
+              console.error("⚠️ Failed to delete from storage:", storageError);
+            }
           }
         }
       } catch (storageErr) {

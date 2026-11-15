@@ -7,23 +7,32 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 async function getProducts() {
-  const products = await prisma.product.findMany({
-    include: {
-      images: {
-        where: { isFeatured: true },
-        take: 1,
-      },
-      _count: {
-        select: {
-          images: true,
-          highlights: true,
+  try {
+    const products = await prisma.product.findMany({
+      include: {
+        images: {
+          orderBy: [
+            { isFeatured: "desc" },
+            { isCatalog: "desc" },
+            { id: "asc" },
+          ],
+          take: 1,
+        },
+        _count: {
+          select: {
+            images: true,
+            highlights: true,
+          },
         },
       },
-    },
-    orderBy: { createdAt: "desc" },
-  });
+      orderBy: { createdAt: "desc" },
+    });
 
-  return products;
+    return products;
+  } catch (error) {
+    console.warn("Failed to fetch products for admin:", error);
+    return [];
+  }
 }
 
 export default async function ProductsPage() {

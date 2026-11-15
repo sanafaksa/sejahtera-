@@ -34,11 +34,11 @@ export default function ProductCard({
       <motion.div
         whileHover={{ y: -8 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="group relative bg-white rounded-2xl border-2 border-gray-100 shadow-md hover:shadow-2xl hover:border-green-200 transition-all duration-300 overflow-hidden h-full flex flex-col"
+        className="group relative bg-white rounded-2xl border border-stone-200/80 shadow-md hover:shadow-2xl hover:border-[#b87333]/40 transition-all duration-300 overflow-hidden h-full flex flex-col"
       >
         {/* Image Container */}
         <div
-          className={`relative overflow-hidden bg-gray-50 ${
+          className={`relative overflow-hidden bg-stone-100 ${
             variant === "compact" ? "h-48" : "h-64"
           }`}
         >
@@ -51,18 +51,18 @@ export default function ProductCard({
           />
 
           {/* Gradient Overlay on Hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           {/* Price Badge - if available */}
           {specifications?.price && (
-            <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1.5 rounded-full shadow-lg font-semibold text-xs sm:text-sm backdrop-blur-sm">
+            <div className="absolute top-4 right-4 bg-[#17120d]/90 text-[#e5be9c] border border-[#b87333]/40 px-3 py-1.5 rounded-full shadow-lg font-semibold text-xs sm:text-sm backdrop-blur-sm">
               {specifications.price}
             </div>
           )}
 
           {/* "View Details" overlay on hover */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/95 text-green-600 font-semibold rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-sm">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#b87333] hover:bg-[#a0632a] text-white font-semibold rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-sm">
               View Details
               <ArrowRight className="w-4 h-4" />
             </span>
@@ -73,7 +73,7 @@ export default function ProductCard({
         <div className="flex flex-col flex-1 p-4 sm:p-5">
           {/* Product Name */}
           <h3
-            className={`font-display font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors duration-300 ${
+            className={`font-display font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#b87333] transition-colors duration-300 ${
               variant === "compact" ? "text-lg" : "text-xl"
             }`}
           >
