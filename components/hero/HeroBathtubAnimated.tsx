@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function HeroBathtubAnimated() {
   return (
-    <div className="relative w-full max-w-[560px] sm:max-w-[640px] lg:max-w-[700px] xl:max-w-[740px] aspect-[16/10] sm:aspect-[16/9.5] lg:-translate-y-4 xl:-translate-y-8 group select-none">
+    <div className="relative w-full max-w-[560px] sm:max-w-[640px] lg:max-w-[700px] xl:max-w-[740px] aspect-[16/10] sm:aspect-[16/9.5] lg:translate-y-4 xl:translate-y-6 group select-none">
       {/* 1. Warm Brass & Gold Ambient Backglow */}
       <motion.div
         animate={{
@@ -46,21 +46,21 @@ export default function HeroBathtubAnimated() {
         />
 
         {/* Subtle Luxury Gradient Overlay at the bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
 
         {/* Floating Badge */}
-        <div className="absolute top-4 right-4 sm:top-5 sm:right-5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-stone-200/90 shadow-lg text-[10px] sm:text-xs font-semibold text-[#17120d] flex items-center gap-2 pointer-events-none">
-          <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-ping" />
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-stone-200/90 shadow-md text-[11px] sm:text-xs font-semibold leading-none text-[#17120d] pointer-events-none">
+          <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse" />
           <span>Polished Brass Masterpiece</span>
         </div>
 
         {/* Bottom subtle detail caption */}
-        <div className="absolute bottom-4 left-5 sm:bottom-5 sm:left-6 text-white pointer-events-none">
-          <p className="text-xs sm:text-sm font-bold tracking-wide drop-shadow-md">
+        <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 right-4 sm:right-6 text-white pointer-events-none">
+          <p className="font-display text-sm sm:text-base font-semibold leading-tight drop-shadow-md">
             Freestanding Royal Brass Bathtub
           </p>
-          <p className="text-[10px] sm:text-xs text-stone-200 drop-shadow-sm font-light">
-            Mirror-finish Brass & Pure White Enamel
+          <p className="mt-1 text-[11px] sm:text-xs font-medium leading-tight text-white/80 drop-shadow-sm">
+            Mirror-finish Brass &amp; Pure White Enamel
           </p>
         </div>
       </motion.div>
