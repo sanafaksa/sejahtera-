@@ -8,28 +8,28 @@ export default function QuickActions() {
   const actions = [
     {
       name: "Add Product",
-      href: "/admin/products/new",
+      href: "/ilv-studio/products/new",
       icon: Plus,
       color: "from-green-500 to-green-600",
       description: "Create new product",
     },
     {
       name: "Upload to Gallery",
-      href: "/admin/gallery/new",
+      href: "/ilv-studio/gallery/new",
       icon: Upload,
       color: "from-blue-500 to-blue-600",
       description: "Add images/videos",
     },
     {
       name: "View Messages",
-      href: "/admin/messages",
+      href: "/ilv-studio/messages",
       icon: FileText,
       color: "from-purple-500 to-purple-600",
       description: "Check customer inquiries",
     },
     {
       name: "Settings",
-      href: "/admin/settings",
+      href: "/ilv-studio/settings",
       icon: Settings,
       color: "from-gray-600 to-gray-700",
       description: "Configure admin panel",

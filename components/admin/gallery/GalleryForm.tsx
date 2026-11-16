@@ -107,7 +107,7 @@ export default function GalleryForm({ mode, initial }: Props) {
           return;
         }
       }
-      router.push("/admin/gallery");
+      router.push("/ilv-studio/gallery");
       router.refresh();
     });
   }
@@ -133,7 +133,7 @@ export default function GalleryForm({ mode, initial }: Props) {
         alert("Failed to update");
         return;
       }
-      router.push("/admin/gallery");
+      router.push("/ilv-studio/gallery");
       router.refresh();
     });
   }
@@ -146,7 +146,7 @@ export default function GalleryForm({ mode, initial }: Props) {
         method: "DELETE",
       });
       if (!res.ok) return alert("Failed to delete");
-      router.push("/admin/gallery");
+      router.push("/ilv-studio/gallery");
       router.refresh();
     });
   }

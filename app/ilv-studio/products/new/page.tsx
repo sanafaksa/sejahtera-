@@ -9,7 +9,7 @@ export default function NewProductPage() {
         {/* Breadcrumb */}
         <div className="mb-6">
           <Link
-            href="/admin/products"
+            href="/ilv-studio/products"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

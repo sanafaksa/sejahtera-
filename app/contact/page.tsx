@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FadeInView from "@/components/animations/FadeInView";
+import PageHero from "@/components/PageHero";
 import StaggerContainer, {
   StaggerItem,
 } from "@/components/animations/StaggerContainer";
@@ -65,38 +66,11 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      <section className="relative bg-gradient-to-r from-green-600 to-forest-600 text-white py-24 lg:py-44 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <FadeInView direction="up">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Let&apos;s Create Something
-                <span className="text-green-200">Extraordinary</span>
-              </h1>
-              <p className="text-xl text-green-50 leading-relaxed max-w-3xl mx-auto">
-                We&apos;d love to hear from you! Whether you have a question
-                about our products, need a custom design quote, or just want to
-                share your ideas, our team is here to help.
-              </p>
-            </div>
-          </FadeInView>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 block leading-[0]">
-          <svg
-            viewBox="0 0 1440 120"
-            className="w-full h-auto block"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-            />
-          </svg>
-        </div>
-      </section>
+      <PageHero
+        title="Contact"
+        description="We'd love to hear from you! Whether you have a question about our products, need a custom design quote, or just want to share your ideas, our team is here to help."
+        fadeTo="#fdfcf9"
+      />
 
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

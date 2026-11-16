@@ -11,7 +11,7 @@ interface DeleteButtonProps {
 
 export default function DeleteButton({
   assetId,
-  redirectTo = "/admin/gallery",
+  redirectTo = "/ilv-studio/gallery",
 }: DeleteButtonProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();

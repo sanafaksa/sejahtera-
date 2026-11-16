@@ -34,7 +34,7 @@ export default function RecentProducts({ products }: RecentProductsProps) {
           </div>
         </div>
         <Link
-          href="/admin/products"
+          href="/ilv-studio/products"
           className="text-sm text-green-600 hover:text-green-700 font-semibold flex items-center gap-1"
         >
           View All
@@ -49,7 +49,7 @@ export default function RecentProducts({ products }: RecentProductsProps) {
             <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
             <p className="text-gray-500">No products yet</p>
             <Link
-              href="/admin/products/new"
+              href="/ilv-studio/products/new"
               className="inline-block mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
             >
               Add First Product
@@ -95,7 +95,7 @@ export default function RecentProducts({ products }: RecentProductsProps) {
                 {/* Actions */}
                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Link
-                    href={`/admin/products/${product.id}/edit`}
+                    href={`/ilv-studio/products/${product.id}/edit`}
                     className="p-2 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors"
                     title="Edit"
                   >

@@ -229,7 +229,7 @@ export default function ProductForm({ product }: ProductFormProps) {
       });
 
       if (response.ok) {
-        router.push("/admin/products");
+        router.push("/ilv-studio/products");
         router.refresh();
       } else {
         const error = await response.json();
@@ -248,7 +248,7 @@ export default function ProductForm({ product }: ProductFormProps) {
       {/* Header with Back Button */}
       <div className="mb-8">
         <Link
-          href="/admin/products"
+          href="/ilv-studio/products"
           className="inline-flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors mb-4 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -719,7 +719,7 @@ export default function ProductForm({ product }: ProductFormProps) {
         {/* Form Actions */}
         <div className="flex items-center justify-between gap-4 pt-6 border-t border-gray-200">
           <Link
-            href="/admin/products"
+            href="/ilv-studio/products"
             className="px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-xl font-semibold transition-colors"
           >
             Cancel

@@ -24,7 +24,7 @@ export default async function GalleryListPage() {
           </p>
         </div>
         <Link
-          href="/admin/gallery/new"
+          href="/ilv-studio/gallery/new"
           className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -38,7 +38,7 @@ export default async function GalleryListPage() {
           <ImageIcon className="mx-auto text-gray-400 mb-4" size={48} />
           <p className="text-gray-600 text-lg mb-4">No gallery items yet</p>
           <Link
-            href="/admin/gallery/new"
+            href="/ilv-studio/gallery/new"
             className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
           >
             <Plus className="w-5 h-5" />
@@ -53,7 +53,7 @@ export default async function GalleryListPage() {
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
             >
               {/* Image/Video Preview */}
-              <Link href={`/admin/gallery/${asset.id}`} className="block">
+              <Link href={`/ilv-studio/gallery/${asset.id}`} className="block">
                 <div className="relative aspect-square bg-gray-100">
                   {asset.type === "video" ? (
                     <div className="relative w-full h-full">
@@ -95,7 +95,7 @@ export default async function GalleryListPage() {
 
               {/* Card Content */}
               <div className="p-4">
-                <Link href={`/admin/gallery/${asset.id}`}>
+                <Link href={`/ilv-studio/gallery/${asset.id}`}>
                   <h3 className="font-semibold mb-1 text-black line-clamp-1">
                     {asset.title || "Untitled"}
                   </h3>
@@ -109,7 +109,7 @@ export default async function GalleryListPage() {
                 {/* Action Buttons */}
                 <div className="flex gap-2">
                   <Link
-                    href={`/admin/gallery/${asset.id}/edit`}
+                    href={`/ilv-studio/gallery/${asset.id}/edit`}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors"
                   >
                     Edit

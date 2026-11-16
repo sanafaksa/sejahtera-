@@ -15,9 +15,9 @@ import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
 const navigation = [
-  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { name: "Products", href: "/admin/products", icon: Package },
-  { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
+  { name: "Dashboard", href: "/ilv-studio/dashboard", icon: LayoutDashboard },
+  { name: "Products", href: "/ilv-studio/products", icon: Package },
+  { name: "Gallery", href: "/ilv-studio/gallery", icon: ImageIcon },
 ];
 
 interface AdminSidebarProps {
@@ -39,7 +39,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         <div className="flex flex-col h-full">
           {/* Logo Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <Link href="/admin/dashboard" className="flex items-center gap-3">
+            <Link href="/ilv-studio/dashboard" className="flex items-center gap-3">
               <Image
                 src="/assets/logo.png"
                 alt="Ilavio Logo"
@@ -111,7 +111,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
             </Link>
 
             <button
-              onClick={() => signOut({ callbackUrl: "/admin/login" })}
+              onClick={() => signOut({ callbackUrl: "/ilv-studio/login" })}
               className="flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full"
             >
               <LogOut className="w-5 h-5" />

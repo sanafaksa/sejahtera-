@@ -53,7 +53,7 @@ export default async function ProductViewPage({
         {/* Breadcrumb & Actions */}
         <div className="flex items-center justify-between mb-6">
           <Link
-            href="/admin/products"
+            href="/ilv-studio/products"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -71,7 +71,7 @@ export default async function ProductViewPage({
               <ExternalLink className="w-3 h-3" />
             </Link>
             <Link
-              href={`/admin/products/${product.id}/edit`}
+              href={`/ilv-studio/products/${product.id}/edit`}
               className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-semibold"
             >
               <Edit className="w-4 h-4" />
@@ -441,7 +441,7 @@ export default async function ProductViewPage({
               <h3 className="font-semibold text-lg mb-4">Quick Actions</h3>
               <div className="space-y-3">
                 <Link
-                  href={`/admin/products/${product.id}/edit`}
+                  href={`/ilv-studio/products/${product.id}/edit`}
                   className="block w-full px-4 py-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg transition-colors text-center font-semibold"
                 >
                   Edit Product

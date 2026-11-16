@@ -64,7 +64,7 @@ export default async function AdminDashboardPage() {
       {/* Quick Actions */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Link
-          href="/admin/products/new"
+          href="/ilv-studio/products/new"
           className="group bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 relative overflow-hidden"
         >
           <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
@@ -76,7 +76,7 @@ export default async function AdminDashboardPage() {
         </Link>
 
         <Link
-          href="/admin/products"
+          href="/ilv-studio/products"
           className="group bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 relative overflow-hidden"
         >
           <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
@@ -206,7 +206,7 @@ export default async function AdminDashboardPage() {
             </div>
           </div>
           <Link
-            href="/admin/products"
+            href="/ilv-studio/products"
             className="text-sm text-green-600 hover:text-green-700 font-semibold flex items-center gap-1 group"
           >
             View All
@@ -222,7 +222,7 @@ export default async function AdminDashboardPage() {
               Get started by creating your first product
             </p>
             <Link
-              href="/admin/products/new"
+              href="/ilv-studio/products/new"
               className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
             >
               <Plus className="w-4 h-4" />
@@ -284,7 +284,7 @@ export default async function AdminDashboardPage() {
                   {/* Actions */}
                   <div className="flex items-center gap-2">
                     <Link
-                      href={`/admin/products/${product.id}/edit`}
+                      href={`/ilv-studio/products/${product.id}/edit`}
                       className="p-2 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors"
                       title="Edit"
                     >

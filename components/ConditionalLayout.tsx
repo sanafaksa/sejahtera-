@@ -12,7 +12,7 @@ export default function ConditionalLayout({
   const pathname = usePathname();
 
   // Check if current path is admin route
-  const isAdminRoute = pathname?.startsWith("/admin");
+  const isAdminRoute = pathname?.startsWith("/ilv-studio");
 
   // If it's an admin route, render children without Header/Footer
   if (isAdminRoute) {

@@ -15,17 +15,17 @@ export default function AdminLayout({
   const { data: session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
-  const isLoginPage = pathname === "/admin/login";
+  const isLoginPage = pathname === "/ilv-studio/login";
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     // Redirect to login if not authenticated and not on login page
     if (status === "unauthenticated" && !isLoginPage) {
-      router.push("/admin/login");
+      router.push("/ilv-studio/login");
     }
     // Redirect to dashboard if authenticated and on login page
     if (status === "authenticated" && isLoginPage) {
-      router.push("/admin/dashboard");
+      router.push("/ilv-studio/dashboard");
     }
   }, [status, router, isLoginPage]);
 

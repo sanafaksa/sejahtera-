@@ -72,7 +72,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/admin/login",
+    signIn: "/ilv-studio/login",
   },
   session: {
     strategy: "jwt",

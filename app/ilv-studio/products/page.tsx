@@ -50,7 +50,7 @@ export default async function ProductsPage() {
             </p>
           </div>
           <Link
-            href="/admin/products/new"
+            href="/ilv-studio/products/new"
             className="flex items-center space-x-2 bg-copper-600 hover:bg-copper-700 text-white px-4 py-2 text-sm rounded-lg transition-colors shadow-lg"
           >
             <Plus size={20} />
@@ -73,7 +73,7 @@ export default async function ProductsPage() {
               Get started by creating your first copper craft product
             </p>
             <Link
-              href="/admin/products/new"
+              href="/ilv-studio/products/new"
               className="inline-flex items-center space-x-2 bg-copper-600 hover:bg-copper-700 text-white px-6 py-3 rounded-lg transition-colors"
             >
               <Plus size={20} />
@@ -157,14 +157,14 @@ export default async function ProductsPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-center space-x-2">
                           <Link
-                            href={`/admin/products/${product.id}`}
+                            href={`/ilv-studio/products/${product.id}`}
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="View"
                           >
                             <Eye size={18} />
                           </Link>
                           <Link
-                            href={`/admin/products/${product.id}/edit`}
+                            href={`/ilv-studio/products/${product.id}/edit`}
                             className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
                             title="Edit"
                           >

@@ -28,7 +28,7 @@ export default async function GalleryListPage() {
           </p>
         </div>
         <Link
-          href="/admin/gallery/new"
+          href="/ilv-studio/gallery/new"
           className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
         >
           <Plus className="w-5 h-5" />
@@ -46,7 +46,7 @@ export default async function GalleryListPage() {
           {assets.map((a) => (
             <Link
               key={a.id}
-              href={`/admin/gallery/${a.id}`}
+              href={`/ilv-studio/gallery/${a.id}`}
               className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
               <div className="relative aspect-square bg-gray-100">
