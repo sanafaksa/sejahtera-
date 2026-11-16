@@ -100,18 +100,6 @@ export default function ModernMosaicGallery({ initialItems = [] }: Props) {
   return (
     <div className="w-full">
       {/* =========================================================================
-          1. HEADER SECTION ("OUR GALLERY" + Subtitle)
-          ========================================================================= */}
-      <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-        <h1 className="font-display font-extrabold uppercase tracking-[0.08em] text-[#17120d] text-4xl sm:text-5xl lg:text-[3.25rem] leading-none mb-3">
-          OUR GALLERY
-        </h1>
-        <p className="text-stone-500 text-xs sm:text-sm font-light tracking-wide max-w-lg mx-auto">
-          Explore our handcrafted copper & brass installations and architectural masterworks.
-        </p>
-      </div>
-
-      {/* =========================================================================
           2. CATEGORY TABS
           ========================================================================= */}
       <div className="border-b border-stone-200 mb-10 sm:mb-14 overflow-x-auto no-scrollbar">

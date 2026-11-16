@@ -3,7 +3,8 @@ import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
-import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Images, MessageCircle } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Gallery | Ilavio - Tumang Copper Crafts",
@@ -49,8 +50,18 @@ export default async function GalleryPage() {
   const items = await getGalleryItems();
 
   return (
-    <div className="bg-[#faf8f5] pt-28 sm:pt-36 pb-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <div className="bg-[#faf8f5] pb-24">
+      <PageHero
+        icon={Images}
+        crumb="Gallery"
+        eyebrow="Our Portfolio"
+        title="Craftsmanship in"
+        titleAccent="Every Detail"
+        description="Explore our handcrafted copper and brass installations, showcasing decades of artisanal excellence and timeless design."
+        fadeTo="#faf8f5"
+      />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pt-8 sm:pt-12">
         {/* Modern Mosaic Gallery */}
         <ModernMosaicGallery initialItems={items} />
 

@@ -13,7 +13,9 @@ import {
   Globe,
   Sparkles,
   CheckCircle,
+  Hammer,
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 // Hosted on Cloudinary (720p faststart). The local public/assets/by-aksa.mp4 is
 // git-ignored (215 MB > GitHub limit) and does not exist on Vercel.
@@ -30,27 +32,15 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      <section className="relative bg-gradient-to-b from-[#17120d] via-[#241a12] to-[#17120d] text-white py-24 sm:py-28 lg:py-40 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#b87333_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
-          <FadeInView direction="up">
-            <div className="max-w-4xl mx-auto text-center">
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#e5be9c] mb-3 inline-block">
-                Our Story
-              </span>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-white">
-                Crafting Tradition,{" "}
-                <span className="text-[#e5be9c]">Defining Excellence</span>
-              </h1>
-              <p className="text-base sm:text-lg text-stone-300 leading-relaxed max-w-2xl mx-auto font-light">
-                Bold, handmade centerpieces that define your interior. Over 30
-                years of heritage from Tumang, Boyolali.
-              </p>
-            </div>
-          </FadeInView>
-        </div>
-      </section>
+      <PageHero
+        icon={Hammer}
+        crumb="About"
+        eyebrow="Our Story"
+        title="Crafting Tradition,"
+        titleAccent="Defining Excellence"
+        description="Bold, handmade centerpieces that define your interior. Over 30 years of heritage from Tumang, Boyolali."
+        fadeTo="#fdfcf9"
+      />
 
       <section className="py-16 bg-gradient-to-br from-cream-50 via-white to-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
