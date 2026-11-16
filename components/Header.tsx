@@ -64,7 +64,7 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-display text-xl sm:text-2xl font-black tracking-tight text-[#17120d] group-hover:text-[#008236] transition-colors leading-none">
+              <span className="font-display text-xl sm:text-2xl font-black tracking-tight text-[#008236] group-hover:text-[#006b2c] transition-colors leading-none">
                 Ilavioo
               </span>
               <span className="text-[9px] uppercase tracking-[0.14em] text-stone-500 font-medium mt-0.5">
@@ -162,7 +162,7 @@ export default function Header() {
                     />
                   </div>
                   <div>
-                    <h3 className="font-display text-xl font-bold text-[#17120d]">
+                    <h3 className="font-display text-xl font-bold text-[#008236]">
                       Ilavioo
                     </h3>
                     <p className="text-[10px] text-stone-500 font-medium uppercase tracking-wider">
