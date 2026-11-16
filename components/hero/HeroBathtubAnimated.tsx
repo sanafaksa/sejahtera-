@@ -54,16 +54,17 @@ export default function HeroBathtubAnimated() {
           <span>Polished Brass Masterpiece</span>
         </div>
 
-        {/* Bottom subtle detail caption */}
-        <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 right-4 sm:right-6 text-white pointer-events-none">
-          <p className="font-display text-sm sm:text-base font-semibold leading-tight drop-shadow-md">
-            Freestanding Royal Brass Bathtub
-          </p>
-          <p className="mt-1 text-[11px] sm:text-xs font-medium leading-tight text-white/80 drop-shadow-sm">
-            Mirror-finish Brass &amp; Pure White Enamel
-          </p>
-        </div>
       </motion.div>
+
+      {/* Bottom subtle detail caption — outside the floating frame so it stays still */}
+      <div className="absolute bottom-5 left-4 sm:bottom-7 sm:left-6 right-4 sm:right-6 z-10 text-white pointer-events-none">
+        <p className="font-display text-sm sm:text-base font-semibold leading-tight drop-shadow-md">
+          Freestanding Royal Brass Bathtub
+        </p>
+        <p className="mt-1 text-[11px] sm:text-xs font-medium leading-tight text-white/80 drop-shadow-sm">
+          Mirror-finish Brass &amp; Pure White Enamel
+        </p>
+      </div>
     </div>
   );
 }
