@@ -50,7 +50,14 @@ export async function POST(req: NextRequest) {
     });
   } catch (error: unknown) {
     console.error("Cloudinary upload API error:", error);
-    const message = error instanceof Error ? error.message : "";
+    // Cloudinary rejects with a plain object ({ message, http_code }), not an Error.
+    const message =
+      typeof error === "object" &&
+      error !== null &&
+      "message" in error &&
+      typeof error.message === "string"
+        ? error.message
+        : "";
     return NextResponse.json(
       { error: message || "Failed to upload to Cloudinary" },
       { status: 500 }
