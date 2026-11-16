@@ -15,9 +15,11 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-// Local file is git-ignored (215 MB > GitHub limit); set this env var to a hosted URL in production.
+// Hosted on Cloudinary (720p faststart). The local public/assets/by-aksa.mp4 is
+// git-ignored (215 MB > GitHub limit) and does not exist on Vercel.
 const HERITAGE_VIDEO_SRC =
-  process.env.NEXT_PUBLIC_HERITAGE_VIDEO_URL || "/assets/by-aksa.mp4";
+  process.env.NEXT_PUBLIC_HERITAGE_VIDEO_URL ||
+  "https://res.cloudinary.com/dqcdwv7du/video/upload/v1794803666/ilavioo/videos/by-aksa.mp4";
 
 export const metadata = {
   title: "About Us - Ilavio Copper Crafts",
