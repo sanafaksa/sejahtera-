@@ -30,35 +30,25 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      <section className="relative bg-gradient-to-r from-green-600 to-forest-600 text-white py-24 lg:py-44 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="relative bg-gradient-to-b from-[#17120d] via-[#241a12] to-[#17120d] text-white py-24 sm:py-28 lg:py-40 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(#b87333_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
           <FadeInView direction="up">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#e5be9c] mb-3 inline-block">
+                Our Story
+              </span>
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-white">
                 Crafting Tradition,{" "}
-                <span className="text-green-200">Defining Excellence</span>
+                <span className="text-[#e5be9c]">Defining Excellence</span>
               </h1>
-              <p className="text-xl text-green-50 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg text-stone-300 leading-relaxed max-w-2xl mx-auto font-light">
                 Bold, handmade centerpieces that define your interior. Over 30
                 years of heritage from Tumang, Boyolali.
               </p>
             </div>
           </FadeInView>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 block leading-[0]">
-          <svg
-            viewBox="0 0 1440 110"
-            className="w-full h-auto block"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-            />
-          </svg>
         </div>
       </section>
 
