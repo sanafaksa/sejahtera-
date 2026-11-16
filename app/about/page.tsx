@@ -13,7 +13,6 @@ import {
   Globe,
   Sparkles,
   CheckCircle,
-  Hammer,
 } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
@@ -33,11 +32,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
       <PageHero
-        icon={Hammer}
-        crumb="About"
-        eyebrow="Our Story"
-        title="Crafting Tradition,"
-        titleAccent="Defining Excellence"
+        title="Our Story"
         description="Bold, handmade centerpieces that define your interior. Over 30 years of heritage from Tumang, Boyolali."
         fadeTo="#fdfcf9"
       />

@@ -17,6 +17,15 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Ilavio - Handcrafted Copper Crafts from Tumang",
   description: "Timeless copper crafts from the heart of Tumang, Indonesia",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/assets/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: { url: "/assets/favicon/apple-touch-icon.png", sizes: "180x180" },
+  },
+  manifest: "/assets/favicon/site.webmanifest",
 };
 
 export default function RootLayout({

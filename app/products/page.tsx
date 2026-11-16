@@ -5,6 +5,7 @@ import StaggerContainer, {
   StaggerItem,
 } from "@/components/animations/StaggerContainer";
 import ProductsFilter from "@/components/products/ProductsFilter";
+import PageHero from "@/components/PageHero";
 import { Suspense } from "react";
 import { Package, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -168,42 +169,13 @@ export default async function ProductsPage({
 
   return (
     <main className="min-h-screen bg-[#faf8f5]">
-      <section className="relative bg-gradient-to-b from-[#17120d] via-[#241a12] to-[#17120d] text-white py-24 sm:py-28 lg:py-40 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#b87333_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
-          <FadeInView direction="up">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-10">
-                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#e5be9c] mb-3 inline-block">
-                  Authentic Indonesian Metal Art
-                </span>
-                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-white">
-                  Handcrafted Copper Collection
-                </h1>
-                <p className="text-base sm:text-lg text-stone-300 leading-relaxed max-w-2xl mx-auto font-light">
-                  Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Tumang, Boyolali.
-                </p>
-              </div>
-
-              <ProductsFilter />
-            </div>
-          </FadeInView>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 140"
-            className="w-full h-auto"
-            preserveAspectRatio="none"
-          >
-            <path
-              fill="#faf8f5"
-              d="M0,80L80,85.3C160,91,320,101,480,96C640,91,800,69,960,64C1120,59,1280,69,1360,74.7L1440,80L1440,140L1360,140C1280,140,1120,140,960,140C800,140,640,140,480,140C320,140,160,140,80,140L0,140Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
+      <PageHero
+        title="Products"
+        description="Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Tumang, Boyolali."
+        fadeTo="#faf8f5"
+      >
+        <ProductsFilter />
+      </PageHero>
 
       <section className="py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

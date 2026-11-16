@@ -3,7 +3,7 @@ import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
-import { ArrowUpRight, Images, MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
@@ -52,11 +52,7 @@ export default async function GalleryPage() {
   return (
     <div className="bg-[#faf8f5] pb-24">
       <PageHero
-        icon={Images}
-        crumb="Gallery"
-        eyebrow="Our Portfolio"
-        title="Craftsmanship in"
-        titleAccent="Every Detail"
+        title="Gallery"
         description="Explore our handcrafted copper and brass installations, showcasing decades of artisanal excellence and timeless design."
         fadeTo="#faf8f5"
       />
