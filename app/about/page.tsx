@@ -15,6 +15,10 @@ import {
   CheckCircle,
 } from "lucide-react";
 
+// Local file is git-ignored (215 MB > GitHub limit); set this env var to a hosted URL in production.
+const HERITAGE_VIDEO_SRC =
+  process.env.NEXT_PUBLIC_HERITAGE_VIDEO_URL || "/assets/by-aksa.mp4";
+
 export const metadata = {
   title: "About Us - Ilavio Copper Crafts",
   description:
@@ -118,15 +122,17 @@ export default function AboutPage() {
             <FadeInView direction="left">
               <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-[#17120d]">
                 <video
-                  src="/assets/by-aksa.mp4"
                   poster="/assets/copper-hero-craft.jpg"
                   autoPlay
                   loop
                   muted
                   playsInline
                   controls
+                  preload="metadata"
                   className="w-full h-full object-cover"
-                />
+                >
+                  <source src={HERITAGE_VIDEO_SRC} type="video/mp4" />
+                </video>
                 <div className="absolute top-4 left-4 z-10 pointer-events-none">
                   <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium tracking-wide border border-white/10 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-[#b87333] animate-pulse" />
