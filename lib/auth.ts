@@ -40,8 +40,9 @@ export const authOptions: NextAuthOptions = {
           }
         }
 
-        // Default admin fallback for seamless local login
+        // Default admin fallback for local development only — never in production
         if (
+          process.env.NODE_ENV !== "production" &&
           credentials.email === "admin@ilavio.com" &&
           credentials.password === "admin123"
         ) {
