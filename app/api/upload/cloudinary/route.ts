@@ -48,10 +48,11 @@ export async function POST(req: NextRequest) {
       width: result.width,
       height: result.height,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Cloudinary upload API error:", error);
+    const message = error instanceof Error ? error.message : "";
     return NextResponse.json(
-      { error: error.message || "Failed to upload to Cloudinary" },
+      { error: message || "Failed to upload to Cloudinary" },
       { status: 500 }
     );
   }

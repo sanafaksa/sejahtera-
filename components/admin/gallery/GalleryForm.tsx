@@ -75,8 +75,9 @@ export default function GalleryForm({ mode, initial }: Props) {
             tags: [],
             isFeatured: false,
           });
-        } catch (err: any) {
-          alert(`Gagal upload ${file.name}: ${err.message}`);
+        } catch (err: unknown) {
+          const message = err instanceof Error ? err.message : String(err);
+          alert(`Gagal upload ${file.name}: ${message}`);
         }
       }
       setItems((prev) => [...prev, ...uploaded]);

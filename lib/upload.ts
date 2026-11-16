@@ -66,10 +66,16 @@ export async function uploadMediaFile(
       type: isVideo ? "video" : "image",
       provider: "supabase",
     };
-  } catch (supabaseError: any) {
-    throw new Error(
-      `Upload failed on both Cloudinary and Supabase: ${supabaseError.message || supabaseError}`
-    );
+  } catch (supabaseError: unknown) {
+    const message =
+      typeof supabaseError === "object" &&
+      supabaseError !== null &&
+      "message" in supabaseError &&
+      typeof supabaseError.message === "string" &&
+      supabaseError.message
+        ? supabaseError.message
+        : String(supabaseError);
+    throw new Error(`Upload failed on both Cloudinary and Supabase: ${message}`);
   }
 }
 
