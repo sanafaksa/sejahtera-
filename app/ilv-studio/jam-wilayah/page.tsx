@@ -41,7 +41,8 @@ export default async function JamWilayahPage() {
   const known = Object.values(counts).reduce((a, b) => a + b, 0);
   const shares = Object.fromEntries(Object.entries(counts).map(([k, n]) => [k, known ? n / known : 0]));
 
-  const heat = buildHeatmap(visits);
+  // All countries, so any of them can be picked in the heatmap.
+  const heat = buildHeatmap(visits, 250);
   const suggestions = suggestHours(visits);
   const h = (n: number) => hourLabel(n, settings.hour12);
 

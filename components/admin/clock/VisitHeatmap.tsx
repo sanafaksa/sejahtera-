@@ -6,6 +6,7 @@ import { hourLabel, type HeatRow } from "@/lib/clock";
 // Sequential copper ramp, light -> dark (Sepi -> Ramai).
 const RAMP = ["#F5EADC", "#E8C9A3", "#D5A06C", "#B9773F", "#8A4B1C"];
 const EMPTY = "#F3F4F6";
+const TOP_COUNTRIES = 10;
 
 function colorFor(value: number, max: number) {
   if (value === 0 || max === 0) return EMPTY;
@@ -24,7 +25,10 @@ function countryLabel(code: string) {
 export default function VisitHeatmap({ rows, hour12 }: { rows: HeatRow[]; hour12: boolean }) {
   const [mode, setMode] = useState<"wib" | "local">("wib");
   const [hover, setHover] = useState<{ country: string; hour: number; value: number } | null>(null);
-  const max = Math.max(0, ...rows.flatMap((r) => r[mode]));
+  const [country, setCountry] = useState<string>("all");
+  // "Semua negara" shows the busiest countries; picking one shows just that row.
+  const shown = country === "all" ? rows.slice(0, TOP_COUNTRIES) : rows.filter((r) => r.country === country);
+  const max = Math.max(0, ...shown.flatMap((r) => r[mode]));
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5 sm:p-6">
@@ -33,7 +37,28 @@ export default function VisitHeatmap({ rows, hour12 }: { rows: HeatRow[]; hour12
           <h2 className="font-semibold text-gray-900">Jam ramai pengunjung</h2>
           <p className="text-sm text-gray-600">Kunjungan 30 hari terakhir per jam, per negara.</p>
         </div>
-        <div className="inline-flex rounded-lg border border-gray-200 p-1 self-start" role="group" aria-label="Zona jam">
+        <div className="flex flex-wrap items-center gap-2 self-start">
+        {rows.length > 0 && (
+          <select
+            value={country}
+            onChange={(e) => {
+              setCountry(e.target.value);
+              setHover(null);
+            }}
+            aria-label="Pilih negara"
+            className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#A8602A]/40"
+          >
+            <option value="all">
+              {rows.length > TOP_COUNTRIES ? `Semua negara (${TOP_COUNTRIES} teratas)` : "Semua negara"}
+            </option>
+            {rows.map((r) => (
+              <option key={r.country} value={r.country}>
+                {countryLabel(r.country)} ({r.total})
+              </option>
+            ))}
+          </select>
+        )}
+        <div className="inline-flex rounded-lg border border-gray-200 p-1" role="group" aria-label="Zona jam">
           {(
             [
               ["wib", "Jam WIB"],
@@ -52,6 +77,7 @@ export default function VisitHeatmap({ rows, hour12 }: { rows: HeatRow[]; hour12
               {label}
             </button>
           ))}
+        </div>
         </div>
       </div>
 
@@ -75,7 +101,7 @@ export default function VisitHeatmap({ rows, hour12 }: { rows: HeatRow[]; hour12
                 </tr>
               </thead>
               <tbody>
-                {rows.map((r) => (
+                {shown.map((r) => (
                   <tr key={r.country}>
                     <th scope="row" className="text-left font-medium text-gray-700 pr-2 whitespace-nowrap truncate">
                       <span className="inline-block rounded bg-gray-100 px-1 text-[10px] text-gray-600 mr-1.5">{r.country}</span>
