@@ -1,4 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import { requireAdminPage } from "@/lib/admin-auth";
+import DashboardGreeting from "@/components/admin/DashboardGreeting";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -47,18 +49,25 @@ async function getDashboardStats() {
 }
 
 export default async function AdminDashboardPage() {
+  const session = await requireAdminPage();
   const stats = await getDashboardStats();
 
   return (
     <div className="space-y-8 max-w-7xl">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Dashboard Overview
-        </h1>
-        <p className="text-gray-600">
-          Welcome back! Here&apos;s what&apos;s happening with your store.
-        </p>
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Dashboard Overview
+          </h1>
+          <p className="text-gray-600">
+            Welcome back! Here&apos;s what&apos;s happening with your store.
+          </p>
+        </div>
+        <DashboardGreeting
+          name={session.user?.name || "Admin"}
+          initialNow={Date.now()}
+        />
       </div>
 
       {/* Quick Actions */}
