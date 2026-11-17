@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getFeaturedProducts as getFeaturedProductsCached } from "@/lib/public-data";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
 import StaggerContainer, { StaggerItem } from "./animations/StaggerContainer";
@@ -6,22 +6,7 @@ import { ChevronRight } from "lucide-react";
 
 async function getFeaturedProducts() {
   try {
-    const products = await prisma.product.findMany({
-      take: 4,
-      include: {
-        images: {
-          orderBy: [
-            { isCatalog: "desc" },
-            { isFeatured: "desc" },
-            { id: "asc" },
-          ],
-          take: 1,
-        },
-        specifications: true,
-      },
-      orderBy: { createdAt: "desc" },
-    });
-    return products;
+    return await getFeaturedProductsCached();
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
+import { PRODUCTS_TAG } from "@/lib/public-data";
 import { cloudinary } from "@/lib/cloudinary";
 
 // Define types for request body
@@ -174,6 +176,7 @@ export async function PUT(
       },
     });
 
+    revalidateTag(PRODUCTS_TAG);
     return NextResponse.json(product);
   } catch (error) {
     console.error("Error updating product:", error);
@@ -237,6 +240,7 @@ export async function DELETE(
       where: { id: productId },
     });
 
+    revalidateTag(PRODUCTS_TAG);
     return NextResponse.json(
       { message: "Product deleted successfully" },
       { status: 200 }

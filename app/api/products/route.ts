@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
+import { PRODUCTS_TAG } from "@/lib/public-data";
 
 // Define types for request body
 type HighlightInput = {
@@ -130,6 +132,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    revalidateTag(PRODUCTS_TAG);
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
     console.error("Error creating product:", error);

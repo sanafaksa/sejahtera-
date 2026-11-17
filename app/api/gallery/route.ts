@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { revalidateTag } from "next/cache";
+import { GALLERY_TAG } from "@/lib/public-data";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -32,6 +36,11 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await req.json();
   if (!body.url || !body.type) {
     return NextResponse.json(
@@ -52,5 +61,6 @@ export async function POST(req: Request) {
     },
   });
 
+  revalidateTag(GALLERY_TAG);
   return NextResponse.json(created, { status: 201 });
 }

@@ -1,4 +1,7 @@
-import { prisma } from "@/lib/prisma";
+import {
+  getProductBySlug,
+  getRelatedProducts as getRelatedProductsCached,
+} from "@/lib/public-data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import FadeInView from "@/components/animations/FadeInView";
@@ -18,16 +21,7 @@ import {
 } from "lucide-react";
 
 async function getProduct(slug: string) {
-  const product = await prisma.product.findUnique({
-    where: { slug },
-    include: {
-      images: {
-        orderBy: { id: "asc" },
-      },
-      specifications: true,
-      highlights: true,
-    },
-  });
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -37,26 +31,7 @@ async function getProduct(slug: string) {
 }
 
 async function getRelatedProducts(currentProductId: number) {
-  const products = await prisma.product.findMany({
-    where: {
-      NOT: { id: currentProductId },
-    },
-    take: 4,
-    include: {
-      images: {
-        orderBy: [
-          { isCatalog: "desc" },
-          { isFeatured: "desc" },
-          { id: "asc" },
-        ],
-        take: 1,
-      },
-      specifications: true,
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  return products;
+  return getRelatedProductsCached(currentProductId);
 }
 
 export async function generateMetadata({

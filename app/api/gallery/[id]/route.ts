@@ -2,6 +2,17 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { supabase } from "@/lib/supabase";
 import { cloudinary } from "@/lib/cloudinary";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { revalidateTag } from "next/cache";
+import { GALLERY_TAG } from "@/lib/public-data";
+
+async function requireAdmin() {
+  const session = await getServerSession(authOptions);
+  return session
+    ? null
+    : NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+}
 
 export async function GET(
   _req: Request,
@@ -19,6 +30,9 @@ export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   const { id: idString } = await params;
   const id = Number(idString);
   const body = await req.json();
@@ -34,6 +48,7 @@ export async function PUT(
       isFeatured: body.isFeatured ?? undefined,
     },
   });
+  revalidateTag(GALLERY_TAG);
   return NextResponse.json(updated);
 }
 
@@ -41,6 +56,9 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   const { id: idString } = await params;
   const id = Number(idString);
 
@@ -89,6 +107,7 @@ export async function DELETE(
       }
     }
 
+    revalidateTag(GALLERY_TAG);
     return NextResponse.json({
       ok: true,
       message: "Asset deleted successfully",

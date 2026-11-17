@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { getGalleryAssets } from "@/lib/public-data";
 import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -11,9 +11,6 @@ export const metadata: Metadata = {
   description:
     "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Tumang, Boyolali.",
 };
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 async function getGalleryItems(): Promise<GalleryAssetItem[]> {
   try {
@@ -26,9 +23,7 @@ async function getGalleryItems(): Promise<GalleryAssetItem[]> {
       return [];
     }
 
-    const rawItems = await prisma.galleryAsset.findMany({
-      orderBy: { createdAt: "desc" },
-    });
+    const rawItems = await getGalleryAssets();
 
     return rawItems.map((item) => ({
       id: item.id,

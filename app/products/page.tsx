@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getProductList } from "@/lib/public-data";
 import ProductCard from "@/components/ProductCard";
 import FadeInView from "@/components/animations/FadeInView";
 import StaggerContainer, {
@@ -10,8 +10,8 @@ import { Suspense } from "react";
 import { Package, Sparkles } from "lucide-react";
 import Link from "next/link";
 
+// Dynamic because of searchParams; data itself comes from the tagged cache.
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 interface SearchParams {
   search?: string;
@@ -20,47 +20,10 @@ interface SearchParams {
 
 async function getProducts(searchParams: SearchParams) {
   try {
-    const { search, sort } = searchParams;
-
-    const where = search
-      ? {
-          OR: [
-            { name: { contains: search, mode: "insensitive" as const } },
-            {
-              description: { contains: search, mode: "insensitive" as const },
-            },
-          ],
-        }
-      : {};
-
-    let orderBy: { createdAt?: "asc" | "desc"; name?: "asc" | "desc" } = {
-      createdAt: "desc",
-    };
-    if (sort === "oldest") {
-      orderBy = { createdAt: "asc" };
-    } else if (sort === "name-asc") {
-      orderBy = { name: "asc" };
-    } else if (sort === "name-desc") {
-      orderBy = { name: "desc" };
-    }
-
-    const products = await prisma.product.findMany({
-      where,
-      include: {
-        images: {
-          orderBy: [
-            { isCatalog: "desc" },
-            { isFeatured: "desc" },
-            { id: "asc" },
-          ],
-          take: 1,
-        },
-        specifications: true,
-      },
-      orderBy,
-    });
-
-    return products;
+    return await getProductList(
+      (searchParams.search ?? "").trim(),
+      searchParams.sort ?? "newest"
+    );
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
