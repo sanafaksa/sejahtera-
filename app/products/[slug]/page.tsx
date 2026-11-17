@@ -125,14 +125,14 @@ export default async function ProductDetailPage({
 
                 {/* Price Badge */}
                 {product.specifications?.price && (
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#17120d] text-[#e5be9c] border border-[#b87333]/40 rounded-2xl shadow-lg">
-                      <Tag className="w-5 h-5 text-[#e5be9c]" />
-                      <span className="text-2xl font-bold">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#17120d] text-[#e5be9c] border border-[#b87333]/40 rounded-full shadow-sm">
+                      <Tag className="w-4 h-4 text-[#e5be9c]" />
+                      <span className="text-sm sm:text-base font-semibold tracking-wide">
                         {product.specifications.price}
                       </span>
                     </div>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 italic">
                       *Bespoke sizing available
                     </span>
                   </div>
