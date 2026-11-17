@@ -225,33 +225,6 @@ export default async function ProductDetailPage({
                     Call Us
                   </a>
                 </div>
-
-                {/* Trust Badges */}
-                <div className="mt-8 pt-8 border-t border-gray-200">
-                  <div className="grid grid-cols-3 gap-4 text-center text-sm">
-                    <div>
-                      <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <Shield className="w-6 h-6 text-[#b87333]" />
-                      </div>
-                      <p className="font-semibold text-gray-900">Authentic</p>
-                      <p className="text-xs text-gray-500">100% Genuine</p>
-                    </div>
-                    <div>
-                      <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <Sparkles className="w-6 h-6 text-[#b87333]" />
-                      </div>
-                      <p className="font-semibold text-gray-900">Handmade</p>
-                      <p className="text-xs text-gray-500">By Artisans</p>
-                    </div>
-                    <div>
-                      <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <Package className="w-6 h-6 text-[#b87333]" />
-                      </div>
-                      <p className="font-semibold text-gray-900">Quality</p>
-                      <p className="text-xs text-gray-500">Export Standard</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </FadeInView>
           </div>
