@@ -3,6 +3,7 @@ import { getToken } from "next-auth/jwt";
 import {
   collectVisit,
   isHumanRequest,
+  isTrackablePath,
   isTrackingEnabled,
   setVisitCookies,
 } from "@/lib/analytics/collect";
@@ -60,6 +61,7 @@ async function trackPageLoad(req: NextRequest, event: NextFetchEvent) {
   const h = req.headers;
   if (
     req.method !== "GET" ||
+    !isTrackablePath(req.nextUrl.pathname) ||
     !isTrackingEnabled(req.nextUrl.hostname) ||
     !isDocumentLoad(h) ||
     !isHumanRequest(h)
