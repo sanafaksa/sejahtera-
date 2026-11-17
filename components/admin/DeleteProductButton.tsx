@@ -40,8 +40,9 @@ export default function DeleteProductButton({
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+        className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
         title="Delete"
+        aria-label={`Delete ${productName}`}
       >
         <Trash2 size={18} />
       </button>
