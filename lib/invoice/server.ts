@@ -205,6 +205,12 @@ export function blankInvoice(settings: InvoiceSettings): InvoiceView {
 /** Preview of the next number (not reserved). */
 export async function peekNextNumber(settings: InvoiceSettings, year: number): Promise<string> {
   const scope = counterScope(settings.numbering, year);
-  const row = await prisma.invoiceCounter.findUnique({ where: { scope } }).catch(() => null);
-  return formatInvoiceNumber(settings.numbering, year, (row?.last ?? 0) + 1);
+  let last = 0;
+  try {
+    last = (await prisma.invoiceCounter.findUnique({ where: { scope } }))?.last ?? 0;
+  } catch (error) {
+    // Only a preview; the real number is allocated when the invoice is saved.
+    console.warn("Could not read the invoice counter:", error);
+  }
+  return formatInvoiceNumber(settings.numbering, year, last + 1);
 }
