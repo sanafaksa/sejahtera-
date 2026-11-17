@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
@@ -13,6 +13,11 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
 });
+
+// Browser UI colour on phones (status bar / address bar): Ilavioo copper.
+export const viewport: Viewport = {
+  themeColor: "#A8602A",
+};
 
 export const metadata: Metadata = {
   title: "Ilavio - Handcrafted Copper Crafts from Tumang",
