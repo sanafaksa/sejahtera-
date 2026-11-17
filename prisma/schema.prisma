@@ -112,3 +112,12 @@ model PageVisit {
   @@index([country, createdAt])
   @@map("page_visits")
 }
+
+// Admin settings stored as JSON per feature ("clock", "invoice", ...).
+model AppSetting {
+  key       String   @id @db.VarChar(64)
+  value     Json
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("app_settings")
+}

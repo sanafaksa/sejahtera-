@@ -17,6 +17,8 @@ import { ADMIN_TZ, addDays, dateKey, formatDateTime, isValidTimeZone, startOfZon
 import DailyChart from "@/components/admin/stats/DailyChart";
 import BarList from "@/components/admin/stats/BarList";
 import UtmBuilder from "@/components/admin/stats/UtmBuilder";
+import { getSetting } from "@/lib/settings";
+import { clockSettingsSchema, DEFAULT_CLOCK_SETTINGS } from "@/lib/clock";
 
 export const dynamic = "force-dynamic";
 
@@ -98,7 +100,13 @@ export default async function StatistikPage({
   const range = RANGES.find((r) => String(r) === params.range) ?? 30;
   const tab: Scope = params.tab === "intl" ? "intl" : "id";
 
-  const [rows, products] = await Promise.all([loadVisits(range), loadProducts()]);
+  const [rows, products, clock] = await Promise.all([
+    loadVisits(range),
+    loadProducts(),
+    getSetting("clock", clockSettingsSchema, DEFAULT_CLOCK_SETTINGS),
+  ]);
+  const showLocal = clock.showLocalTimeInRecent;
+  const hour12 = clock.hour12;
   const ov = overview(rows);
   const points = daily(rows, range);
   const scoped = rows.filter((r) => inScope(r, tab));
@@ -262,7 +270,7 @@ export default async function StatistikPage({
               <thead className="text-xs text-gray-500 border-b border-gray-100">
                 <tr>
                   <th className="px-5 sm:px-6 py-2 font-medium">Waktu (WIB)</th>
-                  <th className="px-3 py-2 font-medium">Jam setempat</th>
+                  {showLocal && <th className="px-3 py-2 font-medium">Jam setempat</th>}
                   <th className="px-3 py-2 font-medium">Lokasi</th>
                   <th className="px-3 py-2 font-medium">Halaman</th>
                   <th className="px-3 py-2 font-medium">Perangkat</th>
@@ -272,10 +280,12 @@ export default async function StatistikPage({
               <tbody className="text-gray-700">
                 {recent.map((r, i) => (
                   <tr key={`${r.createdAt.toISOString()}-${i}`} className="border-b border-gray-50 last:border-0">
-                    <td className="px-5 sm:px-6 py-2.5 whitespace-nowrap tabular-nums">{formatDateTime(r.createdAt, ADMIN_TZ)}</td>
-                    <td className="px-3 py-2.5 whitespace-nowrap tabular-nums text-gray-500">
-                      {isValidTimeZone(r.timezone) ? formatDateTime(r.createdAt, r.timezone) : "–"}
-                    </td>
+                    <td className="px-5 sm:px-6 py-2.5 whitespace-nowrap tabular-nums">{formatDateTime(r.createdAt, ADMIN_TZ, hour12)}</td>
+                    {showLocal && (
+                      <td className="px-3 py-2.5 whitespace-nowrap tabular-nums text-gray-500">
+                        {isValidTimeZone(r.timezone) ? formatDateTime(r.createdAt, r.timezone, hour12) : "–"}
+                      </td>
+                    )}
                     <td className="px-3 py-2.5 whitespace-nowrap">
                       {countryFlag(r.country)}{" "}
                       {[r.city, r.country === "ID" ? provinceName(r.region) : countryName(r.country)]
