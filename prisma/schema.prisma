@@ -82,3 +82,33 @@ model GalleryAsset {
 
   @@map("gallery_assets")
 }
+
+// ---------------------------------------------------------------------------
+// Analytics: one row per counted page view. No raw IP is ever stored; the
+// visitor id is a random value kept in a first-party cookie.
+// ---------------------------------------------------------------------------
+model PageVisit {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now()) @map("created_at") // stored in UTC
+  visitorId    String   @map("visitor_id") @db.VarChar(64)
+  path         String   @db.VarChar(512)
+  productSlug  String?  @map("product_slug") @db.VarChar(255)
+  country      String?  @db.VarChar(2) // ISO 3166-1 alpha-2
+  region       String?  @db.VarChar(16) // ISO 3166-2 subdivision code (without country)
+  city         String?  @db.VarChar(120)
+  timezone     String?  @db.VarChar(64) // IANA name, e.g. "Europe/Berlin"
+  device       String   @db.VarChar(16) // "mobile" | "tablet" | "desktop"
+  os           String?  @db.VarChar(40)
+  browser      String?  @db.VarChar(40)
+  inApp        String?  @map("in_app") @db.VarChar(20) // "Instagram" | "Facebook" | "TikTok" | ...
+  source       String   @db.VarChar(80) // "Langsung", "Google", "Instagram", utm_source, ...
+  referrerHost String?  @map("referrer_host") @db.VarChar(255)
+  utmSource    String?  @map("utm_source") @db.VarChar(100)
+  utmMedium    String?  @map("utm_medium") @db.VarChar(100)
+  utmCampaign  String?  @map("utm_campaign") @db.VarChar(100)
+
+  @@index([createdAt])
+  @@index([visitorId, path, createdAt])
+  @@index([country, createdAt])
+  @@map("page_visits")
+}

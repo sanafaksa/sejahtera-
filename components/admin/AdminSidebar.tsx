@@ -10,6 +10,7 @@ import {
   LogOut,
   X,
   Home,
+  BarChart3,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
@@ -18,6 +19,7 @@ const navigation = [
   { name: "Dashboard", href: "/ilv-studio/dashboard", icon: LayoutDashboard },
   { name: "Products", href: "/ilv-studio/products", icon: Package },
   { name: "Gallery", href: "/ilv-studio/gallery", icon: ImageIcon },
+  { name: "Statistik", href: "/ilv-studio/statistik", icon: BarChart3 },
 ];
 
 interface AdminSidebarProps {
