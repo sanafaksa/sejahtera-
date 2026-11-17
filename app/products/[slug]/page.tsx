@@ -140,14 +140,14 @@ export default async function ProductDetailPage({
 
                 {/* Specifications Grid */}
                 {product.specifications && (
-                  <div className="flex flex-wrap gap-4 mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-8">
                     {product.specifications.size && (
-                      <div className="flex-1 min-w-[calc(50%-8px)] flex items-start gap-3 p-4 bg-white rounded-xl border border-stone-200 hover:border-[#b87333]/50 transition-colors">
+                      <div className="flex items-start gap-3 min-w-0">
                         <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
                           <Ruler className="w-5 h-5 text-[#b87333]" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-500 mb-1">Size</p>
+                          <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Size</p>
                           <p className="font-semibold text-gray-900 break-words">
                             {product.specifications.size}
                           </p>
@@ -156,12 +156,12 @@ export default async function ProductDetailPage({
                     )}
 
                     {product.specifications.finishing && (
-                      <div className="flex-1 min-w-[calc(50%-8px)] flex items-start gap-3 p-4 bg-white rounded-xl border border-stone-200 hover:border-[#b87333]/50 transition-colors">
+                      <div className="flex items-start gap-3 min-w-0">
                         <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
                           <Sparkles className="w-5 h-5 text-[#b87333]" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-500 mb-1">Finishing</p>
+                          <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Finishing</p>
                           <p className="font-semibold text-gray-900 break-words">
                             {product.specifications.finishing}
                           </p>
@@ -170,12 +170,12 @@ export default async function ProductDetailPage({
                     )}
 
                     {product.specifications.material && (
-                      <div className="flex-1 min-w-[calc(50%-8px)] flex items-start gap-3 p-4 bg-white rounded-xl border border-stone-200 hover:border-[#b87333]/50 transition-colors">
+                      <div className="flex items-start gap-3 min-w-0">
                         <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
                           <Package className="w-5 h-5 text-[#b87333]" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-500 mb-1">Material</p>
+                          <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Material</p>
                           <p className="font-semibold text-gray-900 break-words">
                             {product.specifications.material}
                           </p>
