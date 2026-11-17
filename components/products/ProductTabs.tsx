@@ -196,22 +196,19 @@ export default function ProductTabs({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex items-start gap-4 p-6 bg-amber-50 rounded-xl border-2 border-amber-200">
-              <div className="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                <AlertCircle className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-display text-xl font-bold text-amber-900 mb-3">
-                  Important Information
-                </h3>
-                <div className="prose max-w-none text-amber-900 leading-relaxed">
-                  {notes.split("\n").map((paragraph, index) => (
-                    <p key={index} className="mb-2">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
+            <h3 className="font-display text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <AlertCircle className="w-6 h-6 text-[#b87333]" />
+              Important Information
+            </h3>
+            <div className="max-w-none text-gray-700 leading-relaxed">
+              {notes
+                .split("\n")
+                .filter((paragraph) => paragraph.trim())
+                .map((paragraph, index) => (
+                  <p key={index} className="mb-3 last:mb-0">
+                    {paragraph}
+                  </p>
+                ))}
             </div>
           </motion.div>
         )}
