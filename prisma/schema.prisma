@@ -121,3 +121,69 @@ model AppSetting {
 
   @@map("app_settings")
 }
+
+// ---------------------------------------------------------------------------
+// Invoices. Money is stored as Decimal; totals are recomputed on the server.
+// ---------------------------------------------------------------------------
+model Invoice {
+  id               Int           @id @default(autoincrement())
+  number           String        @unique @db.VarChar(40)
+  publicToken      String        @unique @map("public_token") @db.VarChar(64)
+  status           String        @default("draft") @db.VarChar(16) // draft | sent | paid | overdue | cancelled
+  language         String        @default("en") @db.VarChar(2) // en | id
+  currency         String        @default("USD") @db.VarChar(3)
+  customerName     String        @map("customer_name") @db.VarChar(160)
+  customerCompany  String?       @map("customer_company") @db.VarChar(160)
+  customerEmail    String?       @map("customer_email") @db.VarChar(200)
+  customerPhone    String?       @map("customer_phone") @db.VarChar(60)
+  customerAddress  String?       @map("customer_address")
+  customerCountry  String?       @map("customer_country") @db.VarChar(2)
+  customerTimezone String?       @map("customer_timezone") @db.VarChar(64)
+  issueDate        DateTime      @map("issue_date") @db.Date
+  dueDate          DateTime?     @map("due_date") @db.Date
+  discountType     String        @default("percent") @map("discount_type") @db.VarChar(8) // percent | amount
+  discountValue    Decimal       @default(0) @map("discount_value") @db.Decimal(16, 2)
+  taxEnabled       Boolean       @default(false) @map("tax_enabled")
+  taxLabel         String        @default("PPN") @map("tax_label") @db.VarChar(40)
+  taxRate          Decimal       @default(0) @map("tax_rate") @db.Decimal(5, 2)
+  shipping         Decimal       @default(0) @db.Decimal(16, 2)
+  subtotal         Decimal       @default(0) @db.Decimal(16, 2)
+  discountTotal    Decimal       @default(0) @map("discount_total") @db.Decimal(16, 2)
+  taxTotal         Decimal       @default(0) @map("tax_total") @db.Decimal(16, 2)
+  total            Decimal       @default(0) @db.Decimal(16, 2)
+  notes            String?
+  terms            String?
+  paymentMethodIds String[]      @default([]) @map("payment_method_ids")
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  items            InvoiceItem[]
+
+  @@index([status])
+  @@index([issueDate])
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          Int      @id @default(autoincrement())
+  invoiceId   Int      @map("invoice_id")
+  position    Int
+  productId   Int?     @map("product_id")
+  sku         String?  @db.VarChar(64)
+  name        String   @db.VarChar(255)
+  description String?
+  quantity    Decimal  @db.Decimal(12, 3)
+  unitPrice   Decimal  @map("unit_price") @db.Decimal(16, 2)
+  amount      Decimal  @db.Decimal(16, 2)
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+  @@map("invoice_items")
+}
+
+// Sequence per numbering scope ("INV:2026" when numbers reset yearly).
+model InvoiceCounter {
+  scope String @id @db.VarChar(64)
+  last  Int    @default(0)
+
+  @@map("invoice_counters")
+}

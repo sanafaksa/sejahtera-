@@ -12,6 +12,7 @@ import {
   Home,
   BarChart3,
   Clock3,
+  FileText,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
@@ -22,6 +23,7 @@ const navigation = [
   { name: "Gallery", href: "/ilv-studio/gallery", icon: ImageIcon },
   { name: "Statistik", href: "/ilv-studio/statistik", icon: BarChart3 },
   { name: "Jam Wilayah", href: "/ilv-studio/jam-wilayah", icon: Clock3 },
+  { name: "Invoice", href: "/ilv-studio/invoice", icon: FileText },
 ];
 
 interface AdminSidebarProps {

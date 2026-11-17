@@ -169,3 +169,15 @@ body {
     animation-play-state: paused;
   }
 }
+
+/* Invoice printing ("Download PDF" uses the browser's Save as PDF). */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

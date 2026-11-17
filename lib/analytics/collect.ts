@@ -36,6 +36,7 @@ export function isTrackablePath(path: string): boolean {
     path.startsWith("/") &&
     !path.startsWith("/ilv-studio") &&
     !path.startsWith("/api") &&
+    !path.startsWith("/invoice/") &&
     !path.startsWith("/_next") &&
     !/\.[A-Za-z0-9]+$/.test(path)
   );

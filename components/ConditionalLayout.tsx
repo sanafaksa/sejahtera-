@@ -13,7 +13,8 @@ export default function ConditionalLayout({
   const pathname = usePathname();
 
   // Check if current path is admin route
-  const isAdminRoute = pathname?.startsWith("/ilv-studio");
+  // Admin pages and shared invoice links render without the site chrome.
+  const isAdminRoute = pathname?.startsWith("/ilv-studio") || pathname?.startsWith("/invoice/");
 
   // If it's an admin route, render children without Header/Footer
   if (isAdminRoute) {
