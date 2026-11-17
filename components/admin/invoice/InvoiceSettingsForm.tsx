@@ -9,7 +9,7 @@ import InvoiceDocument from "@/components/invoice/InvoiceDocument";
 import { CURRENCIES } from "@/lib/invoice/calc";
 import { COLUMN_LABEL_KEYS, INVOICE_TEXT, type InvoiceLanguage } from "@/lib/invoice/i18n";
 import { formatInvoiceNumber } from "@/lib/invoice/numbering";
-import type { InvoiceSettings, PaymentMethod } from "@/lib/invoice/schema";
+import { DEFAULT_INVOICE_LOGO, type InvoiceSettings, type PaymentMethod } from "@/lib/invoice/schema";
 import type { InvoiceView } from "@/lib/invoice/view";
 import { Field, Section, Toggle, inputCls } from "./fields";
 
@@ -160,6 +160,15 @@ export default function InvoiceSettingsForm({ initial, year }: { initial: Invoic
                 }}
               />
             </span>
+            {kind === "logo" && url !== DEFAULT_INVOICE_LOGO && (
+              <button
+                type="button"
+                onClick={() => business("logoUrl", DEFAULT_INVOICE_LOGO)}
+                className="rounded-lg px-3 py-2 text-sm text-[#A8602A] hover:bg-amber-50"
+              >
+                Pakai logo Ilavioo
+              </button>
+            )}
             {url && (
               <button
                 type="button"

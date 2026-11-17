@@ -193,6 +193,20 @@ describe("invoice validation", () => {
     ).toBe(false);
   });
 
+  it("uses the Ilavioo logo by default and only allows https or /assets images", () => {
+    expect(DEFAULT_INVOICE_SETTINGS.business.logoUrl).toBe("/assets/ilavioo-logo-horizontal.png");
+    const withLogo = (logoUrl: string) =>
+      invoiceSettingsSchema.safeParse({
+        ...DEFAULT_INVOICE_SETTINGS,
+        business: { ...DEFAULT_INVOICE_SETTINGS.business, logoUrl },
+      }).success;
+    expect(withLogo("https://res.cloudinary.com/x/logo.png")).toBe(true);
+    expect(withLogo("")).toBe(true);
+    expect(withLogo("/assets/../../etc/passwd")).toBe(false);
+    expect(withLogo("//evil.example/logo.png")).toBe(false);
+    expect(withLogo("data:image/svg+xml,<svg/>")).toBe(false);
+  });
+
   it("shows sent invoices past due as overdue", () => {
     expect(effectiveStatus({ status: "sent", dueDate: "2026-11-01" }, "2026-11-17")).toBe("overdue");
     expect(effectiveStatus({ status: "sent", dueDate: "2026-11-17" }, "2026-11-17")).toBe("sent");

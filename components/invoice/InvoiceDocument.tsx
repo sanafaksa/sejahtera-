@@ -85,7 +85,7 @@ export default function InvoiceDocument({
     status && status !== "draft" ? (
       <span
         className="inline-block rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide"
-        style={{ borderColor: accent, color: isModern ? "#fff" : accent }}
+        style={isModern ? { borderColor: "rgba(255,255,255,0.7)", color: "#fff" } : { borderColor: accent, color: accent }}
       >
         {t.statuses[status]}
       </span>

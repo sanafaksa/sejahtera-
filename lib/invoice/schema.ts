@@ -11,11 +11,18 @@ const optional = (max: number) =>
     .max(max)
     .nullish()
     .transform((v) => (v ? v : null));
-const httpsUrl = z
+/** Official logo shipped with the website, used on invoices by default. */
+export const DEFAULT_INVOICE_LOGO = "/assets/ilavioo-logo-horizontal.png";
+
+// An uploaded https URL, a file from the site's own /assets folder, or empty.
+const imageUrl = z
   .string()
   .trim()
   .max(1000)
-  .refine((v) => v === "" || /^https:\/\//.test(v), "URL harus diawali https://");
+  .refine(
+    (v) => v === "" || /^https:\/\//.test(v) || /^\/assets\/(?!.*\.\.)[\w./-]+$/.test(v),
+    "URL harus diawali https://"
+  );
 const currency = z.string().trim().toUpperCase().regex(/^[A-Z]{3}$/, "Kode mata uang 3 huruf");
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Format tanggal YYYY-MM-DD");
 const money = z.coerce.number().finite().min(0).max(1e13);
@@ -44,8 +51,8 @@ export const invoiceSettingsSchema = z.object({
     phone: text(60),
     website: text(200),
     taxId: text(60),
-    logoUrl: httpsUrl,
-    signatureUrl: httpsUrl,
+    logoUrl: imageUrl,
+    signatureUrl: imageUrl,
     signatoryName: text(120),
   }),
   accentColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Warna harus format #RRGGBB"),
@@ -86,7 +93,7 @@ export const DEFAULT_INVOICE_SETTINGS: InvoiceSettings = {
     phone: "",
     website: "ilavioo.com",
     taxId: "",
-    logoUrl: "",
+    logoUrl: DEFAULT_INVOICE_LOGO,
     signatureUrl: "",
     signatoryName: "",
   },
