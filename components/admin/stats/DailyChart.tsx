@@ -99,7 +99,12 @@ export default function DailyChart({ points }: { points: DailyPoint[] }) {
           {/* X labels */}
           <div className="flex gap-[2px] mt-2 text-[11px] text-gray-400">
             {points.map((p, i) => (
-              <span key={p.date} className="flex-1 min-w-0 text-center whitespace-nowrap overflow-visible">
+              <span
+                key={p.date}
+                className={`flex-1 min-w-0 text-center whitespace-nowrap overflow-visible ${
+                  labelEvery === 1 && (points.length - 1 - i) % 2 === 1 ? "invisible sm:visible" : ""
+                }`}
+              >
                 {(points.length - 1 - i) % labelEvery === 0 ? shortDate(p.date) : ""}
               </span>
             ))}

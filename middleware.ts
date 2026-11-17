@@ -1,22 +1,22 @@
 import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { isBot, parseUserAgent } from "@/lib/analytics/ua";
-import { resolveSource, type VisitSource } from "@/lib/analytics/source";
+import {
+  collectVisit,
+  isHumanRequest,
+  isTrackingEnabled,
+  setVisitCookies,
+} from "@/lib/analytics/collect";
 import { TRACK_KEY_HEADER, trackingKey } from "@/lib/analytics/track-key";
 
 const ADMIN_PREFIX = "/ilv-studio";
 const ADMIN_LOGIN = "/ilv-studio/login";
-const VISITOR_COOKIE = "ilv_vid";
-const SESSION_COOKIE = "ilv_src";
-const SESSION_SECONDS = 30 * 60;
-const VISITOR_SECONDS = 365 * 24 * 60 * 60;
 
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const { pathname } = req.nextUrl;
   if (pathname === ADMIN_PREFIX || pathname.startsWith(`${ADMIN_PREFIX}/`)) {
     return protectAdmin(req);
   }
-  return trackVisit(req, event);
+  return trackPageLoad(req, event);
 }
 
 // ---------------------------------------------------------------------------
@@ -39,113 +39,46 @@ async function protectAdmin(req: NextRequest) {
 }
 
 // ---------------------------------------------------------------------------
-// Public pages: record an anonymous visit without slowing the response.
+// Public pages: record full page loads without slowing the response.
+// Client-side navigations are reported by <VisitTracker> via /api/track/nav.
 // ---------------------------------------------------------------------------
-function isPrefetch(h: Headers): boolean {
-  return Boolean(
-    h.get("next-router-prefetch") ||
-      h.get("x-middleware-prefetch") ||
-      h.get("purpose") === "prefetch" ||
-      h.get("sec-purpose")?.includes("prefetch")
-  );
+
+/**
+ * True for a real document load. Next strips its RSC/prefetch headers before
+ * middleware runs, so we rely on what the browser sends: RSC fetches and
+ * prefetches are `sec-fetch-dest: empty`, page loads are `document`.
+ */
+function isDocumentLoad(h: Headers): boolean {
+  const dest = h.get("sec-fetch-dest");
+  if (dest) return dest === "document";
+  if (h.get("purpose") === "prefetch" || h.get("sec-purpose")?.includes("prefetch")) return false;
+  return h.get("accept")?.includes("text/html") ?? false;
 }
 
-function shouldTrack(req: NextRequest): boolean {
-  if (req.method !== "GET") return false;
-  if (process.env.VERCEL_ENV === "preview") return false;
-  const host = req.nextUrl.hostname;
-  if (
-    (host === "localhost" || host === "127.0.0.1") &&
-    process.env.ANALYTICS_TRACK_LOCAL !== "1"
-  ) {
-    // Local dev shares the production database; don't pollute the statistics.
-    return false;
-  }
-  if (isPrefetch(req.headers)) return false;
-  return !isBot(req.headers.get("user-agent"));
-}
-
-function readSession(raw: string | undefined): VisitSource | null {
-  if (!raw) return null;
-  try {
-    const v = JSON.parse(raw) as Partial<VisitSource>;
-    if (typeof v.source !== "string" || !v.source) return null;
-    const str = (x: unknown) => (typeof x === "string" && x ? x.slice(0, 100) : null);
-    return {
-      source: v.source.slice(0, 80),
-      referrerHost: str(v.referrerHost),
-      utmSource: str(v.utmSource),
-      utmMedium: str(v.utmMedium),
-      utmCampaign: str(v.utmCampaign),
-    };
-  } catch {
-    return null;
-  }
-}
-
-function decodeHeader(value: string | null): string | null {
-  if (!value) return null;
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-}
-
-async function trackVisit(req: NextRequest, event: NextFetchEvent) {
+async function trackPageLoad(req: NextRequest, event: NextFetchEvent) {
   const res = NextResponse.next();
-  if (!shouldTrack(req)) return res;
+  const h = req.headers;
+  if (
+    req.method !== "GET" ||
+    !isTrackingEnabled(req.nextUrl.hostname) ||
+    !isDocumentLoad(h) ||
+    !isHumanRequest(h)
+  ) {
+    return res;
+  }
 
   const key = await trackingKey();
   if (!key) return res;
 
-  const h = req.headers;
-  const secure = req.nextUrl.protocol === "https:";
-  const ua = parseUserAgent(h.get("user-agent"));
-
-  let visitorId = req.cookies.get(VISITOR_COOKIE)?.value;
-  if (!visitorId || !/^[a-f0-9-]{36}$/.test(visitorId)) {
-    visitorId = crypto.randomUUID();
-  }
-
-  const { visit } = resolveSource({
-    referrer: h.get("referer"),
-    ownHost: req.nextUrl.hostname,
+  const { payload, session } = collectVisit({
+    headers: h,
+    cookies: req.cookies,
+    host: req.nextUrl.hostname,
+    path: req.nextUrl.pathname,
     params: req.nextUrl.searchParams,
-    inApp: ua.inApp,
-    sessionSource: readSession(req.cookies.get(SESSION_COOKIE)?.value),
+    referrer: h.get("referer"),
   });
-
-  res.cookies.set(VISITOR_COOKIE, visitorId, {
-    maxAge: VISITOR_SECONDS,
-    httpOnly: true,
-    sameSite: "lax",
-    secure,
-    path: "/",
-  });
-  // Rolling 30-minute session so internal clicks keep their original source.
-  res.cookies.set(SESSION_COOKIE, JSON.stringify(visit), {
-    maxAge: SESSION_SECONDS,
-    httpOnly: true,
-    sameSite: "lax",
-    secure,
-    path: "/",
-  });
-
-  const path = (req.nextUrl.pathname.replace(/\/+$/, "") || "/").slice(0, 512);
-  const payload = {
-    visitorId,
-    path,
-    country: h.get("x-vercel-ip-country"),
-    region: h.get("x-vercel-ip-country-region"),
-    city: decodeHeader(h.get("x-vercel-ip-city")),
-    timezone: h.get("x-vercel-ip-timezone"),
-    device: ua.device,
-    os: ua.os,
-    browser: ua.browser,
-    inApp: ua.inApp,
-    ...visit,
-  };
+  setVisitCookies(res, payload.visitorId, session, req.nextUrl.protocol === "https:");
 
   event.waitUntil(
     fetch(new URL("/api/track", req.nextUrl.origin), {

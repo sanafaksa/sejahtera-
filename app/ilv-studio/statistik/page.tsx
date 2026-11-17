@@ -78,9 +78,9 @@ function StatCard({
 }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5 min-w-0">
-      <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-        <Icon className="w-4 h-4 text-[#A8602A] shrink-0" />
-        <span className="truncate">{label}</span>
+      <div className="flex items-start gap-2 text-sm text-gray-600 mb-2">
+        <Icon className="w-4 h-4 text-[#A8602A] shrink-0 mt-0.5" />
+        <span className="leading-snug">{label}</span>
       </div>
       <p className="text-2xl font-bold text-gray-900 tabular-nums truncate">{value}</p>
       {hint && <p className="text-xs text-gray-500 mt-1 truncate">{hint}</p>}
