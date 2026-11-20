@@ -253,14 +253,14 @@ export default async function Home() {
 
         {/* 3. Bottom Overlapping Dark Banner Card: rises into view on scroll */}
         <FadeInView direction="up" duration={0.9} className="relative z-20 mt-10 sm:mt-14 lg:mt-16">
-          <div className="relative overflow-hidden bg-[#0e0a07] text-white rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] pt-14 sm:pt-18 lg:pt-20 pb-14 sm:pb-20 px-6 sm:px-10 lg:px-14 shadow-[0_-25px_60px_rgba(0,0,0,0.4)]">
-            {/* Glassmorphism: coloured light behind a frosted, translucent pane */}
+          <div className="relative overflow-hidden bg-white text-[#1a120b] rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] pt-14 sm:pt-18 lg:pt-20 pb-14 sm:pb-20 px-6 sm:px-10 lg:px-14 shadow-[0_-20px_50px_rgba(60,35,15,0.12)]">
+            {/* Frosted white glass: faint copper/sage light behind a translucent pane */}
             <div aria-hidden className="absolute inset-0 pointer-events-none">
-              <div className="hero-glow-a absolute -top-24 left-[6%] w-[460px] h-[460px] rounded-full bg-[#c47a38]/75 blur-[80px]" />
-              <div className="hero-glow-b absolute -bottom-28 right-[8%] w-[520px] h-[520px] rounded-full bg-[#6f9a8c]/70 blur-[90px]" />
-              <div className="hero-glow-c absolute top-[15%] left-[42%] w-[360px] h-[360px] rounded-full bg-[#e0b062]/45 blur-[80px]" />
-              <div className="absolute inset-0 bg-white/[0.06] backdrop-blur-2xl rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] border-t border-x border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]" />
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-black/20" />
+              <div className="hero-glow-a absolute -top-24 left-[6%] w-[460px] h-[460px] rounded-full bg-[#e9b98a]/35 blur-[90px]" />
+              <div className="hero-glow-b absolute -bottom-28 right-[8%] w-[520px] h-[520px] rounded-full bg-[#a9c7bc]/35 blur-[100px]" />
+              <div className="hero-glow-c absolute top-[15%] left-[42%] w-[360px] h-[360px] rounded-full bg-[#f3d9a8]/30 blur-[90px]" />
+              <div className="absolute inset-0 bg-white/60 backdrop-blur-2xl rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] border-t border-x border-[#ebd7c6]/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-[#f6ece1]/40" />
             </div>
             <div className="container mx-auto relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -270,23 +270,23 @@ export default async function Home() {
                   className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between space-y-6"
                 >
                   <div>
-                    <span className="text-[11px] font-semibold tracking-widest text-[#d89758] uppercase block mb-3">
+                    <span className="text-[11px] font-semibold tracking-widest text-[#9e5b24] uppercase block mb-3">
                       Tumang Craft Heritage
                     </span>
-                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold text-white leading-tight">
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#17120d] leading-tight">
                       Modern Copper For Stylish Interiors
                     </h3>
                   </div>
 
                   <div className="flex items-center gap-4 pt-2">
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#d89758] shadow-inner">
-                      <Armchair className="w-7 h-7 text-[#d89758]" />
+                    <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-[#ebd7c6] flex items-center justify-center text-[#b87333]">
+                      <Armchair className="w-7 h-7 text-[#b87333]" />
                     </div>
                     <div>
-                      <div className="font-display text-2xl sm:text-3xl font-bold text-white">
+                      <div className="font-display text-2xl sm:text-3xl font-bold text-[#17120d]">
                         150+
                       </div>
-                      <div className="text-xs text-stone-400 font-medium">
+                      <div className="text-xs text-stone-500 font-medium">
                         Luxury items in stock
                       </div>
                     </div>
@@ -297,8 +297,8 @@ export default async function Home() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
                     {HERITAGE_CARDS.map((card, i) => (
                       <FadeInView key={card.title} direction="up" delay={0.35 + i * 0.15} className="h-full">
-                        <div className="h-full rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
-                          <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
+                        <div className="h-full rounded-[26px] bg-white/70 backdrop-blur-xl p-4 text-[#1a120b] border border-[#ebd7c6]/80 shadow-[0_8px_30px_rgba(60,35,15,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] hover:bg-white hover:shadow-[0_16px_40px_rgba(60,35,15,0.14)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+                          <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-stone-100 mb-3 ring-1 ring-[#ebd7c6]/70">
                             <Image
                               src={card.image}
                               alt={card.alt}
@@ -308,10 +308,10 @@ export default async function Home() {
                             />
                           </div>
                           <div>
-                            <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] block mb-0.5">
                               {card.tag}
                             </span>
-                            <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
+                            <h4 className="text-sm font-bold text-stone-900 group-hover:text-[#b87333] transition-colors leading-snug">
                               {card.title}
                             </h4>
                           </div>
