@@ -259,7 +259,7 @@ export default async function Home() {
               <div className="hero-glow-a absolute -top-24 left-[6%] w-[460px] h-[460px] rounded-full bg-[#e9b98a]/35 blur-[90px]" />
               <div className="hero-glow-b absolute -bottom-28 right-[8%] w-[520px] h-[520px] rounded-full bg-[#a9c7bc]/35 blur-[100px]" />
               <div className="hero-glow-c absolute top-[15%] left-[42%] w-[360px] h-[360px] rounded-full bg-[#f3d9a8]/30 blur-[90px]" />
-              <div className="absolute inset-0 bg-white/60 backdrop-blur-2xl rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] border-t border-x border-[#ebd7c6]/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]" />
+              <div className="absolute inset-0 bg-[#f6f1eb]/90 backdrop-blur-2xl rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] border-t border-x border-[#ebd7c6]/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]" />
               <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-[#f6ece1]/40" />
             </div>
             <div className="container mx-auto relative">
@@ -279,7 +279,7 @@ export default async function Home() {
                   </div>
 
                   <div className="flex items-center gap-4 pt-2">
-                    <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-[#ebd7c6] flex items-center justify-center text-[#b87333]">
+                    <div className="w-14 h-14 rounded-2xl bg-[#f6f1eb] shadow-[5px_5px_12px_rgba(166,138,110,0.35),-5px_-5px_12px_rgba(255,255,255,0.95)] flex items-center justify-center text-[#b87333]">
                       <Armchair className="w-7 h-7 text-[#b87333]" />
                     </div>
                     <div>
@@ -297,8 +297,8 @@ export default async function Home() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
                     {HERITAGE_CARDS.map((card, i) => (
                       <FadeInView key={card.title} direction="up" delay={0.35 + i * 0.15} className="h-full">
-                        <div className="h-full rounded-[26px] bg-white/70 backdrop-blur-xl p-4 text-[#1a120b] border border-[#ebd7c6]/80 shadow-[0_8px_30px_rgba(60,35,15,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] hover:bg-white hover:shadow-[0_16px_40px_rgba(60,35,15,0.14)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
-                          <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-stone-100 mb-3 ring-1 ring-[#ebd7c6]/70">
+                        <div className="h-full rounded-[26px] bg-[#f6f1eb] p-4 text-[#1a120b] shadow-[10px_10px_24px_rgba(166,138,110,0.35),-10px_-10px_24px_rgba(255,255,255,0.95)] hover:shadow-[inset_6px_6px_14px_rgba(166,138,110,0.3),inset_-6px_-6px_14px_rgba(255,255,255,0.9)] transition-all duration-300 group flex flex-col justify-between">
+                          <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-stone-100 mb-3 shadow-[inset_3px_3px_8px_rgba(166,138,110,0.3),inset_-3px_-3px_8px_rgba(255,255,255,0.8)]">
                             <Image
                               src={card.image}
                               alt={card.alt}
