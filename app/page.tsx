@@ -23,7 +23,7 @@ import {
   SiThreads,
   SiLinkedin,
 } from "react-icons/si";
-import { getFeaturedProducts } from "@/lib/public-data";
+import { getProductList } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 
@@ -35,11 +35,30 @@ const CARD_DOTS = [
   ["#d4af37", "#1c1c1c", "#b87333"],
 ];
 
-/** The four newest products, the same data (images, names, prices) as the Products page. */
+// Products shown first on the home page, in this order (by slug).
+const HOME_FEATURED_SLUGS = [
+  "imperial-nabawi-brass-grand-entrance-door",
+  "tumang-fluted-copper-urn-planter",
+  "sculptural-kaligrafi-copper-wall-panel",
+  "artisanal-copper-countertop-wash-basin",
+];
+const HOME_CARD_COUNT = 4;
+
+/**
+ * Four product cards with the same data (images, names, prices) as the Products
+ * page. The chosen slugs come first; missing ones are filled with the newest
+ * products that have specifications, so unfinished test entries never show.
+ */
 async function getBestSellingProducts() {
   try {
-    const products = await getFeaturedProducts();
-    return products.map((p, i) => ({
+    const all = await getProductList("", "newest");
+    const bySlug = new Map(all.map((p) => [p.slug, p]));
+    const picked = HOME_FEATURED_SLUGS.flatMap((slug) => bySlug.get(slug) ?? []);
+    for (const p of all) {
+      if (picked.length >= HOME_CARD_COUNT) break;
+      if (p.specifications && !picked.includes(p)) picked.push(p);
+    }
+    return picked.slice(0, HOME_CARD_COUNT).map((p, i) => ({
       id: p.id,
       href: `/products/${p.slug}`,
       tag: p.specifications?.material || "Handcrafted Copper",
