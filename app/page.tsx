@@ -23,46 +23,40 @@ import {
   SiThreads,
   SiLinkedin,
 } from "react-icons/si";
-import { prisma } from "@/lib/prisma";
+import { getFeaturedProducts } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 
-const bestSellingProducts = [
-  {
-    id: "versailles-bath",
-    tag: "Pure Red Copper",
-    colors: ["#b87333", "#e5be9c", "#5a341a"],
-    title: "Versailles Hand-Planished Tub",
-    price: "Custom Sizing · From $1,250",
-    image: "/assets/products/showcase-3.jpg",
-  },
-  {
-    id: "nabawi-doors",
-    tag: "Solid Naval Brass",
-    colors: ["#d4af37", "#b87333", "#2c1d11"],
-    title: "The Nabawi Arabesque Doors",
-    price: "Bespoke Portals · Made to Order",
-    image: "/assets/products/showcase-1.jpg",
-  },
-  {
-    id: "copper-credenza",
-    tag: "Living Accents",
-    colors: ["#b87333", "#8a5732", "#3a2213"],
-    title: "Hand-Hammered Copper Credenza",
-    price: "Teak & Copper · From $680",
-    image: "/assets/products/copper-1.jpg",
-  },
-  {
-    id: "cathedral-doors",
-    tag: "Architectural Gates",
-    colors: ["#d4af37", "#1c1c1c", "#b87333"],
-    title: "Cathedral Slotted Brass Portals",
-    price: "Pivot System · Made to Order",
-    image: "/assets/products/showcase-2.jpg",
-  },
+// Decorative finish dots per card position (copper / brass tones).
+const CARD_DOTS = [
+  ["#b87333", "#e5be9c", "#5a341a"],
+  ["#d4af37", "#b87333", "#2c1d11"],
+  ["#b87333", "#8a5732", "#3a2213"],
+  ["#d4af37", "#1c1c1c", "#b87333"],
 ];
 
-export default function Home() {
+/** The four newest products, the same data (images, names, prices) as the Products page. */
+async function getBestSellingProducts() {
+  try {
+    const products = await getFeaturedProducts();
+    return products.map((p, i) => ({
+      id: p.id,
+      href: `/products/${p.slug}`,
+      tag: p.specifications?.material || "Handcrafted Copper",
+      colors: CARD_DOTS[i % CARD_DOTS.length],
+      title: p.name,
+      price: p.specifications?.price || "Made to Order",
+      image: p.images[0]?.imageUrl ?? null,
+    }));
+  } catch (error) {
+    console.warn("Failed to load best-selling products:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const bestSellingProducts = await getBestSellingProducts();
+
   return (
     <main className="min-h-screen bg-[#faf6f1] text-[#1a120b]">
       {/* =========================================================================
@@ -414,11 +408,15 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12">
             {bestSellingProducts.map((product, idx) => (
               <FadeInView key={product.id} direction="up" delay={0.1 * idx}>
-                <div className="rounded-[28px] bg-[#fbf6f0]/95 p-4 sm:p-5 text-[#1a120b] shadow-[0_20px_45px_rgba(0,0,0,0.45)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.65)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between border border-white/40 group h-full">
+                <Link
+                  href={product.href}
+                  aria-label={`View ${product.title}`}
+                  className="rounded-[28px] bg-[#fbf6f0]/95 p-4 sm:p-5 text-[#1a120b] shadow-[0_20px_45px_rgba(0,0,0,0.45)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.65)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between border border-white/40 group h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5be9c]"
+                >
                   <div>
                     {/* Top Tag & Color Finish Dots */}
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] bg-white/80 px-2.5 py-1 rounded-full border border-[#ebd7c6]/80">
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] bg-white/80 px-2.5 py-1 rounded-full border border-[#ebd7c6]/80 line-clamp-1">
                         {product.tag}
                       </span>
                       <div className="flex items-center gap-1.5">
@@ -434,35 +432,38 @@ export default function Home() {
 
                     {/* Product Image Frame */}
                     <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/70 mb-4 flex items-center justify-center p-2">
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        fill
-                        className="object-cover group-hover:scale-108 transition-transform duration-500 rounded-xl"
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                      />
+                      {product.image ? (
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          fill
+                          className="object-cover group-hover:scale-108 transition-transform duration-500 rounded-xl"
+                          sizes="(max-width: 768px) 100vw, 25vw"
+                        />
+                      ) : (
+                        <span className="text-xs text-stone-400">No image</span>
+                      )}
                     </div>
 
                     {/* Title */}
-                    <h3 className="font-display text-base font-bold text-[#17120d] group-hover:text-[#b87333] transition-colors leading-snug mb-1">
+                    <h3 className="font-display text-base font-bold text-[#17120d] group-hover:text-[#b87333] transition-colors leading-snug mb-1 line-clamp-2">
                       {product.title}
                     </h3>
                   </div>
 
                   {/* Price & Action Button */}
                   <div className="pt-4 mt-3 border-t border-[#f0e4d7] flex items-center justify-between">
-                    <span className="text-xs font-semibold text-stone-700">
+                    <span className="text-xs font-semibold text-stone-700 line-clamp-1">
                       {product.price}
                     </span>
-                    <Link
-                      href="/contact"
-                      aria-label={`Inquire about ${product.title}`}
-                      className="w-8 h-8 rounded-full bg-[#17120d] hover:bg-[#b87333] text-white flex items-center justify-center transition-colors shadow-sm shrink-0"
+                    <span
+                      aria-hidden
+                      className="w-8 h-8 rounded-full bg-[#17120d] group-hover:bg-[#b87333] text-white flex items-center justify-center transition-colors shadow-sm shrink-0"
                     >
                       <ArrowUpRight className="w-4 h-4" />
-                    </Link>
+                    </span>
                   </div>
-                </div>
+                </Link>
               </FadeInView>
             ))}
           </div>
