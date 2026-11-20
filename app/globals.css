@@ -181,3 +181,67 @@ body {
     print-color-adjust: exact;
   }
 }
+
+/* PageHero (Products / Gallery / About / Contact): slow ambient motion. */
+.hero-gradient {
+  background-size: 220% 220%;
+  animation: hero-gradient-shift 18s ease-in-out infinite alternate;
+}
+.hero-glow-a {
+  animation: hero-drift-a 16s ease-in-out infinite alternate;
+}
+.hero-glow-b {
+  animation: hero-drift-b 20s ease-in-out infinite alternate;
+}
+.hero-glow-c {
+  animation: hero-pulse 12s ease-in-out infinite alternate;
+}
+.hero-sheen {
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 236, 214, 0.09) 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: hero-sheen 11s linear infinite;
+}
+.hero-dot {
+  animation: hero-float 7s ease-in-out infinite;
+}
+.hero-dot-2 { animation-duration: 9s; animation-delay: -2s; }
+.hero-dot-3 { animation-duration: 6s; animation-delay: -4s; }
+.hero-dot-4 { animation-duration: 8s; animation-delay: -1s; }
+.hero-dot-5 { animation-duration: 10s; animation-delay: -6s; }
+
+@keyframes hero-gradient-shift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 30% 100%; }
+}
+@keyframes hero-drift-a {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(18vw, 6rem) scale(1.25); }
+}
+@keyframes hero-drift-b {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-16vw, -5rem) scale(0.9); }
+}
+@keyframes hero-pulse {
+  0% { opacity: 0.6; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes hero-sheen {
+  0% { background-position: 150% 0; }
+  100% { background-position: -100% 0; }
+}
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50% { transform: translateY(-14px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gradient,
+  .hero-glow-a,
+  .hero-glow-b,
+  .hero-glow-c,
+  .hero-sheen,
+  .hero-dot {
+    animation: none;
+  }
+}
