@@ -269,8 +269,8 @@ export default async function Home() {
 
                 <div className="lg:col-span-8 xl:col-span-8">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-                    <div className="rounded-[26px] bg-[#fbf5ee] p-4 text-[#1a120b] shadow-md hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between border border-[#ebd7c6]/60">
-                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/60 mb-3">
+                    <div className="rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
                         <Image
                           src="/assets/products/copper-1.jpg"
                           alt="Handcrafted Copper Credenza & Tableware"
@@ -280,17 +280,17 @@ export default async function Home() {
                         />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] block mb-0.5">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
                           Artisan Tableware
                         </span>
-                        <h4 className="text-sm font-bold text-stone-900 group-hover:text-[#b87333] transition-colors leading-snug">
+                        <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
                           Hand-Hammered Copper Decor
                         </h4>
                       </div>
                     </div>
 
-                    <div className="rounded-[26px] bg-[#fbf5ee] p-4 text-[#1a120b] shadow-md hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between border border-[#ebd7c6]/60">
-                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/60 mb-3">
+                    <div className="rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
                         <Image
                           src="/assets/products/copper-5.jpg"
                           alt="Handcrafted Copper Living Furniture"
@@ -300,17 +300,17 @@ export default async function Home() {
                         />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] block mb-0.5">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
                           Living Accents
                         </span>
-                        <h4 className="text-sm font-bold text-stone-900 group-hover:text-[#b87333] transition-colors leading-snug">
+                        <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
                           Tumang Heritage Sculptures
                         </h4>
                       </div>
                     </div>
 
-                    <div className="rounded-[26px] bg-[#fbf5ee] p-4 text-[#1a120b] shadow-md hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between border border-[#ebd7c6]/60">
-                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/60 mb-3">
+                    <div className="rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
                         <Image
                           src="/assets/products/copper-3.jpg"
                           alt="Handcrafted Copper Luxury Bath & Basin"
@@ -320,10 +320,10 @@ export default async function Home() {
                         />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] block mb-0.5">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
                           Architectural
                         </span>
-                        <h4 className="text-sm font-bold text-stone-900 group-hover:text-[#b87333] transition-colors leading-snug">
+                        <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
                           Bespoke Hammered Basins
                         </h4>
                       </div>
