@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus, MessageCircle, ArrowUpRight, Sparkles, CalendarClock } from "lucide-react";
+import { Plus, Minus, Sparkles, CalendarClock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeInView from "./animations/FadeInView";
 
@@ -167,39 +167,6 @@ export default function FaqSection() {
               </FadeInView>
             );
           })}
-        </div>
-
-        {/* Bottom Help & Visit Booking Card */}
-        <div className="max-w-4xl mx-auto mt-12 sm:mt-16">
-          <FadeInView direction="up" delay={0.2}>
-            <div className="rounded-3xl bg-gradient-to-r from-[#170f0a] via-[#241710] to-[#170f0a] text-white p-7 sm:p-10 shadow-xl border border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4 text-left">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-[#e5be9c] shrink-0">
-                  <MessageCircle className="w-7 h-7 text-[#eed3bf]" />
-                </div>
-                <div>
-                  <h4 className="font-display text-lg sm:text-xl font-bold text-white mb-1">
-                    Planning a visit or have a custom project inquiry?
-                  </h4>
-                  <p className="text-xs sm:text-sm text-stone-300 font-light">
-                    Contact our consultation desk in advance to schedule your workshop visit or discuss custom drawings.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
-                <a
-                  href="https://wa.me/+6281213696772"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-[#b87333] hover:bg-[#cb8962] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-md transition-all duration-300 w-full sm:w-auto group"
-                >
-                  <span>Schedule via WhatsApp</span>
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
-          </FadeInView>
         </div>
       </div>
     </section>

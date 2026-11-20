@@ -606,68 +606,68 @@ export default async function Home() {
 
           {/* 3 Large Column Editorial Cards (Exact Mockup Match) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
-            {/* Card 1: Palatial Dining & Architectural Doors */}
+            {/* Card 1: Living & Garden Accents */}
             <FadeInView direction="up" delay={0.1}>
               <div className="flex flex-col group">
                 <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-white/10 mb-4 shadow-xl">
                   <Image
                     src="/assets/products/copper-5.jpg"
-                    alt="Palatial Copper Dining and Architectural Furniture"
+                    alt="Hand-hammered copper planter with a monstera"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
-                <h3 className="font-display text-base font-bold text-white group-hover:text-[#e2b078] transition-colors mb-1.5">
-                  Palatial Dining & Living
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2b078] transition-colors mb-2">
+                  Living & Garden Accents
                 </h3>
-                <p className="text-xs sm:text-sm text-stone-400 font-light leading-relaxed">
-                  Tailored solid copper tables and chiseled panels engineered to become the centerpiece of shared conversations and grand banquets.
+                <p className="text-sm sm:text-[15px] text-stone-300 leading-relaxed max-w-sm">
+                  Hand-hammered copper planters and vessels that bring warmth and a living patina to homes, terraces and hotel lobbies.
                 </p>
               </div>
             </FadeInView>
 
-            {/* Card 2: Warm Ambient Sanctuaries */}
+            {/* Card 2: Decor & Tableware */}
             <FadeInView direction="up" delay={0.2}>
               <div className="flex flex-col group">
                 <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-white/10 mb-4 shadow-xl">
                   <Image
                     src="/assets/hero-2.jpg"
-                    alt="Warm Ambient Sanctuaries with Artisanal Copper Work"
+                    alt="Copper and brass decor, bowls and vessels in the Ilavioo showroom"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
-                <h3 className="font-display text-base font-bold text-white group-hover:text-[#e2b078] transition-colors mb-1.5">
-                  Warm Ambient Sanctuaries
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2b078] transition-colors mb-2">
+                  Decor & Tableware
                 </h3>
-                <p className="text-xs sm:text-sm text-stone-400 font-light leading-relaxed">
-                  Spacious living suites enriched with hand-hammered relief panels, sculpted lighting fixtures, and natural acoustic warmth.
+                <p className="text-sm sm:text-[15px] text-stone-300 leading-relaxed max-w-sm">
+                  Wall art, mirrors, bowls and serving pieces in copper and brass, each finished by hand to make a room feel welcoming.
                 </p>
               </div>
             </FadeInView>
 
-            {/* Card 3: Master Bath & Garden Spas */}
+            {/* Card 3: Made by Tumang Artisans */}
             <FadeInView direction="up" delay={0.3}>
               <div className="flex flex-col group">
                 <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-white/10 mb-4 shadow-xl">
                   <Image
                     src="/assets/products/copper-3.jpg"
-                    alt="Master Bath and Garden Spas with Copper Tub"
+                    alt="A Tumang artisan hand-hammering a copper vessel"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
-                <h3 className="font-display text-base font-bold text-white group-hover:text-[#e2b078] transition-colors mb-1.5">
-                  Master Bath & Garden Spas
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2b078] transition-colors mb-2">
+                  Made by Tumang Artisans
                 </h3>
-                <p className="text-xs sm:text-sm text-stone-400 font-light leading-relaxed">
-                  Deep-soak freestanding copper bathtubs that retain thermal warmth 3x longer than stone or acrylic, aging with organic beauty.
+                <p className="text-sm sm:text-[15px] text-stone-300 leading-relaxed max-w-sm">
+                  Every piece is shaped in our Boyolali workshop by coppersmiths using techniques passed down through generations.
                 </p>
               </div>
             </FadeInView>
