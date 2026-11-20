@@ -204,9 +204,6 @@ export default function Footer() {
               © {currentYear}{" "}
               <span className="text-[#df9b64] font-semibold">Ilavioo</span>. All
               rights reserved.
-              <span className="block text-xs text-[#8a6a54] mt-1">
-                This site uses anonymous visit data (no IP addresses) to improve our service.
-              </span>
             </p>
             <div className="flex items-center gap-6">
               <Link
