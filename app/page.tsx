@@ -231,8 +231,16 @@ export default async function Home() {
 
         {/* 3. Bottom Overlapping Dark Banner Card (Exact Mockup Match) */}
         <div className="relative z-20 mt-10 sm:mt-14 lg:mt-16">
-          <div className="bg-[#0e0a07] text-white rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] pt-14 sm:pt-18 lg:pt-20 pb-14 sm:pb-20 px-6 sm:px-10 lg:px-14 border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.4)]">
-            <div className="container mx-auto">
+          <div className="relative overflow-hidden bg-[#0e0a07] text-white rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] pt-14 sm:pt-18 lg:pt-20 pb-14 sm:pb-20 px-6 sm:px-10 lg:px-14 shadow-[0_-25px_60px_rgba(0,0,0,0.4)]">
+            {/* Glassmorphism: coloured light behind a frosted, translucent pane */}
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+              <div className="hero-glow-a absolute -top-24 left-[6%] w-[460px] h-[460px] rounded-full bg-[#c47a38]/75 blur-[80px]" />
+              <div className="hero-glow-b absolute -bottom-28 right-[8%] w-[520px] h-[520px] rounded-full bg-[#6f9a8c]/70 blur-[90px]" />
+              <div className="hero-glow-c absolute top-[15%] left-[42%] w-[360px] h-[360px] rounded-full bg-[#e0b062]/45 blur-[80px]" />
+              <div className="absolute inset-0 bg-white/[0.06] backdrop-blur-2xl rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] border-t border-x border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-black/20" />
+            </div>
+            <div className="container mx-auto relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between space-y-6">
                   <div>
