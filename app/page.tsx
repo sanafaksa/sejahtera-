@@ -27,6 +27,28 @@ import { getProductList } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 
+// Cards in the "Modern Copper For Stylish Interiors" banner.
+const HERITAGE_CARDS = [
+  {
+    tag: "Artisan Tableware",
+    title: "Hand-Hammered Copper Decor",
+    image: "/assets/products/copper-1.jpg",
+    alt: "Handcrafted Copper Credenza & Tableware",
+  },
+  {
+    tag: "Living Accents",
+    title: "Tumang Heritage Sculptures",
+    image: "/assets/products/copper-5.jpg",
+    alt: "Handcrafted Copper Living Furniture",
+  },
+  {
+    tag: "Architectural",
+    title: "Bespoke Hammered Basins",
+    image: "/assets/products/copper-3.jpg",
+    alt: "Handcrafted Copper Luxury Bath & Basin",
+  },
+];
+
 // Decorative finish dots per card position (copper / brass tones).
 const CARD_DOTS = [
   ["#b87333", "#e5be9c", "#5a341a"],
@@ -229,8 +251,8 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* 3. Bottom Overlapping Dark Banner Card (Exact Mockup Match) */}
-        <div className="relative z-20 mt-10 sm:mt-14 lg:mt-16">
+        {/* 3. Bottom Overlapping Dark Banner Card: rises into view on scroll */}
+        <FadeInView direction="up" duration={0.9} className="relative z-20 mt-10 sm:mt-14 lg:mt-16">
           <div className="relative overflow-hidden bg-[#0e0a07] text-white rounded-t-[38px] sm:rounded-t-[52px] lg:rounded-t-[60px] pt-14 sm:pt-18 lg:pt-20 pb-14 sm:pb-20 px-6 sm:px-10 lg:px-14 shadow-[0_-25px_60px_rgba(0,0,0,0.4)]">
             {/* Glassmorphism: coloured light behind a frosted, translucent pane */}
             <div aria-hidden className="absolute inset-0 pointer-events-none">
@@ -242,7 +264,11 @@ export default async function Home() {
             </div>
             <div className="container mx-auto relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                <div className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between space-y-6">
+                <FadeInView
+                  direction="up"
+                  delay={0.2}
+                  className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between space-y-6"
+                >
                   <div>
                     <span className="text-[11px] font-semibold tracking-widest text-[#d89758] uppercase block mb-3">
                       Tumang Craft Heritage
@@ -265,75 +291,40 @@ export default async function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </FadeInView>
 
                 <div className="lg:col-span-8 xl:col-span-8">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-                    <div className="rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
-                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
-                        <Image
-                          src="/assets/products/copper-1.jpg"
-                          alt="Handcrafted Copper Credenza & Tableware"
-                          fill
-                          className="object-cover group-hover:scale-108 transition-transform duration-500"
-                          sizes="(max-width: 768px) 100vw, 25vw"
-                        />
-                      </div>
-                      <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
-                          Artisan Tableware
-                        </span>
-                        <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
-                          Hand-Hammered Copper Decor
-                        </h4>
-                      </div>
-                    </div>
-
-                    <div className="rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
-                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
-                        <Image
-                          src="/assets/products/copper-5.jpg"
-                          alt="Handcrafted Copper Living Furniture"
-                          fill
-                          className="object-cover group-hover:scale-108 transition-transform duration-500"
-                          sizes="(max-width: 768px) 100vw, 25vw"
-                        />
-                      </div>
-                      <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
-                          Living Accents
-                        </span>
-                        <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
-                          Tumang Heritage Sculptures
-                        </h4>
-                      </div>
-                    </div>
-
-                    <div className="rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
-                      <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
-                        <Image
-                          src="/assets/products/copper-3.jpg"
-                          alt="Handcrafted Copper Luxury Bath & Basin"
-                          fill
-                          className="object-cover group-hover:scale-108 transition-transform duration-500"
-                          sizes="(max-width: 768px) 100vw, 25vw"
-                        />
-                      </div>
-                      <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
-                          Architectural
-                        </span>
-                        <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
-                          Bespoke Hammered Basins
-                        </h4>
-                      </div>
-                    </div>
+                    {HERITAGE_CARDS.map((card, i) => (
+                      <FadeInView key={card.title} direction="up" delay={0.35 + i * 0.15} className="h-full">
+                        <div className="h-full rounded-[26px] bg-white/[0.08] backdrop-blur-xl p-4 text-white border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/[0.14] hover:border-white/35 transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+                          <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-white/10 mb-3 ring-1 ring-white/15">
+                            <Image
+                              src={card.image}
+                              alt={card.alt}
+                              fill
+                              className="object-cover group-hover:scale-108 transition-transform duration-500"
+                              sizes="(max-width: 768px) 100vw, 25vw"
+                            />
+                          </div>
+                          <div>
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-[#f0c493] block mb-0.5">
+                              {card.tag}
+                            </span>
+                            <h4 className="text-sm font-bold text-white group-hover:text-[#f0c493] transition-colors leading-snug">
+                              {card.title}
+                            </h4>
+                          </div>
+                        </div>
+                      </FadeInView>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </FadeInView>
+
       </section>
 
       {/* =========================================================================
