@@ -48,7 +48,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
             <Link href="/ilv-studio/dashboard" className="flex items-center gap-3">
               <Image
                 src="/assets/logo.png"
-                alt="Ilavio Logo"
+                alt="Ilavioo logo"
                 width={40}
                 height={40}
                 className="w-10 h-10 object-contain"

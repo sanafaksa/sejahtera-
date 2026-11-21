@@ -135,7 +135,7 @@ export default async function ProductsPage({
   return (
     <main className="min-h-screen bg-[#faf8f5]">
       <PageHero
-        title="Products"
+        title="Copper & Brass Products"
         description="Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Tumang, Boyolali."
         fadeTo="#faf8f5"
       >

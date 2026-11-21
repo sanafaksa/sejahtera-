@@ -144,7 +144,7 @@ export default async function Home() {
         {/* Semi-transparent showroom background image */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2200&q=80"
+            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=60"
             alt="Modern Showroom Living Interior Background"
             fill
             priority
@@ -201,6 +201,7 @@ export default async function Home() {
             <div className="overflow-visible mb-2 sm:mb-4">
               <h1 className="font-extrabold uppercase tracking-tight text-[#16120e] text-[12vw] sm:text-[10.5vw] lg:text-[7.2rem] xl:text-[8.4rem] leading-[0.88] select-none text-left font-display">
                 CRAFTED LUXURY
+                <span className="sr-only">: handcrafted copper and brass from Tumang, Indonesia</span>
               </h1>
             </div>
           </FadeInView>

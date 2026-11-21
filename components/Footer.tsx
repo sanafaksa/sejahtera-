@@ -74,7 +74,7 @@ export default function Footer() {
                 <div className="relative w-12 h-12">
                   <Image
                     src="/assets/logo.png"
-                    alt="Ilavio Logo"
+                    alt="Ilavioo logo"
                     fill
                     className="object-contain group-hover:scale-110 transition-transform duration-300"
                   />

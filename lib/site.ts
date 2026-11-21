@@ -21,7 +21,7 @@ export const SITE = {
   legalName: "PT. Ilavioo Nusantara Sejahtera",
   tagline: "Handcrafted Copper & Brass from Tumang",
   description:
-    "Handcrafted copper and brass bathtubs, basins, lighting, doors and decor, hand-hammered by artisans in Tumang, Boyolali, Indonesia. Bespoke commissions and worldwide export.",
+    "Handcrafted copper and brass bathtubs, basins, lighting and doors, hand-hammered by artisans in Tumang, Indonesia. Bespoke orders and worldwide export.",
   email: "marketing@ilavioo.com",
   logo: "/assets/ilavioo-logo-horizontal.png",
   ogImage: "/assets/hero-luxury-bath-suite.jpg",
