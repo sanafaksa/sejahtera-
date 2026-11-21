@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { hourLabel, type HeatRow } from "@/lib/clock";
 
-// Sequential copper ramp, light -> dark (Sepi -> Ramai).
-const RAMP = ["#F5EADC", "#E8C9A3", "#D5A06C", "#B9773F", "#8A4B1C"];
-const EMPTY = "#F3F4F6";
+// Traffic-light ramp: green (few visits) -> yellow -> red (busiest).
+const RAMP = ["#4ADE80", "#A3E635", "#FACC15", "#FB923C", "#EF4444"];
+const EMPTY = "#E7E5E4";
 const TOP_COUNTRIES = 10;
 
 function colorFor(value: number, max: number) {

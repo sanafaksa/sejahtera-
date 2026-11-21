@@ -1,15 +1,22 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdminPage } from "@/lib/admin-auth";
 import DashboardGreeting from "@/components/admin/DashboardGreeting";
+import CountUpNumber from "@/components/animations/CountUpNumber";
 import Link from "next/link";
 import Image from "next/image";
 import {
   Package,
   Image as ImageIcon,
-  TrendingUp,
+  Layers,
+  Sparkles,
   Eye,
   Plus,
   ArrowRight,
+  ArrowUpRight,
+  Pencil,
+  Upload,
+  FileText,
+  BarChart3,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -51,280 +58,181 @@ async function getDashboardStats() {
 export default async function AdminDashboardPage() {
   const session = await requireAdminPage();
   const stats = await getDashboardStats();
+  const name = session.user?.name || "Admin";
+  const perProduct =
+    stats.totalProducts > 0 ? Math.round((stats.totalImages / stats.totalProducts) * 10) / 10 : 0;
+
+  const statCards = [
+    { label: "Total produk", value: stats.totalProducts, icon: Package, hint: "di katalog", count: true },
+    { label: "Total foto", value: stats.totalImages, icon: ImageIcon, hint: "semua produk", count: true },
+    { label: "Foto per produk", value: perProduct, icon: Layers, hint: "rata-rata", count: false },
+    { label: "Produk terbaru", value: stats.recentProducts.length, icon: Sparkles, hint: "5 terakhir", count: true },
+  ];
+
+  const actions = [
+    { label: "Tambah produk", text: "Buat produk baru", href: "/ilv-studio/products/new", icon: Plus },
+    { label: "Upload galeri", text: "Foto & video workshop", href: "/ilv-studio/gallery/new", icon: Upload },
+    { label: "Invoice baru", text: "Buat & kirim invoice", href: "/ilv-studio/invoice/baru", icon: FileText },
+    { label: "Statistik", text: "Pengunjung & sumber", href: "/ilv-studio/statistik", icon: BarChart3 },
+  ];
 
   return (
-    <div className="space-y-8 max-w-7xl">
-      {/* Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Dashboard Overview
-          </h1>
-          <p className="text-gray-600">
-            Welcome back! Here&apos;s what&apos;s happening with your store.
-          </p>
-        </div>
-        <DashboardGreeting
-          name={session.user?.name || "Admin"}
-          initialNow={Date.now()}
+    <div className="admin-rise space-y-6 max-w-7xl">
+      {/* Hero */}
+      <section className="glass rounded-[1.75rem] p-5 sm:p-7 relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-[radial-gradient(circle,#f0b07c_0%,transparent_70%)] opacity-60"
         />
-      </div>
-
-      {/* Quick Actions */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Link
-          href="/ilv-studio/products/new"
-          className="group bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 relative overflow-hidden"
-        >
-          <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
-          <div className="relative z-10">
-            <Plus className="w-8 h-8 mb-3" />
-            <h3 className="font-semibold text-lg mb-1">Add Product</h3>
-            <p className="text-white/80 text-sm">Create new product</p>
-          </div>
-        </Link>
-
-        <Link
-          href="/ilv-studio/products"
-          className="group bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 relative overflow-hidden"
-        >
-          <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
-          <div className="relative z-10">
-            <Package className="w-8 h-8 mb-3" />
-            <h3 className="font-semibold text-lg mb-1">Manage Products</h3>
-            <p className="text-white/80 text-sm">View all products</p>
-          </div>
-        </Link>
-
-        <Link
-          href="/"
-          target="_blank"
-          className="group bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 relative overflow-hidden"
-        >
-          <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
-          <div className="relative z-10">
-            <Eye className="w-8 h-8 mb-3" />
-            <h3 className="font-semibold text-lg mb-1">View Website</h3>
-            <p className="text-white/80 text-sm">Check live site</p>
-          </div>
-        </Link>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Total Products */}
-        <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group">
-          <div className="flex items-start justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Package className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700">
-              <TrendingUp className="w-3 h-3" />
-              Active
-            </div>
-          </div>
+        <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
           <div>
-            <p className="text-gray-600 text-sm mb-1 font-medium">
-              Total Products
+            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#9e5b24] mb-3">
+              <span className="admin-live w-1.5 h-1.5 rounded-full bg-emerald-500 text-emerald-500" />
+              Studio aktif
             </p>
-            <p className="text-3xl font-bold text-gray-900">
-              {stats.totalProducts}
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-stone-900">
+              Halo, {name.split(" ")[0]}
+            </h1>
+            <p className="text-stone-600 mt-1.5">Ringkasan konten dan aktivitas website hari ini.</p>
           </div>
+          <DashboardGreeting name={name} initialNow={Date.now()} />
         </div>
+      </section>
 
-        {/* Total Images */}
-        <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group">
-          <div className="flex items-start justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <ImageIcon className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">
-              <TrendingUp className="w-3 h-3" />
-              Growing
-            </div>
-          </div>
-          <div>
-            <p className="text-gray-600 text-sm mb-1 font-medium">
-              Total Images
-            </p>
-            <p className="text-3xl font-bold text-gray-900">
-              {stats.totalImages}
-            </p>
-          </div>
-        </div>
-
-        {/* Average Images per Product */}
-        <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group">
-          <div className="flex items-start justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <ImageIcon className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700">
-              Avg
-            </div>
-          </div>
-          <div>
-            <p className="text-gray-600 text-sm mb-1 font-medium">
-              Images per Product
-            </p>
-            <p className="text-3xl font-bold text-gray-900">
-              {stats.totalProducts > 0
-                ? Math.round((stats.totalImages / stats.totalProducts) * 10) /
-                  10
-                : 0}
-            </p>
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group">
-          <div className="flex items-start justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <TrendingUp className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-50 text-orange-700">
-              Recent
-            </div>
-          </div>
-          <div>
-            <p className="text-gray-600 text-sm mb-1 font-medium">
-              Latest Products
-            </p>
-            <p className="text-3xl font-bold text-gray-900">
-              {stats.recentProducts.length}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Recent Products Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Package className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 text-lg">
-                Recent Products
-              </h3>
-              <p className="text-sm text-gray-500">
-                Latest additions to catalog
+      {/* Stats */}
+      <section className="admin-rise grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        {statCards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div key={card.label} className="glass admin-tile rounded-[1.5rem] p-4 sm:p-5">
+              <div className="flex items-start justify-between gap-2 mb-5">
+                <span className="admin-chip w-10 h-10 rounded-2xl flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5" />
+                </span>
+                <span className="text-[11px] font-medium text-stone-500 bg-white/70 rounded-full px-2 py-0.5 truncate">
+                  {card.hint}
+                </span>
+              </div>
+              <p className="text-sm text-stone-500">{card.label}</p>
+              <p className="text-3xl font-semibold tracking-tight text-stone-900 tabular-nums mt-0.5">
+                {card.count ? <CountUpNumber value={card.value} /> : card.value}
               </p>
             </div>
-          </div>
-          <Link
-            href="/ilv-studio/products"
-            className="text-sm text-green-600 hover:text-green-700 font-semibold flex items-center gap-1 group"
-          >
-            View All
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+          );
+        })}
+      </section>
 
-        {stats.recentProducts.length === 0 ? (
-          <div className="p-12 text-center">
-            <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <p className="text-gray-500 mb-1">No products yet</p>
-            <p className="text-sm text-gray-400 mb-4">
-              Get started by creating your first product
-            </p>
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 items-start">
+        {/* Recent products */}
+        <section className="glass rounded-[1.75rem] lg:col-span-2 overflow-hidden">
+          <div className="flex items-center justify-between px-5 sm:px-6 pt-5 pb-3">
+            <div>
+              <h2 className="font-semibold text-stone-900 text-lg">Produk terbaru</h2>
+              <p className="text-sm text-stone-500">Tambahan terakhir ke katalog</p>
+            </div>
             <Link
-              href="/ilv-studio/products/new"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
+              href="/ilv-studio/products"
+              className="group inline-flex items-center gap-1 text-sm font-semibold text-[#9e5b24] hover:text-[#7d441a] rounded-full px-3 py-1.5 hover:bg-white/70 transition"
             >
-              <Plus className="w-4 h-4" />
-              Add First Product
+              Semua
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
-        ) : (
-          <div className="divide-y divide-gray-100">
-            {stats.recentProducts.map((product) => (
-              <div
-                key={product.id}
-                className="p-4 hover:bg-gray-50 transition-colors group"
+
+          {stats.recentProducts.length === 0 ? (
+            <div className="px-6 pb-10 pt-6 text-center">
+              <Package className="w-10 h-10 text-stone-300 mx-auto mb-3" />
+              <p className="text-stone-600 mb-4">Belum ada produk</p>
+              <Link
+                href="/ilv-studio/products/new"
+                className="admin-chip inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold"
               >
-                <div className="flex items-center gap-4">
-                  {/* Product Image */}
-                  <div className="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                    {product.images[0]?.imageUrl ? (
-                      <Image
-                        src={product.images[0].imageUrl}
-                        alt={product.name}
-                        fill
-                        sizes="64px"
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <Package className="w-6 h-6 text-gray-400" />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Product Info */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-gray-900 truncate group-hover:text-green-600 transition-colors">
-                      {product.name}
-                    </h4>
-                    <p className="text-sm text-gray-500 truncate">
-                      {product.description || "No description"}
-                    </p>
-                  </div>
-
-                  {/* Date */}
-                  <div className="text-right hidden sm:block">
-                    <p className="text-sm text-gray-600 font-medium">
+                <Plus className="w-4 h-4" /> Tambah produk pertama
+              </Link>
+            </div>
+          ) : (
+            <ul className="admin-rise px-2 sm:px-3 pb-3">
+              {stats.recentProducts.map((product) => (
+                <li key={product.id}>
+                  <div className="group flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-2xl hover:bg-white/60 transition-colors duration-300">
+                    <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-white/70 ring-1 ring-white shrink-0">
+                      {product.images[0]?.imageUrl ? (
+                        <Image
+                          src={product.images[0].imageUrl}
+                          alt={product.name}
+                          fill
+                          sizes="56px"
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Package className="w-5 h-5 text-stone-400" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-stone-900 truncate">{product.name}</p>
+                      <p className="text-sm text-stone-500 truncate">{product.description || "Tanpa deskripsi"}</p>
+                    </div>
+                    <p className="hidden sm:block text-xs text-stone-500 text-right shrink-0">
                       {new Date(product.createdAt).toLocaleDateString("id-ID", {
                         day: "numeric",
                         month: "short",
                         year: "numeric",
                       })}
                     </p>
-                    <p className="text-xs text-gray-500">
-                      {new Date(product.createdAt).toLocaleTimeString("id-ID", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/ilv-studio/products/${product.id}/edit`}
-                      className="p-2 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors"
-                      title="Edit"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <div className="flex items-center gap-1 shrink-0">
+                      <Link
+                        href={`/ilv-studio/products/${product.id}/edit`}
+                        title="Edit"
+                        aria-label={`Edit ${product.name}`}
+                        className="p-2 rounded-xl text-stone-500 hover:text-[#9e5b24] hover:bg-white transition"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                        />
-                      </svg>
-                    </Link>
-                    <Link
-                      href={`/products/${product.slug}`}
-                      target="_blank"
-                      className="p-2 hover:bg-green-50 text-green-600 rounded-lg transition-colors"
-                      title="View"
-                    >
-                      <Eye className="w-4 h-4" />
-                    </Link>
+                        <Pencil className="w-4 h-4" />
+                      </Link>
+                      <Link
+                        href={`/products/${product.slug}`}
+                        target="_blank"
+                        title="Lihat"
+                        aria-label={`Lihat ${product.name} di website`}
+                        className="p-2 rounded-xl text-stone-500 hover:text-[#9e5b24] hover:bg-white transition"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        {/* Quick actions */}
+        <section className="glass rounded-[1.75rem] p-3">
+          <h2 className="font-semibold text-stone-900 text-lg px-3 pt-2 pb-2">Aksi cepat</h2>
+          <ul className="admin-rise space-y-1.5">
+            {actions.map((a) => {
+              const Icon = a.icon;
+              return (
+                <li key={a.href}>
+                  <Link
+                    href={a.href}
+                    className="admin-tile group flex items-center gap-3 rounded-2xl p-3 bg-white/40 hover:bg-white/75"
+                  >
+                    <span className="admin-chip w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-105">
+                      <Icon className="w-5 h-5" />
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block font-medium text-stone-900">{a.label}</span>
+                      <span className="block text-sm text-stone-500 truncate">{a.text}</span>
+                    </span>
+                    <ArrowUpRight className="w-4 h-4 text-stone-400 transition-all duration-300 group-hover:text-[#9e5b24] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminTopbar from "@/components/admin/AdminTopbar";
 import { motion, AnimatePresence } from "framer-motion";
+import "./admin.css";
 
 export default function AdminLayout({
   children,
@@ -17,6 +18,19 @@ export default function AdminLayout({
   const pathname = usePathname();
   const isLoginPage = pathname === "/ilv-studio/login";
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // Desktop sidebar folded to icons; remembered per browser.
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(localStorage.getItem("ilv-sidebar-collapsed") === "1");
+  }, []);
+
+  const toggleCollapsed = () => {
+    setCollapsed((c) => {
+      localStorage.setItem("ilv-sidebar-collapsed", c ? "0" : "1");
+      return !c;
+    });
+  };
 
   useEffect(() => {
     // Redirect to login if not authenticated and not on login page
@@ -29,13 +43,14 @@ export default function AdminLayout({
     }
   }, [status, router, isLoginPage]);
 
-  // Show loading state with enhanced UI
+  // Show loading state
   if (status === "loading") {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#b87333]/20 border-t-[#b87333] rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 font-medium">Loading...</p>
+      <div className="admin-shell min-h-screen flex items-center justify-center">
+        <div className="admin-backdrop" aria-hidden="true"><span /><span /><span /></div>
+        <div className="glass rounded-3xl px-10 py-8 text-center">
+          <div className="w-12 h-12 border-[3px] border-[#b87333]/20 border-t-[#b87333] rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-stone-600 font-medium">Memuat studio…</p>
         </div>
       </div>
     );
@@ -46,51 +61,45 @@ export default function AdminLayout({
     return <>{children}</>;
   }
 
-  // Main admin layout with sidebar
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Sidebar */}
+    <div className="admin-shell min-h-screen">
+      <div className="admin-backdrop" aria-hidden="true"><span /><span /><span /></div>
+
       <AdminSidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
+        collapsed={collapsed}
+        onToggleCollapsed={toggleCollapsed}
       />
 
-      {/* Main Content Area */}
-      <div className="lg:pl-64 min-h-screen flex flex-col">
-        {/* Top Bar */}
-        <AdminTopbar
-          session={session}
-          onMenuClick={() => setIsSidebarOpen(true)}
-        />
+      <div
+        className={`min-h-screen flex flex-col transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          collapsed ? "lg:pl-[6.5rem]" : "lg:pl-[18rem]"
+        }`}
+      >
+        <AdminTopbar session={session} onMenuClick={() => setIsSidebarOpen(true)} />
 
-        {/* Page Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 px-4 pb-6 pt-2 sm:px-6 lg:px-8 lg:pb-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={pathname}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
               {children}
             </motion.div>
           </AnimatePresence>
         </main>
 
-        {/* Footer */}
-        <footer className="border-t border-gray-200 bg-white py-4 px-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-600">
-            <p>
-              © {new Date().getFullYear()} Ilavio Copper Crafts. All rights
-              reserved.
-            </p>
-            <p>Made with ❤️ by Ilavio Team</p>
-          </div>
+        <footer className="px-4 sm:px-6 lg:px-8 pb-5">
+          <p className="text-xs text-stone-500 text-center sm:text-left">
+            © {new Date().getFullYear()} Ilavioo Studio
+          </p>
         </footer>
       </div>
 
-      {/* Mobile Overlay */}
       <AnimatePresence>
         {isSidebarOpen && (
           <motion.div
@@ -98,7 +107,7 @@ export default function AdminLayout({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsSidebarOpen(false)}
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 bg-[#2a1a0e]/30 backdrop-blur-sm z-40 lg:hidden"
           />
         )}
       </AnimatePresence>

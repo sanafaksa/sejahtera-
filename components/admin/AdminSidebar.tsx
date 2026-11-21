@@ -9,123 +9,166 @@ import {
   ImageIcon,
   LogOut,
   X,
-  Home,
+  ExternalLink,
   BarChart3,
   Clock3,
   FileText,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
-const navigation = [
-  { name: "Dashboard", href: "/ilv-studio/dashboard", icon: LayoutDashboard },
-  { name: "Products", href: "/ilv-studio/products", icon: Package },
-  { name: "Gallery", href: "/ilv-studio/gallery", icon: ImageIcon },
-  { name: "Statistik", href: "/ilv-studio/statistik", icon: BarChart3 },
-  { name: "Jam Wilayah", href: "/ilv-studio/jam-wilayah", icon: Clock3 },
-  { name: "Invoice", href: "/ilv-studio/invoice", icon: FileText },
+const sections = [
+  {
+    label: "Kelola website",
+    items: [
+      { name: "Dashboard", href: "/ilv-studio/dashboard", icon: LayoutDashboard },
+      { name: "Products", href: "/ilv-studio/products", icon: Package },
+      { name: "Gallery", href: "/ilv-studio/gallery", icon: ImageIcon },
+      { name: "Invoice", href: "/ilv-studio/invoice", icon: FileText },
+    ],
+  },
+  {
+    label: "Insight",
+    items: [
+      { name: "Statistik", href: "/ilv-studio/statistik", icon: BarChart3 },
+      { name: "Jam Wilayah", href: "/ilv-studio/jam-wilayah", icon: Clock3 },
+    ],
+  },
 ];
 
 interface AdminSidebarProps {
+  /** Mobile drawer open. */
   isOpen: boolean;
   onClose: () => void;
+  /** Desktop: folded to an icon rail. Ignored on phones, where the drawer is always full width. */
+  collapsed: boolean;
+  onToggleCollapsed: () => void;
 }
 
-export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
+export default function AdminSidebar({ isOpen, onClose, collapsed, onToggleCollapsed }: AdminSidebarProps) {
   const pathname = usePathname();
+  // Desktop-only hide for labels when folded.
+  const label = collapsed ? "lg:hidden" : "";
 
   return (
-    <>
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 z-50 h-screen w-64 bg-white border-r border-gray-200 shadow-lg transform transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Logo Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <Link href="/ilv-studio/dashboard" className="flex items-center gap-3">
-              <Image
-                src="/assets/logo.png"
-                alt="Ilavioo logo"
-                width={40}
-                height={40}
-                className="w-10 h-10 object-contain"
-              />
+    <aside
+      className={`fixed z-50 top-0 left-0 h-screen w-[17rem] p-3 transition-[transform,width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+      } ${collapsed ? "lg:w-[6rem]" : ""}`}
+    >
+      <div className="glass-strong h-full rounded-[1.75rem] flex flex-col overflow-hidden">
+        {/* Brand + fold toggle */}
+        <div
+          className={`flex items-center justify-between gap-2 px-5 pt-5 pb-4 ${
+            collapsed ? "lg:flex-col lg:px-3 lg:gap-3" : ""
+          }`}
+        >
+          <Link href="/ilv-studio/dashboard" className="flex items-center gap-3 group min-w-0" title="Dashboard">
+            <span className="relative w-10 h-10 shrink-0 rounded-2xl bg-white/80 ring-1 ring-white shadow-sm flex items-center justify-center transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:scale-105">
+              <Image src="/assets/logo.png" alt="Ilavioo logo" width={28} height={28} className="w-7 h-7 object-contain" />
+            </span>
+            <span className={`min-w-0 ${label}`}>
+              <span className="block font-semibold text-stone-900 leading-tight">Ilavioo</span>
+              <span className="block text-[11px] font-medium uppercase tracking-[0.14em] text-[#9e5b24]">Studio</span>
+            </span>
+          </Link>
 
-              <div>
-                <p className="font-bold text-gray-900">Ilavio Admin</p>
-                <p className="text-xs text-gray-500">Copper Crafts</p>
-              </div>
-            </Link>
+          <button
+            onClick={onToggleCollapsed}
+            aria-label={collapsed ? "Buka sidebar" : "Tutup sidebar"}
+            aria-expanded={!collapsed}
+            title={collapsed ? "Buka sidebar" : "Tutup sidebar"}
+            className="hidden lg:flex p-2 rounded-xl text-stone-500 hover:text-stone-900 hover:bg-white/70 transition-colors"
+          >
+            {collapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
+          </button>
 
-            {/* Mobile Close Button */}
-            <button
-              onClick={onClose}
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <X className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-            {navigation.map((item) => {
-              const isActive =
-                pathname === item.href || pathname?.startsWith(item.href + "/");
-              const Icon = item.icon;
-
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={onClose}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all relative ${
-                    isActive
-                      ? "bg-amber-50 text-[#b87333] font-semibold"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute left-0 top-0 bottom-0 w-1 bg-[#b87333] rounded-r"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                  <Icon className="w-5 h-5" />
-                  <span>{item.name}</span>
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Bottom Actions */}
-          <div className="p-4 border-t border-gray-200 space-y-2">
-            <Link
-              href="/"
-              target="_blank"
-              className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-            >
-              <Home className="w-5 h-5" />
-              <span>View Website</span>
-            </Link>
-
-            <button
-              onClick={() => signOut({ callbackUrl: "/ilv-studio/login" })}
-              className="flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full"
-            >
-              <LogOut className="w-5 h-5" />
-              <span>Logout</span>
-            </button>
-          </div>
+          <button
+            onClick={onClose}
+            aria-label="Tutup menu"
+            className="lg:hidden p-2 rounded-xl hover:bg-white/70 transition-colors"
+          >
+            <X className="w-5 h-5 text-stone-600" />
+          </button>
         </div>
-      </aside>
-    </>
+
+        {/* Navigation */}
+        <nav className={`flex-1 overflow-y-auto overflow-x-hidden px-3 pb-3 space-y-5 ${collapsed ? "lg:space-y-3" : ""}`}>
+          {sections.map((section) => (
+            <div key={section.label}>
+              <p
+                className={`px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400 whitespace-nowrap ${label}`}
+              >
+                {section.label}
+              </p>
+              {collapsed && <div className="hidden lg:block mx-auto mb-3 h-px w-8 bg-stone-900/10" aria-hidden="true" />}
+              <ul className="space-y-1">
+                {section.items.map((item) => {
+                  const isActive = pathname === item.href || pathname?.startsWith(item.href + "/");
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        aria-current={isActive ? "page" : undefined}
+                        aria-label={collapsed ? item.name : undefined}
+                        title={collapsed ? item.name : undefined}
+                        className={`relative flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm transition-colors duration-300 group ${
+                          collapsed ? "lg:justify-center lg:px-0" : ""
+                        } ${isActive ? "text-white font-semibold" : "text-stone-600 hover:text-stone-900 hover:bg-white/60"}`}
+                      >
+                        {isActive && (
+                          <motion.span
+                            layoutId="admin-active-nav"
+                            className="absolute inset-0 rounded-2xl admin-chip"
+                            transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                          />
+                        )}
+                        <Icon
+                          className={`relative w-[18px] h-[18px] shrink-0 transition-transform duration-300 ${
+                            isActive ? "" : "group-hover:scale-110 group-hover:-rotate-6"
+                          }`}
+                        />
+                        <span className={`relative whitespace-nowrap ${label}`}>{item.name}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        {/* Bottom */}
+        <div className="p-3 border-t border-white/70 space-y-1">
+          <Link
+            href="/"
+            target="_blank"
+            title={collapsed ? "Lihat website" : undefined}
+            aria-label={collapsed ? "Lihat website" : undefined}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm text-stone-600 hover:text-stone-900 hover:bg-white/60 transition-colors ${
+              collapsed ? "lg:justify-center lg:px-0" : ""
+            }`}
+          >
+            <ExternalLink className="w-[18px] h-[18px] shrink-0" />
+            <span className={`whitespace-nowrap ${label}`}>Lihat website</span>
+          </Link>
+          <button
+            onClick={() => signOut({ callbackUrl: "/ilv-studio/login" })}
+            title={collapsed ? "Logout" : undefined}
+            aria-label={collapsed ? "Logout" : undefined}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm text-red-600 hover:bg-red-50/80 transition-colors ${
+              collapsed ? "lg:justify-center lg:px-0" : ""
+            }`}
+          >
+            <LogOut className="w-[18px] h-[18px] shrink-0" />
+            <span className={`whitespace-nowrap ${label}`}>Logout</span>
+          </button>
+        </div>
+      </div>
+    </aside>
   );
 }

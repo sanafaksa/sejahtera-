@@ -1,0 +1,281 @@
+/* Ilavioo Studio admin theme: frosted glass over a warm copper glow.
+   Everything is scoped to .admin-shell so the public site is untouched. */
+
+.admin-shell {
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-strong: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 10px 30px -12px rgba(74, 38, 16, 0.18),
+    0 2px 6px -2px rgba(74, 38, 16, 0.08);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  isolation: isolate;
+  background: #f6efe7;
+  color: #1f1610;
+}
+
+/* ---------- Ambient background: slow-drifting copper / apricot glows ---------- */
+.admin-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(1200px 700px at 100% -10%, #fbe3cc 0%, transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, #f3d9c4 0%, transparent 55%), #f6efe7;
+}
+.admin-backdrop span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.admin-backdrop span:nth-child(1) {
+  width: 520px;
+  height: 520px;
+  top: -140px;
+  left: 18%;
+  background: #e8a36b;
+  animation: admin-drift-a 26s ease-in-out infinite alternate;
+}
+.admin-backdrop span:nth-child(2) {
+  width: 460px;
+  height: 460px;
+  bottom: -160px;
+  right: 6%;
+  background: #f2b8a0;
+  animation: admin-drift-b 32s ease-in-out infinite alternate;
+}
+.admin-backdrop span:nth-child(3) {
+  width: 340px;
+  height: 340px;
+  top: 40%;
+  left: -100px;
+  background: #d9a06f;
+  opacity: 0.35;
+  animation: admin-drift-a 38s ease-in-out infinite alternate-reverse;
+}
+.admin-backdrop::after {
+  /* fine grain so the blur doesn't band */
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes admin-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(80px, 60px, 0) scale(1.15); }
+}
+@keyframes admin-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to { transform: translate3d(-90px, -50px, 0) scale(0.92); }
+}
+
+/* ---------- Glass surfaces ---------- */
+.admin-shell .glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+.admin-shell .glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  backdrop-filter: blur(28px) saturate(170%);
+}
+
+/* Existing admin pages use white cards (bg-white + rounded-*). Turn them into
+   glass so every page matches without rewriting each one. */
+.admin-shell main .bg-white[class*="rounded-xl"],
+.admin-shell main .bg-white[class*="rounded-2xl"],
+.admin-shell main .bg-white[class*="rounded-3xl"] {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  border-radius: 1.25rem;
+}
+.admin-shell main .bg-gray-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.admin-shell main .divide-gray-100 > :not(:last-child),
+.admin-shell main .border-gray-200,
+.admin-shell main .border-gray-100 {
+  border-color: rgba(120, 84, 56, 0.12);
+}
+.admin-shell main thead,
+.admin-shell main thead tr {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+.admin-shell main tbody tr {
+  transition: background-color 0.25s var(--ease-out-soft);
+}
+.admin-shell main tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+.admin-shell main input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.admin-shell main select,
+.admin-shell main textarea {
+  border-radius: 0.875rem;
+  transition: box-shadow 0.25s var(--ease-out-soft), border-color 0.25s var(--ease-out-soft),
+    background-color 0.25s var(--ease-out-soft);
+}
+.admin-shell main input:focus-visible,
+.admin-shell main select:focus-visible,
+.admin-shell main textarea:focus-visible {
+  box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.18);
+}
+
+/* ---------- Motion ---------- */
+
+/* Stagger: direct children rise in one after another. */
+.admin-rise > * {
+  opacity: 0;
+  animation: admin-rise 0.7s var(--ease-out-soft) forwards;
+}
+.admin-rise > *:nth-child(1) { animation-delay: 0.04s; }
+.admin-rise > *:nth-child(2) { animation-delay: 0.1s; }
+.admin-rise > *:nth-child(3) { animation-delay: 0.16s; }
+.admin-rise > *:nth-child(4) { animation-delay: 0.22s; }
+.admin-rise > *:nth-child(5) { animation-delay: 0.28s; }
+.admin-rise > *:nth-child(6) { animation-delay: 0.34s; }
+.admin-rise > *:nth-child(7) { animation-delay: 0.4s; }
+.admin-rise > *:nth-child(n + 8) { animation-delay: 0.46s; }
+
+@keyframes admin-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.985);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    /* "none", not blur(0): a leftover filter would stop the glass behind it from blurring */
+    filter: none;
+  }
+}
+
+/* Cards on every admin page (the white cards turned glass above) rise in,
+   staggered by their position among siblings. */
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]) {
+  animation: admin-rise 0.7s var(--ease-out-soft) both;
+  animation-delay: 0.05s;
+}
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):nth-child(2) { animation-delay: 0.11s; }
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):nth-child(3) { animation-delay: 0.17s; }
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):nth-child(4) { animation-delay: 0.23s; }
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):nth-child(5) { animation-delay: 0.29s; }
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):nth-child(6) { animation-delay: 0.35s; }
+.admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):nth-child(n + 7) { animation-delay: 0.41s; }
+
+/* Cards laid out in a grid (stat tiles, gallery items, clocks) lift and catch a
+   sheen on hover, like the dashboard tiles. */
+.admin-shell main .grid > .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]) {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s var(--ease-out-soft), box-shadow 0.45s var(--ease-out-soft);
+}
+.admin-shell main .grid > .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.9s var(--ease-out-soft);
+  pointer-events: none;
+}
+.admin-shell main .grid > .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 22px 40px -18px rgba(74, 38, 16, 0.32);
+}
+.admin-shell main .grid > .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):hover::after {
+  transform: translateX(120%);
+}
+
+/* Lift + sheen on hover for interactive glass tiles. */
+.admin-tile {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s var(--ease-out-soft), box-shadow 0.45s var(--ease-out-soft),
+    background-color 0.45s var(--ease-out-soft);
+}
+.admin-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.9s var(--ease-out-soft);
+  pointer-events: none;
+}
+.admin-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 22px 40px -18px rgba(74, 38, 16, 0.32);
+}
+.admin-tile:hover::after {
+  transform: translateX(120%);
+}
+
+/* Copper gradient chip used for icons. */
+.admin-chip {
+  background: linear-gradient(140deg, #d99459 0%, #b87333 45%, #7d441a 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 8px 18px -8px rgba(125, 68, 26, 0.65);
+  color: #fff;
+}
+
+/* Soft pulsing dot for "live" indicators. */
+.admin-live {
+  position: relative;
+}
+.admin-live::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.35;
+  animation: admin-pulse 2s ease-out infinite;
+}
+@keyframes admin-pulse {
+  from { transform: scale(0.6); opacity: 0.45; }
+  to { transform: scale(1.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-backdrop span,
+  .admin-live::before {
+    animation: none;
+  }
+  .admin-rise > *,
+  .admin-shell main .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]) {
+    animation: none;
+    opacity: 1;
+  }
+  .admin-shell main .grid > .bg-white:is([class*="rounded-xl"], [class*="rounded-2xl"]):hover {
+    transform: none;
+  }
+  .admin-tile,
+  .admin-tile::after {
+    transition: none;
+  }
+  .admin-tile:hover {
+    transform: none;
+  }
+}
+
+/* Older browsers without backdrop-filter: fall back to near-opaque white. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .admin-shell .glass,
+  .admin-shell main .bg-white[class*="rounded-"] {
+    background: rgba(255, 255, 255, 0.94);
+  }
+}
