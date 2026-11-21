@@ -39,6 +39,11 @@ const nextConfig: NextConfig = {
 
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
 
+  async redirects() {
+    // /process was replaced by /craftsmanship.
+    return [{ source: "/process", destination: "/craftsmanship", permanent: true }];
+  },
+
   async headers() {
     return [
       // Keep the admin area out of search results.

@@ -32,7 +32,7 @@ export async function GET() {
 - [Products](${absoluteUrl("/products")}): full catalog
 - [International orders](${absoluteUrl("/export")}): export to 16+ countries, crating, custom orders from drawings
 - [Bali villas and resorts](${absoluteUrl("/bali")}): made-to-order pieces delivered to Bali
-- [Our process](${absoluteUrl("/process")}): how pieces are made
+- [Craftsmanship](${absoluteUrl("/craftsmanship")}): how our Tumang artisans hammer, emboss and finish every piece by hand
 - [About](${absoluteUrl("/about")}): company and Tumang copper heritage
 - [Gallery](${absoluteUrl("/gallery")}): finished projects
 - [Contact and quotations](${absoluteUrl("/contact")})

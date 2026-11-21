@@ -38,7 +38,7 @@ export default function ExportPage() {
           </p>
           <p>
             Browse the <Link href="/products">product catalog</Link>, see how pieces are made on{" "}
-            <Link href="/process">our process page</Link>, or <Link href="/contact">request a quotation</Link>.
+            <Link href="/craftsmanship">our craftsmanship page</Link>, or <Link href="/contact">request a quotation</Link>.
           </p>
         </>
       }

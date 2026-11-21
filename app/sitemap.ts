@@ -12,7 +12,7 @@ const STATIC_PAGES: { path: string; priority: number; changeFrequency: "weekly" 
   { path: "/export", priority: 0.8, changeFrequency: "monthly" },
   { path: "/bali", priority: 0.8, changeFrequency: "monthly" },
   { path: "/gallery", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/process", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/craftsmanship", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
   { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
