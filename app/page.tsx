@@ -133,7 +133,6 @@ async function getBestSellingProducts() {
     return picked.slice(0, HOME_CARD_COUNT).map((p, i) => ({
       id: p.id,
       href: `/products/${p.slug}`,
-      tag: p.specifications?.material || "Handcrafted Copper",
       colors: CARD_DOTS[i % CARD_DOTS.length],
       title: p.name,
       price: p.specifications?.price || "Made to Order",
@@ -479,11 +478,8 @@ export default async function Home() {
                   className="rounded-[28px] bg-[#fbf6f0]/95 p-4 sm:p-5 text-[#1a120b] shadow-[0_20px_45px_rgba(0,0,0,0.45)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.65)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between border border-white/40 group h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5be9c]"
                 >
                   <div>
-                    {/* Top Tag & Color Finish Dots */}
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] bg-white/80 px-2.5 py-1 rounded-full border border-[#ebd7c6]/80 line-clamp-1">
-                        {product.tag}
-                      </span>
+                    {/* Color Finish Dots */}
+                    <div className="flex items-center justify-end gap-2 mb-3">
                       <div className="flex items-center gap-1.5">
                         {product.colors.map((color, i) => (
                           <span
