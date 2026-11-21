@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SITE } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
-/** Height of the contact bar above the header (lg and up), in px. */
+/** Height of the contact bar above the header, in px. */
 const TOP_BAR_HEIGHT = 36;
 
 export default function Header() {
@@ -54,28 +54,28 @@ export default function Header() {
 
   return (
     <>
-    {/* Contact bar (desktop); on smaller screens the same details are in the menu and footer */}
-    <div className="hidden lg:block bg-[#3E2723] text-white/90 text-[13px]" style={{ height: TOP_BAR_HEIGHT }}>
+    {/* Contact bar; office hours are hidden on phones to fit the width */}
+    <div className="bg-[#3E2723] text-white/90 text-xs sm:text-[13px]" style={{ height: TOP_BAR_HEIGHT }}>
       <div className="container mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#e5be9c] transition-colors">
+        <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 sm:gap-2 shrink-0 hover:text-[#e5be9c] transition-colors">
             <WhatsAppIcon className="w-3.5 h-3.5" />
             {phoneDisplay}
           </a>
-          <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 hover:text-[#e5be9c] transition-colors">
-            <Mail className="w-3.5 h-3.5" />
-            {SITE.email}
+          <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-1.5 sm:gap-2 min-w-0 hover:text-[#e5be9c] transition-colors">
+            <Mail className="w-3.5 h-3.5 shrink-0" />
+            <span className="truncate">{SITE.email}</span>
           </a>
         </div>
-        <p className="inline-flex items-center gap-2">
+        <p className="hidden md:inline-flex items-center gap-2 shrink-0">
           <Clock className="w-3.5 h-3.5" />
           Mon – Fri: 08:00 – 17:00 <span className="text-white/60">(GMT+7)</span>
         </p>
       </div>
     </div>
     <header
-      style={{ "--top-bar-offset": `${topOffset}px` } as React.CSSProperties}
-      className={`fixed top-0 lg:top-[var(--top-bar-offset)] left-0 right-0 z-50 transition-[padding,box-shadow] duration-300 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-xs ${
+      style={{ top: topOffset }}
+      className={`fixed left-0 right-0 z-50 transition-[padding,box-shadow] duration-300 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-xs ${
         isScrolled ? "py-2.5 sm:py-3 shadow-sm" : "py-3 sm:py-4"
       }`}
     >
@@ -170,7 +170,8 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm lg:hidden z-[55]"
+              className="fixed inset-x-0 bg-black/40 backdrop-blur-sm lg:hidden z-[55]"
+              style={{ top: -topOffset, height: "100vh" }}
               onClick={() => setIsOpen(false)}
             />
 
@@ -180,7 +181,8 @@ export default function Header() {
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 bottom-0 w-full max-w-xs bg-[#fcf9f5] border-l border-stone-200 shadow-2xl lg:hidden overflow-y-auto z-[60] p-6 flex flex-col justify-between"
-              style={{ height: "100vh" }}
+              // The header has backdrop-filter, so `fixed` is relative to it: undo its offset.
+              style={{ top: -topOffset, height: "100vh" }}
             >
               <div>
                 <div className="flex items-center gap-3 pb-6 border-b border-stone-200">
