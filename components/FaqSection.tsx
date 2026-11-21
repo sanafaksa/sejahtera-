@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Minus, CalendarClock } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import FadeInView from "./animations/FadeInView";
 
 interface FaqItem {
@@ -100,6 +100,7 @@ export default function FaqSection() {
                   <button
                     onClick={() => toggleAccordion(index)}
                     aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
                     className="w-full text-left px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                   >
                     <div className="flex items-center gap-4">
@@ -136,29 +137,27 @@ export default function FaqSection() {
                     </div>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.28, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 sm:px-8 pb-6 sm:pb-7 pt-1 border-t border-stone-100 text-stone-600 text-sm sm:text-base leading-relaxed font-light pl-16 sm:pl-19 space-y-3">
-                          <p>{faq.answer}</p>
+                  {/* Answers stay in the HTML even when collapsed, so search engines and AI crawlers can read every one. */}
+                  <motion.div
+                    id={`faq-answer-${index}`}
+                    initial={false}
+                    animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                    aria-hidden={!isOpen}
+                  >
+                    <div className="px-6 sm:px-8 pb-6 sm:pb-7 pt-1 border-t border-stone-100 text-stone-600 text-sm sm:text-base leading-relaxed font-light pl-16 sm:pl-19 space-y-3">
+                      <p>{faq.answer}</p>
 
-                          {/* Highlight alert if present (Workshop visit reminder) */}
-                          {faq.highlightNote && (
-                            <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#fdf6ee] border border-[#ecd2ba] text-[#7d441a] text-xs sm:text-sm font-medium">
-                              <CalendarClock className="w-4 h-4 text-[#b87333] shrink-0 mt-0.5" />
-                              <p>{faq.highlightNote}</p>
-                            </div>
-                          )}
+                      {/* Highlight alert if present (Workshop visit reminder) */}
+                      {faq.highlightNote && (
+                        <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#fdf6ee] border border-[#ecd2ba] text-[#7d441a] text-xs sm:text-sm font-medium">
+                          <CalendarClock className="w-4 h-4 text-[#b87333] shrink-0 mt-0.5" />
+                          <p>{faq.highlightNote}</p>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      )}
+                    </div>
+                  </motion.div>
                 </div>
               </FadeInView>
             );
