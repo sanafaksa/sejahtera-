@@ -624,26 +624,27 @@ export default async function Home() {
       {/* =========================================================================
           SECTION 4 (FROM UPLOADED REFERENCE):
           "Bring Comfort And Elegance Into Your Home..."
-          Dark Background with 3 Tall Column Editorial Cards
+          Warm light background with 3 tall editorial cards
           ========================================================================= */}
-      <section className="py-24 sm:py-32 bg-[#0c0a08] text-white relative overflow-hidden border-t border-white/10">
+      <section className="py-24 sm:py-32 bg-[#f4ebe1] text-[#17120d] relative overflow-hidden border-t border-stone-200/70">
         {/* Semi-transparent background showing copper craft workshop & creations */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
             src="/assets/about.jpg"
             alt="Artisanal Workshop & Copper Crafts"
             fill
-            className="object-cover object-center opacity-22 filter saturate-90"
+            className="object-cover object-center opacity-[0.12] filter saturate-75"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0c0a08]/95 via-[#0c0a08]/80 to-[#0c0a08]/96" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#faf6f1]/90 via-[#f4ebe1]/70 to-[#faf6f1]/95" />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[760px] max-w-[140vw] h-[420px] rounded-full bg-[#eed7c4]/50 blur-3xl" />
         </div>
 
         <div className="container mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
           {/* Centered Large Headline (Exact Mockup Match) */}
           <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
             <FadeInView direction="up">
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-relaxed">
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#17120d] tracking-tight leading-relaxed">
                 Bring Comfort And Elegance Into Your Home With Beautifully Crafted Copper Designed For Modern Lifestyles And Timeless Interiors.
               </h2>
             </FadeInView>
@@ -654,7 +655,7 @@ export default async function Home() {
             {/* Card 1: Living & Garden Accents */}
             <FadeInView direction="up" delay={0.1}>
               <div className="flex flex-col group">
-                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-white/10 mb-4 shadow-xl">
+                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-200 ring-1 ring-stone-200 mb-4 shadow-[0_18px_40px_-18px_rgba(60,30,10,0.35)]">
                   <Image
                     src="/assets/products/copper-5.jpg"
                     alt="Hand-hammered copper planter with a monstera"
@@ -662,12 +663,12 @@ export default async function Home() {
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2b078] transition-colors mb-2">
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-2">
                   Living & Garden Accents
                 </h3>
-                <p className="text-sm sm:text-[15px] text-stone-300 leading-relaxed max-w-sm">
+                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-sm">
                   Hand-hammered copper planters and vessels that bring warmth and a living patina to homes, terraces and hotel lobbies.
                 </p>
               </div>
@@ -676,7 +677,7 @@ export default async function Home() {
             {/* Card 2: Decor & Tableware */}
             <FadeInView direction="up" delay={0.2}>
               <div className="flex flex-col group">
-                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-white/10 mb-4 shadow-xl">
+                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-200 ring-1 ring-stone-200 mb-4 shadow-[0_18px_40px_-18px_rgba(60,30,10,0.35)]">
                   <Image
                     src="/assets/hero-2.jpg"
                     alt="Copper and brass decor, bowls and vessels in the Ilavioo showroom"
@@ -684,12 +685,12 @@ export default async function Home() {
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2b078] transition-colors mb-2">
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-2">
                   Decor & Tableware
                 </h3>
-                <p className="text-sm sm:text-[15px] text-stone-300 leading-relaxed max-w-sm">
+                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-sm">
                   Wall art, mirrors, bowls and serving pieces in copper and brass, each finished by hand to make a room feel welcoming.
                 </p>
               </div>
@@ -698,7 +699,7 @@ export default async function Home() {
             {/* Card 3: Made by Tumang Artisans */}
             <FadeInView direction="up" delay={0.3}>
               <div className="flex flex-col group">
-                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-white/10 mb-4 shadow-xl">
+                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-200 ring-1 ring-stone-200 mb-4 shadow-[0_18px_40px_-18px_rgba(60,30,10,0.35)]">
                   <Image
                     src="/assets/products/copper-3.jpg"
                     alt="A Tumang artisan hand-hammering a copper vessel"
@@ -706,12 +707,12 @@ export default async function Home() {
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2b078] transition-colors mb-2">
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-2">
                   Made by Tumang Artisans
                 </h3>
-                <p className="text-sm sm:text-[15px] text-stone-300 leading-relaxed max-w-sm">
+                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-sm">
                   Every piece is shaped in our Boyolali workshop by coppersmiths using techniques passed down through generations.
                 </p>
               </div>
