@@ -4,10 +4,10 @@ import type { Metadata } from "next";
  * Public site identity used for SEO: canonical URLs, Open Graph, sitemap and
  * structured data (JSON-LD).
  *
- * The official domain is ilavioo.com (the property registered in Google
+ * The official domain is www.ilavioo.com (ilavioo.com redirects to it; the property registered in Google
  * Search Console). NEXT_PUBLIC_SITE_URL can override it, e.g. for staging.
  */
-const OFFICIAL_SITE_URL = "https://ilavioo.com";
+const OFFICIAL_SITE_URL = "https://www.ilavioo.com";
 
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
