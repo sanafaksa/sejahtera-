@@ -1,5 +1,6 @@
 import { getProductList } from "@/lib/public-data";
 import { SITE, absoluteUrl } from "@/lib/site";
+import { CATEGORIES } from "@/lib/categories";
 
 // Plain-text site summary for AI assistants (https://llmstxt.org). Rebuilt hourly like the sitemap.
 export const revalidate = 3600;
@@ -35,6 +36,10 @@ export async function GET() {
 - [About](${absoluteUrl("/about")}): company and Tumang copper heritage
 - [Gallery](${absoluteUrl("/gallery")}): finished projects
 - [Contact and quotations](${absoluteUrl("/contact")})
+
+## Collections
+
+${CATEGORIES.map((c) => `- [${c.name}](${absoluteUrl(`/collections/${c.slug}`)}): ${c.description}`).join("\n")}
 
 ## Products
 

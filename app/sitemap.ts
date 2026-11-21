@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getProductList } from "@/lib/public-data";
 import { absoluteUrl } from "@/lib/site";
+import { CATEGORIES } from "@/lib/categories";
 
 // Rebuilt hourly so new products appear without a redeploy.
 export const revalidate = 3600;
@@ -24,6 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: p.changeFrequency,
     priority: p.priority,
   }));
+
+  for (const c of CATEGORIES) {
+    entries.push({ url: absoluteUrl(`/collections/${c.slug}`), changeFrequency: "weekly", priority: 0.85 });
+  }
 
   try {
     const products = await getProductList("", "newest");

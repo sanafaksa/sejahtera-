@@ -21,7 +21,11 @@ export default function Footer() {
   ];
 
   const productCategories = [
-    { name: "All Products", href: "/products" },
+    { name: "Copper Bathtubs", href: "/collections/copper-bathtubs" },
+    { name: "Sinks & Basins", href: "/collections/copper-sinks-basins" },
+    { name: "Doors & Wall Panels", href: "/collections/brass-doors-wall-panels" },
+    { name: "Lighting", href: "/collections/copper-lighting" },
+    { name: "Decor & Planters", href: "/collections/copper-decor" },
     { name: "Bali Villas & Resorts", href: "/bali" },
     { name: "International Orders", href: "/export" },
     { name: "Custom Orders", href: "/contact" },

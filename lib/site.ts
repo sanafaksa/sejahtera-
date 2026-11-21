@@ -114,14 +114,18 @@ export function webPageStructuredData({
   name,
   description,
   extra,
+  parents = [],
 }: {
   type: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
   path: string;
   name: string;
   description: string;
   extra?: Record<string, unknown>;
+  /** Breadcrumb levels between Home and this page, e.g. Products. */
+  parents?: { name: string; path: string }[];
 }): Record<string, unknown>[] {
   const url = absoluteUrl(path);
+  const crumbs = [{ name: "Home", path: "/" }, ...parents];
   return [
     {
       "@context": "https://schema.org",
@@ -139,8 +143,8 @@ export function webPageStructuredData({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-        { "@type": "ListItem", position: 2, name, item: url },
+        ...crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: absoluteUrl(c.path) })),
+        { "@type": "ListItem", position: crumbs.length + 1, name, item: url },
       ],
     },
   ];

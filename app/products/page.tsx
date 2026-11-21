@@ -1,6 +1,7 @@
 import { getProductList } from "@/lib/public-data";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import CollectionNav from "@/components/CollectionNav";
 import { absoluteUrl, pageMetadata, webPageStructuredData } from "@/lib/site";
 import ProductCard from "@/components/ProductCard";
 import FadeInView from "@/components/animations/FadeInView";
@@ -178,6 +179,8 @@ export default async function ProductsPage({
       >
         <ProductsFilter />
       </PageHero>
+
+      <CollectionNav className="container mx-auto px-4 sm:px-6 lg:px-8 pt-2" />
 
       <section className="py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

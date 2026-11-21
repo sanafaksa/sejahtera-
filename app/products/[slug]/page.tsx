@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { SITE, SITE_URL, absoluteUrl, metaDescription, pageMetadata } from "@/lib/site";
-import {
-  getProductBySlug,
-  getRelatedProducts as getRelatedProductsCached,
-} from "@/lib/public-data";
+import { getProductBySlug, getProductList } from "@/lib/public-data";
+import { categorizeProduct } from "@/lib/categories";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import FadeInView from "@/components/animations/FadeInView";
@@ -33,8 +31,18 @@ async function getProduct(slug: string) {
   return product;
 }
 
-async function getRelatedProducts(currentProductId: number) {
-  return getRelatedProductsCached(currentProductId);
+/** Up to 4 other products, same collection first, then the newest. */
+async function getRelatedProducts(current: { id: number; name: string; slug: string }) {
+  try {
+    const all = (await getProductList("", "newest")).filter((p) => p.id !== current.id);
+    const category = categorizeProduct(current).slug;
+    const same = all.filter((p) => categorizeProduct(p).slug === category);
+    const rest = all.filter((p) => categorizeProduct(p).slug !== category);
+    return [...same, ...rest].slice(0, 4);
+  } catch (error) {
+    console.error("related products:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -64,6 +72,7 @@ type DetailProduct = Awaited<ReturnType<typeof getProduct>>;
 /** schema.org Product + BreadcrumbList. Prices are quoted on request, so no Offer is emitted. */
 function productStructuredData(product: DetailProduct) {
   const url = absoluteUrl(`/products/${product.slug}`);
+  const category = categorizeProduct(product);
   const spec = product.specifications;
   const additionalProperty = [
     spec?.size && { "@type": "PropertyValue", name: "Size", value: spec.size },
@@ -85,6 +94,7 @@ function productStructuredData(product: DetailProduct) {
       brand: { "@type": "Brand", name: SITE.name },
       manufacturer: { "@id": `${SITE_URL}/#organization` },
       countryOfOrigin: "ID",
+      category: category.name,
     },
     {
       "@context": "https://schema.org",
@@ -92,7 +102,8 @@ function productStructuredData(product: DetailProduct) {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
         { "@type": "ListItem", position: 2, name: "Products", item: absoluteUrl("/products") },
-        { "@type": "ListItem", position: 3, name: product.name, item: url },
+        { "@type": "ListItem", position: 3, name: category.name, item: absoluteUrl(`/collections/${category.slug}`) },
+        { "@type": "ListItem", position: 4, name: product.name, item: url },
       ],
     },
   ];
@@ -105,15 +116,16 @@ export default async function ProductDetailPage({
 }) {
   const { slug } = await params;
   const product = await getProduct(slug);
-  const relatedProducts = await getRelatedProducts(product.id);
+  const relatedProducts = await getRelatedProducts(product);
+  const category = categorizeProduct(product);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
       <JsonLd data={productStructuredData(product)} />
-      {/* Breadcrumb Section */}
-      <section className="bg-white border-b border-gray-100">
+      {/* Breadcrumb Section (top padding clears the fixed header) */}
+      <section className="bg-white border-b border-gray-100 pt-16 md:pt-[78px]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <FadeInView direction="down">
+          <div>
             <div className="flex items-center justify-between">
               <nav className="flex items-center gap-2 text-sm text-gray-600">
                 <Link
@@ -130,7 +142,14 @@ export default async function ProductDetailPage({
                   Products
                 </Link>
                 <span>/</span>
-                <span className="text-gray-900 font-semibold line-clamp-1">
+                <Link
+                  href={`/collections/${category.slug}`}
+                  className="hover:text-green-600 transition-colors whitespace-nowrap"
+                >
+                  {category.name}
+                </Link>
+                <span className="hidden sm:inline">/</span>
+                <span className="hidden sm:inline text-gray-900 font-semibold line-clamp-1">
                   {product.name}
                 </span>
               </nav>
@@ -142,7 +161,7 @@ export default async function ProductDetailPage({
                 <span className="hidden sm:inline">Back to Products</span>
               </Link>
             </div>
-          </FadeInView>
+          </div>
         </div>
       </section>
 
