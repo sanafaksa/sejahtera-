@@ -96,7 +96,7 @@ export default function AboutPage() {
                     <Globe className="w-7 h-7 text-copper-600" />
                   </div>
                   <div className="text-4xl font-bold text-gray-900 mb-2">
-                    <CountUpNumber value={50} suffix="+" />
+                    <CountUpNumber value={16} suffix="+" />
                   </div>
                   <p className="text-gray-600 font-medium">Countries Served</p>
                 </div>

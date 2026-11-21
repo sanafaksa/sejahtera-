@@ -387,11 +387,11 @@ export default function ContactPage() {
               },
               {
                 q: "What is the lead time for custom orders?",
-                a: "Lead times vary depending on the complexity and size of the project, typically ranging from 2-8 weeks. We'll provide a specific timeline after reviewing your requirements.",
+                a: "Production time depends on the type of piece. Smaller decor, tableware and pendant lamps are quicker; large pieces such as bathtubs, carved entrance doors, domes and full project orders take longer. We confirm the production time for your exact design in the quotation.",
               },
               {
                 q: "Do you ship internationally?",
-                a: "Yes, we ship our products worldwide. Shipping costs and delivery times vary by location. Contact us for a detailed quote.",
+                a: "Yes. We ship worldwide (16+ countries so far) and throughout Indonesia, including Bali. Shipping cost and delivery time depend on the destination and are stated in your quotation.",
               },
               {
                 q: "What materials do you work with?",

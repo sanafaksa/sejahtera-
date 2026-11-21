@@ -77,6 +77,10 @@ const ORGANIZATION_LD = {
   email: SITE.email,
   telephone: SITE.telephone,
   sameAs: [SITE.social.instagram, SITE.social.threads, SITE.social.tiktok],
+  areaServed: [
+    { "@type": "Place", name: "Worldwide" },
+    { "@type": "AdministrativeArea", name: "Bali, Indonesia" },
+  ],
   description: SITE.description,
   contactPoint: {
     "@type": "ContactPoint",

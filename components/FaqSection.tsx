@@ -29,7 +29,7 @@ const FAQ_DATA: FaqItem[] = [
     category: "Production Lead Times",
     question: "What is the estimated production timeframe for handcrafted pieces?",
     answer:
-      "Production timeframes vary depending on scale and repoussé relief complexity. Standard interior decor and bathroom fixtures (such as hammered basins, tableware, or pendant lamps) typically require 7–14 business days. Monumental architectural statements—such as grand relief mosque doors, heavy bathtubs, or ceremonial domes—generally take 3–6 weeks.",
+      "Production time depends on the type of piece. Smaller decor, tableware and pendant lamps are quicker; large pieces such as bathtubs, carved entrance doors, domes and full project orders take longer. We confirm the production time for your exact design in the quotation.",
   },
   {
     category: "Shipping & Global Export",

@@ -20,7 +20,7 @@ export async function GET() {
 
   const body = `# ${SITE.name}
 
-> ${SITE.name} (${SITE.legalName}) makes handcrafted copper and brass products in Tumang, Cepogo, Boyolali, Central Java, Indonesia: bathtubs, basins and sinks, lighting, doors and wall panels, and decor. Pieces are hand-hammered by local artisans, made to order in custom sizes, and exported worldwide. Prices are quoted per project.
+> ${SITE.name} (${SITE.legalName}) makes handcrafted copper and brass products in Tumang, Cepogo, Boyolali, Central Java, Indonesia: bathtubs, basins and sinks, lighting, doors and wall panels, and decor. Pieces are hand-hammered by local artisans, made to order in custom sizes, for villas, hotels and homes in Bali and for clients in 16+ countries worldwide. Prices are quoted per project.
 
 - Contact: ${SITE.email}, WhatsApp ${SITE.telephone}
 - Workshop visits in Tumang are by appointment.
@@ -29,6 +29,8 @@ export async function GET() {
 
 - [Home](${absoluteUrl("/")})
 - [Products](${absoluteUrl("/products")}): full catalog
+- [International orders](${absoluteUrl("/export")}): export to 16+ countries, crating, custom orders from drawings
+- [Bali villas and resorts](${absoluteUrl("/bali")}): made-to-order pieces delivered to Bali
 - [Our process](${absoluteUrl("/process")}): how pieces are made
 - [About](${absoluteUrl("/about")}): company and Tumang copper heritage
 - [Gallery](${absoluteUrl("/gallery")}): finished projects

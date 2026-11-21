@@ -8,6 +8,8 @@ export const revalidate = 3600;
 const STATIC_PAGES: { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly" }[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/products", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/export", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/bali", priority: 0.8, changeFrequency: "monthly" },
   { path: "/gallery", priority: 0.7, changeFrequency: "monthly" },
   { path: "/process", priority: 0.6, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" },

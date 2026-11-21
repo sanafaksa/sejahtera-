@@ -21,7 +21,7 @@ export const SITE = {
   legalName: "PT. Ilavioo Nusantara Sejahtera",
   tagline: "Handcrafted Copper & Brass from Tumang",
   description:
-    "Handcrafted copper and brass bathtubs, basins, lighting and doors, hand-hammered by artisans in Tumang, Indonesia. Bespoke orders and worldwide export.",
+    "Handcrafted copper and brass bathtubs, basins, lighting and doors from Tumang, Indonesia. Made to order for Bali villas and clients in 16+ countries.",
   email: "marketing@ilavioo.com",
   /** Official profiles (same as the footer). Used for links and schema sameAs. */
   social: {

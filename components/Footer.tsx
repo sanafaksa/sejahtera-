@@ -21,9 +21,9 @@ export default function Footer() {
   ];
 
   const productCategories = [
-    { name: "Decorative Items", href: "/products?category=decorative" },
-    { name: "Kitchenware", href: "/products?category=kitchenware" },
-    { name: "Lighting", href: "/products?category=lighting" },
+    { name: "All Products", href: "/products" },
+    { name: "Bali Villas & Resorts", href: "/bali" },
+    { name: "International Orders", href: "/export" },
     { name: "Custom Orders", href: "/contact" },
   ];
 
