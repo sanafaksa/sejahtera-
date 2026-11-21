@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import VisitTracker from "@/components/VisitTracker";
+import WhatsAppBubble from "@/components/WhatsAppBubble";
 
 export default function ConditionalLayout({
   children,
@@ -28,6 +29,7 @@ export default function ConditionalLayout({
       <Header />
       <main className="min-h-screen">{children}</main>
       <Footer />
+      <WhatsAppBubble />
     </>
   );
 }

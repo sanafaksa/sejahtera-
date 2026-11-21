@@ -18,11 +18,6 @@ export const metadata = pageMetadata({
   images: [{ url: "/assets/copper-hero-craft.jpg", alt: "Coppersmith hammering a copper piece in Tumang" }],
 });
 
-// Same Cloudinary video as the About page.
-const HERITAGE_VIDEO_SRC =
-  process.env.NEXT_PUBLIC_HERITAGE_VIDEO_URL ||
-  "https://res.cloudinary.com/dqcdwv7du/video/upload/v1794803666/ilavioo/videos/by-aksa.mp4";
-
 const steps = [
   {
     title: "Material selection",
@@ -141,33 +136,6 @@ export default function CraftsmanshipPage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* Video */}
-      <section className="py-14 sm:py-20">
-        <div className="max-w-5xl mx-auto px-5 sm:px-8">
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#17120d] mb-3">
-            See our craftsmen at work
-          </h2>
-          <p className="text-stone-600 mb-8">
-            More videos from the workshop on{" "}
-            <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" className="text-[#A8602A] underline underline-offset-2">Instagram</a>{" "}
-            and{" "}
-            <a href={SITE.social.tiktok} target="_blank" rel="noopener noreferrer" className="text-[#A8602A] underline underline-offset-2">TikTok</a>.
-          </p>
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-[#17120d]">
-            <video
-              poster="/assets/copper-hero-craft.jpg"
-              controls
-              muted
-              playsInline
-              preload="none"
-              className="w-full h-full object-cover"
-            >
-              <source src={HERITAGE_VIDEO_SRC} type="video/mp4" />
-            </video>
-          </div>
         </div>
       </section>
 
