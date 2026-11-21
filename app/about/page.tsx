@@ -29,6 +29,7 @@ export const metadata = pageMetadata({
   description:
     "Learn about our 30+ years of heritage in handcrafted copper and brass artistry from Tumang, Boyolali, Indonesia.",
   path: "/about",
+  keywords: ["Indonesian artisans","Tumang artisans","heritage metalwork","copper craft Central Java"],
   images: [{ url: "/assets/about.jpg", alt: "Ilavioo artisans in Tumang" }],
 });
 

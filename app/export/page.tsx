@@ -12,6 +12,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Copper Bathtub & Brass Door Manufacturer, Indonesia",
   description: DESCRIPTION,
   path: "/export",
+  keywords: ["copper bathtub supplier","copper manufacturer Indonesia","brass door manufacturer","wholesale copper bathtubs","copper export Indonesia","hotel bathroom supplier","interior designer supplier"],
   images: [{ url: "/assets/copper-showroom-gallery.jpg", alt: "Handcrafted copper and brass pieces in the Ilavioo workshop showroom" }],
 });
 

@@ -12,6 +12,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Copper Bathtubs & Brass Doors for Bali Villas",
   description: DESCRIPTION,
   path: "/bali",
+  keywords: ["Bali villa bathtub","Bali hotel interior","copper bathtub Bali","brass door Bali","Bali villa design","Bali resort supplier"],
   images: [{ url: "/assets/hero-luxury-bath-suite.jpg", alt: "Handcrafted copper bathtub for a Bali villa bathroom" }],
 });
 

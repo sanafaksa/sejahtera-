@@ -64,6 +64,7 @@ export async function generateMetadata({
     description,
     path: `/products/${product.slug}`,
     images,
+    keywords: [product.name, ...categorizeProduct(product).keywords],
   });
 }
 
@@ -95,6 +96,7 @@ function productStructuredData(product: DetailProduct) {
       manufacturer: { "@id": `${SITE_URL}/#organization` },
       countryOfOrigin: "ID",
       category: category.name,
+      keywords: [product.name, ...category.keywords].join(", "),
     },
     {
       "@context": "https://schema.org",

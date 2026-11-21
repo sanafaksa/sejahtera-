@@ -26,7 +26,7 @@ import {
 import { getProductList } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
-import { SITE, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/site";
+import { SITE, SITE_KEYWORDS, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/site";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
@@ -64,6 +64,7 @@ export const metadata: Metadata = pageMetadata({
   title: null,
   description: SITE.description,
   path: "/",
+  keywords: ["copper bathtub", "brass door", "copper sink", "copper lighting", "luxury bathroom", "villa interior Bali"],
 });
 
 const ORGANIZATION_LD = {
@@ -82,6 +83,7 @@ const ORGANIZATION_LD = {
     { "@type": "AdministrativeArea", name: "Bali, Indonesia" },
   ],
   description: SITE.description,
+  knowsAbout: SITE_KEYWORDS,
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",

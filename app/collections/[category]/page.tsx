@@ -25,7 +25,7 @@ export async function generateMetadata({
   const { category } = await params;
   const c = getCategory(category);
   if (!c) return {};
-  return pageMetadata({ title: c.title, description: c.description, path: `/collections/${c.slug}` });
+  return pageMetadata({ title: c.title, description: c.description, path: `/collections/${c.slug}`, keywords: c.keywords });
 }
 
 export default async function CollectionPage({ params }: { params: Promise<{ category: string }> }) {
@@ -51,6 +51,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ cat
     description: c.description,
     parents: [{ name: "Products", path: "/products" }],
     extra: {
+      keywords: c.keywords.join(", "),
       mainEntity: {
         "@type": "ItemList",
         numberOfItems: products.length,

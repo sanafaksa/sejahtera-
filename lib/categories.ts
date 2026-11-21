@@ -24,6 +24,8 @@ export interface ProductCategory {
   description: string;
   /** Keywords tested against the product name and slug. */
   match: RegExp;
+  /** Search phrases for meta keywords and schema. */
+  keywords: string[];
   /** Intro paragraphs (plain text). */
   intro: string[];
   /** Buying-guide section. */
@@ -45,6 +47,7 @@ const SHARED_QA_LEAD: CategoryQA = {
 export const CATEGORIES: ProductCategory[] = [
   {
     slug: "copper-bathtubs",
+    keywords: ["copper bathtub", "handmade copper bathtub", "hammered copper bathtub", "freestanding copper tub", "brass bathtub", "copper soaking tub", "luxury copper bath", "copper bathtub for sale", "custom copper bathtub"],
     name: "Copper Bathtubs",
     title: "Handmade Copper & Brass Bathtubs",
     heading: "Handmade Copper & Brass Bathtubs",
@@ -90,6 +93,7 @@ export const CATEGORIES: ProductCategory[] = [
   },
   {
     slug: "copper-sinks-basins",
+    keywords: ["copper sink", "hammered copper sink", "copper vessel sink", "copper basin", "brass sink", "copper kitchen sink", "handmade copper wash basin", "copper bar sink"],
     name: "Sinks & Basins",
     title: "Hammered Copper Sinks & Basins",
     heading: "Hammered Copper Sinks & Basins",
@@ -135,6 +139,7 @@ export const CATEGORIES: ProductCategory[] = [
   },
   {
     slug: "brass-doors-wall-panels",
+    keywords: ["brass door", "brass entrance door", "copper door", "copper wall panel", "repousse copper art", "metal wall art", "brass calligraphy", "mosque door"],
     name: "Doors & Wall Panels",
     title: "Brass Doors & Copper Wall Panels",
     heading: "Brass Doors & Copper Wall Panels",
@@ -180,6 +185,7 @@ export const CATEGORIES: ProductCategory[] = [
   },
   {
     slug: "copper-lighting",
+    keywords: ["copper pendant light", "copper chandelier", "brass pendant lamp", "hammered copper lamp", "handmade copper lighting", "pierced copper lamp"],
     name: "Lighting",
     title: "Handmade Copper Pendant Lights & Chandeliers",
     heading: "Handmade Copper Pendant Lights & Chandeliers",
@@ -225,6 +231,7 @@ export const CATEGORIES: ProductCategory[] = [
   },
   {
     slug: "copper-decor",
+    keywords: ["copper vase", "copper planter", "copper decor", "brass decor", "handmade copper gifts", "hammered copper bowl"],
     name: "Decor & Planters",
     title: "Copper Vases, Planters & Decor",
     heading: "Copper Vases, Planters & Decor",

@@ -14,6 +14,7 @@ export const metadata = pageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: "/craftsmanship",
+  keywords: ["handmade craftsmanship","hand-hammered copper","repousse","traditional metalworking","artisan made","coppersmith"],
   images: [{ url: "/assets/copper-hero-craft.jpg", alt: "Coppersmith hammering a copper piece in Tumang" }],
 });
 

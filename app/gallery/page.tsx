@@ -13,6 +13,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Tumang, Boyolali.",
   path: "/gallery",
+  keywords: ["copper bathroom ideas","copper interior design","brass door design","copper project gallery"],
   images: [{ url: "/assets/copper-showroom-gallery.jpg", alt: "Ilavioo copper showroom gallery" }],
 });
 

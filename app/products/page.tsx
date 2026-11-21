@@ -39,6 +39,7 @@ const PRODUCTS_META = pageMetadata({
   description:
     "Explore handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia. Bespoke sizes and worldwide shipping.",
   path: "/products",
+  keywords: ["copper bathtubs","copper sinks","brass doors","copper lamps","copper home decor","buy handmade copper"],
 });
 
 // Search and sort views are thin duplicates of /products: keep them out of the index.

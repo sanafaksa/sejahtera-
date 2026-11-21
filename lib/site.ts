@@ -40,6 +40,23 @@ export const SITE = {
   },
 } as const;
 
+/**
+ * Search phrases international buyers use. Sent as <meta name="keywords"> (Google
+ * ignores it, other engines and AI tools may read it) and as schema knowsAbout.
+ */
+export const SITE_KEYWORDS = [
+  "handcrafted copper",
+  "copper craftsmanship",
+  "artisan coppersmith Indonesia",
+  "handmade copper and brass",
+  "copper bathtub manufacturer",
+  "Indonesian copper craft",
+  "Tumang copper village",
+  "copper products exporter Indonesia",
+  "copper bathtub Bali",
+  "worldwide shipping",
+];
+
 export const DEFAULT_TITLE = `${SITE.name} | ${SITE.tagline}`;
 
 /** Turns a site-relative path ("/assets/x.jpg") into an absolute URL. */
@@ -69,11 +86,14 @@ export function pageMetadata({
   description,
   path,
   images,
+  keywords = [],
 }: {
   title: string | null;
   description: string;
   path: string;
   images?: SocialImage[];
+  /** Page-specific phrases; the site-wide SITE_KEYWORDS are appended. */
+  keywords?: string[];
 }): Metadata {
   const socialTitle = title ? `${title} | ${SITE.name}` : DEFAULT_TITLE;
   const ogImages = images?.length
@@ -82,6 +102,7 @@ export function pageMetadata({
   return {
     ...(title ? { title } : {}),
     description,
+    keywords: [...new Set([...keywords, ...SITE_KEYWORDS])],
     alternates: { canonical: path },
     openGraph: {
       type: "website",

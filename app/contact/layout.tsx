@@ -7,6 +7,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Contact Ilavioo for quotations, bespoke copper and brass commissions, export shipping or a workshop visit in Tumang, Boyolali, Central Java.",
   path: "/contact",
+  keywords: ["copper bathtub quote","custom copper order","bespoke copper commission","copper supplier contact"],
 });
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
