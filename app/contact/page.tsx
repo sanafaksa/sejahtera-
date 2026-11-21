@@ -112,7 +112,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">Instagram</h3>
                 <a
-                  href="https://instagram.com/ilavioo_nusantara"
+                  href="https://www.instagram.com/ilavioocopper_art"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-green-600 hover:text-green-700 font-medium"
@@ -395,7 +395,7 @@ export default function ContactPage() {
               },
               {
                 q: "What materials do you work with?",
-                a: "We primarily work with copper, brass, and aluminum. All our materials are high-quality and sourced responsibly.",
+                a: "We work with copper and brass. All our materials are high-quality and sourced responsibly.",
               },
               {
                 q: "How do I maintain copper products?",

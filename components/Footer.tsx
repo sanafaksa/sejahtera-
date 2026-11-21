@@ -7,6 +7,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { SiInstagram, SiThreads, SiTiktok } from "react-icons/si";
+import { SITE } from "@/lib/site";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -29,19 +30,19 @@ export default function Footer() {
   const socialLinks = [
     {
       name: "Instagram",
-      href: "https://instagram.com/ilavioocopper_art",
+      href: SITE.social.instagram,
       icon: SiInstagram,
       hoverClass: "hover:bg-gradient-to-tr hover:from-amber-600 hover:to-pink-600 hover:border-pink-500",
     },
     {
       name: "Threads",
-      href: "https://www.threads.net/@ilavioocopper_art",
+      href: SITE.social.threads,
       icon: SiThreads,
       hoverClass: "hover:bg-stone-800 hover:border-amber-600",
     },
     {
       name: "TikTok",
-      href: "https://tiktok.com/@ilavioocopper",
+      href: SITE.social.tiktok,
       icon: SiTiktok,
       hoverClass: "hover:bg-black hover:border-cyan-400",
     },
@@ -160,7 +161,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="https://maps.google.com"
+                  href="https://www.google.com/maps/search/?api=1&query=Tumang%2C+Cepogo%2C+Boyolali%2C+Central+Java%2C+Indonesia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 text-[#c7ad99] hover:text-[#e8b58f] transition-colors duration-300 font-medium"

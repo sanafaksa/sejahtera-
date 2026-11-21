@@ -23,6 +23,12 @@ export const SITE = {
   description:
     "Handcrafted copper and brass bathtubs, basins, lighting and doors, hand-hammered by artisans in Tumang, Indonesia. Bespoke orders and worldwide export.",
   email: "marketing@ilavioo.com",
+  /** Official profiles (same as the footer). Used for links and schema sameAs. */
+  social: {
+    instagram: "https://www.instagram.com/ilavioocopper_art",
+    threads: "https://www.threads.net/@ilavioocopper_art",
+    tiktok: "https://www.tiktok.com/@ilavioocopper",
+  },
   /** E.164, same number as the footer / contact page and WhatsApp. */
   telephone: "+6281213696772",
   logo: "/assets/ilavioo-logo-horizontal.png",

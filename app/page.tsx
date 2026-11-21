@@ -22,7 +22,6 @@ import {
   SiTiktok,
   SiInstagram,
   SiThreads,
-  SiLinkedin,
 } from "react-icons/si";
 import { getProductList } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
@@ -77,6 +76,7 @@ const ORGANIZATION_LD = {
   logo: absoluteUrl(SITE.logo),
   email: SITE.email,
   telephone: SITE.telephone,
+  sameAs: [SITE.social.instagram, SITE.social.threads, SITE.social.tiktok],
   description: SITE.description,
   contactPoint: {
     "@type": "ContactPoint",
@@ -165,7 +165,7 @@ export default async function Home() {
         {/* Floating Vertical Social Media Dock on the far right edge */}
         <div className="hidden xl:flex flex-col items-center gap-3.5 absolute right-5 top-44 z-30">
           <a
-            href="https://tiktok.com/@ilavioo"
+            href={SITE.social.tiktok}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
@@ -174,16 +174,7 @@ export default async function Home() {
             <SiTiktok className="w-3.5 h-3.5" />
           </a>
           <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-stone-200/90 shadow-sm hover:shadow-md flex items-center justify-center text-stone-700 hover:text-[#b87333] transition-all hover:scale-110"
-          >
-            <SiLinkedin className="w-3.5 h-3.5" />
-          </a>
-          <a
-            href="https://instagram.com/ilavioo"
+            href={SITE.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -192,10 +183,10 @@ export default async function Home() {
             <SiInstagram className="w-3.5 h-3.5" />
           </a>
           <a
-            href="https://threads.net/@ilavioo"
+            href={SITE.social.threads}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Website / Threads"
+            aria-label="Threads"
             className="w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-stone-200/90 shadow-sm hover:shadow-md flex items-center justify-center text-stone-700 hover:text-[#b87333] transition-all hover:scale-110"
           >
             <SiThreads className="w-3.5 h-3.5" />
