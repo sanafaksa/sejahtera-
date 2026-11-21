@@ -23,6 +23,8 @@ export const SITE = {
   description:
     "Handcrafted copper and brass bathtubs, basins, lighting and doors, hand-hammered by artisans in Tumang, Indonesia. Bespoke orders and worldwide export.",
   email: "marketing@ilavioo.com",
+  /** E.164, same number as the footer / contact page and WhatsApp. */
+  telephone: "+6281213696772",
   logo: "/assets/ilavioo-logo-horizontal.png",
   ogImage: "/assets/hero-luxury-bath-suite.jpg",
   address: {
@@ -91,4 +93,49 @@ export function pageMetadata({
       images: ogImages.map((i) => i.url),
     },
   };
+}
+
+const ORG_ID = () => `${SITE_URL}/#organization`;
+const WEBSITE_ID = () => `${SITE_URL}/#website`;
+
+/**
+ * schema.org WebPage subtype (AboutPage, ContactPage, CollectionPage, …) plus a
+ * Home › page breadcrumb, linked to the site-wide Organization and WebSite nodes.
+ */
+export function webPageStructuredData({
+  type,
+  path,
+  name,
+  description,
+  extra,
+}: {
+  type: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  path: string;
+  name: string;
+  description: string;
+  extra?: Record<string, unknown>;
+}): Record<string, unknown>[] {
+  const url = absoluteUrl(path);
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": type,
+      "@id": `${url}#webpage`,
+      url,
+      name,
+      description,
+      inLanguage: "en",
+      isPartOf: { "@id": WEBSITE_ID() },
+      about: { "@id": ORG_ID() },
+      ...extra,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name, item: url },
+      ],
+    },
+  ];
 }

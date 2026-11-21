@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata, webPageStructuredData } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Us: Bespoke Copper Commissions",
@@ -9,5 +10,18 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <JsonLd
+        data={webPageStructuredData({
+          type: "ContactPage",
+          path: "/contact",
+          name: "Contact",
+          description:
+            "Request a quotation, discuss a bespoke commission or book a workshop visit in Tumang, Boyolali.",
+        })}
+      />
+      {children}
+    </>
+  );
 }

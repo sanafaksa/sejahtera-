@@ -64,6 +64,13 @@
   }
 }
 
+/* Slide-in animations start 60px off to the side; clip (not hidden) so phones
+   never get a sideways scroll and position: sticky keeps working. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

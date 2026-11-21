@@ -76,7 +76,15 @@ const ORGANIZATION_LD = {
   url: SITE_URL,
   logo: absoluteUrl(SITE.logo),
   email: SITE.email,
+  telephone: SITE.telephone,
   description: SITE.description,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: SITE.email,
+    telephone: SITE.telephone,
+    availableLanguage: ["en", "id"],
+  },
   address: {
     "@type": "PostalAddress",
     addressLocality: SITE.address.locality,
@@ -147,7 +155,6 @@ export default async function Home() {
             src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=60"
             alt="Modern Showroom Living Interior Background"
             fill
-            priority
             className="object-cover object-center opacity-22 filter saturate-90"
             sizes="100vw"
           />
@@ -215,16 +222,22 @@ export default async function Home() {
                   <div className="flex -space-x-2.5 overflow-hidden">
                     <img
                       className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover shadow-sm"
+                      loading="lazy"
+                      decoding="async"
                       src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
                       alt="Customer 1"
                     />
                     <img
                       className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover shadow-sm"
+                      loading="lazy"
+                      decoding="async"
                       src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
                       alt="Customer 2"
                     />
                     <img
                       className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover shadow-sm"
+                      loading="lazy"
+                      decoding="async"
                       src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80"
                       alt="Customer 3"
                     />
@@ -384,7 +397,6 @@ export default async function Home() {
                   src="/assets/hero-copper-bathtub.png"
                   alt="Handcrafted Luxury Copper Bath"
                   fill
-                  priority
                   className="object-contain filter drop-shadow-[0_20px_30px_rgba(40,20,10,0.22)] transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 95vw, 45vw"
                 />

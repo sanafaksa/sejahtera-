@@ -1,5 +1,7 @@
 import { getProductList } from "@/lib/public-data";
-import { pageMetadata } from "@/lib/site";
+import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { absoluteUrl, pageMetadata, webPageStructuredData } from "@/lib/site";
 import ProductCard from "@/components/ProductCard";
 import FadeInView from "@/components/animations/FadeInView";
 import StaggerContainer, {
@@ -31,12 +33,23 @@ async function getProducts(searchParams: SearchParams) {
   }
 }
 
-export const metadata = pageMetadata({
+const PRODUCTS_META = pageMetadata({
   title: "Handcrafted Copper & Brass Products",
   description:
     "Explore handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia. Bespoke sizes and worldwide shipping.",
   path: "/products",
 });
+
+// Search and sort views are thin duplicates of /products: keep them out of the index.
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const filtered = Boolean(params.search?.trim()) || Boolean(params.sort);
+  return filtered ? { ...PRODUCTS_META, robots: { index: false, follow: true } } : PRODUCTS_META;
+}
 
 function ProductsLoadingSkeleton() {
   return (
@@ -131,9 +144,33 @@ export default async function ProductsPage({
 }) {
   const params = await searchParams;
   const products = await getProducts(params);
+  const isFiltered = Boolean(params.search?.trim()) || Boolean(params.sort);
 
   return (
     <main className="min-h-screen bg-[#faf8f5]">
+      {!isFiltered && (
+        <JsonLd
+          data={webPageStructuredData({
+            type: "CollectionPage",
+            path: "/products",
+            name: "Products",
+            description:
+              "Handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia.",
+            extra: {
+              mainEntity: {
+                "@type": "ItemList",
+                numberOfItems: products.length,
+                itemListElement: products.map((product, i) => ({
+                  "@type": "ListItem",
+                  position: i + 1,
+                  url: absoluteUrl(`/products/${product.slug}`),
+                  name: product.name,
+                })),
+              },
+            },
+          })}
+        />
+      )}
       <PageHero
         title="Copper & Brass Products"
         description="Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Tumang, Boyolali."

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { pageMetadata } from "@/lib/site";
+import { pageMetadata, webPageStructuredData } from "@/lib/site";
 import Link from "next/link";
 import FadeInView from "@/components/animations/FadeInView";
 import StaggerContainer, {
@@ -16,6 +16,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import JsonLd from "@/components/JsonLd";
 
 // Hosted on Cloudinary (720p faststart). The local public/assets/by-aksa.mp4 is
 // git-ignored (215 MB > GitHub limit) and does not exist on Vercel.
@@ -34,6 +35,15 @@ export const metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
+      <JsonLd
+        data={webPageStructuredData({
+          type: "AboutPage",
+          path: "/about",
+          name: "About Us",
+          description:
+            "The story of Ilavioo and the copper and brass craft heritage of Tumang, Boyolali, Indonesia.",
+        })}
+      />
       <PageHero
         title="Our Story"
         description="Bold, handmade centerpieces that define your interior. Over 30 years of heritage from Tumang, Boyolali."

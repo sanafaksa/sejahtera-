@@ -1,11 +1,12 @@
 import { Metadata } from "next";
-import { pageMetadata } from "@/lib/site";
+import { pageMetadata, webPageStructuredData } from "@/lib/site";
 import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
 import { getGalleryAssets } from "@/lib/public-data";
 import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = pageMetadata({
   title: "Gallery: Copper & Brass Projects",
@@ -49,6 +50,15 @@ export default async function GalleryPage() {
 
   return (
     <div className="bg-[#faf8f5] pb-24">
+      <JsonLd
+        data={webPageStructuredData({
+          type: "CollectionPage",
+          path: "/gallery",
+          name: "Gallery",
+          description:
+            "Photos of handcrafted copper and brass architectural, interior and bath pieces made in Tumang, Indonesia.",
+        })}
+      />
       <PageHero
         title="Gallery"
         description="Explore our handcrafted copper and brass installations, showcasing decades of artisanal excellence and timeless design."

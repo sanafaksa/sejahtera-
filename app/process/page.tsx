@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Hammer, Palette, Sparkles, Globe } from "lucide-react";
+import JsonLd from "@/components/JsonLd";
+import { webPageStructuredData } from "@/lib/site";
 
 const processSteps = [
   {
@@ -74,6 +76,15 @@ const highlights = [
 export default function ProcessPage() {
   return (
     <div className="bg-white">
+      <JsonLd
+        data={webPageStructuredData({
+          type: "WebPage",
+          path: "/process",
+          name: "Our Process",
+          description:
+            "How Ilavioo artisans in Tumang select, shape, emboss and finish handcrafted copper and brass pieces.",
+        })}
+      />
       {/* Hero Section */}
       <section className="relative h-[350px] bg-gray-900">
         <div className="absolute inset-0">
