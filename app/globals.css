@@ -57,12 +57,6 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 /* Slide-in animations start 60px off to the side; clip (not hidden) so phones
    never get a sideways scroll and position: sticky keeps working. */
