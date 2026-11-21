@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import { SITE, SITE_URL, absoluteUrl, metaDescription } from "@/lib/site";
+import { SITE, SITE_URL, absoluteUrl, metaDescription, pageMetadata } from "@/lib/site";
 import {
   getProductBySlug,
   getRelatedProducts as getRelatedProductsCached,
@@ -47,29 +47,16 @@ export async function generateMetadata({
   const description = metaDescription(
     product.description || `Handcrafted ${product.name} from Tumang, Indonesia.`
   );
-  const path = `/products/${product.slug}`;
   const images = product.images.slice(0, 1).map((img) => ({
     url: img.imageUrl,
     alt: product.name,
   }));
-  return {
+  return pageMetadata({
     title: product.name,
     description,
-    alternates: { canonical: path },
-    openGraph: {
-      type: "website",
-      url: path,
-      title: product.name,
-      description,
-      ...(images.length ? { images } : {}),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: product.name,
-      description,
-      ...(images.length ? { images: images.map((i) => i.url) } : {}),
-    },
-  };
+    path: `/products/${product.slug}`,
+    images,
+  });
 }
 
 type DetailProduct = Awaited<ReturnType<typeof getProduct>>;

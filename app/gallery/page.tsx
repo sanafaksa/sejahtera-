@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
 import { getGalleryAssets } from "@/lib/public-data";
@@ -6,13 +7,13 @@ import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/Mode
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Gallery: Copper & Brass Projects",
   description:
     "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Tumang, Boyolali.",
-  alternates: { canonical: "/gallery" },
-  openGraph: { url: "/gallery" },
-};
+  path: "/gallery",
+  images: [{ url: "/assets/copper-showroom-gallery.jpg", alt: "Ilavioo copper showroom gallery" }],
+});
 
 async function getGalleryItems(): Promise<GalleryAssetItem[]> {
   try {

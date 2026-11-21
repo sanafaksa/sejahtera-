@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 /**
  * Public site identity used for SEO: canonical URLs, Open Graph, sitemap and
  * structured data (JSON-LD).
@@ -32,6 +34,8 @@ export const SITE = {
   },
 } as const;
 
+export const DEFAULT_TITLE = `${SITE.name} | ${SITE.tagline}`;
+
 /** Turns a site-relative path ("/assets/x.jpg") into an absolute URL. */
 export function absoluteUrl(pathOrUrl: string): string {
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
@@ -45,4 +49,48 @@ export function metaDescription(text: string, max = 158): string {
   const cut = clean.slice(0, max - 1);
   const lastSpace = cut.lastIndexOf(" ");
   return `${(lastSpace > 80 ? cut.slice(0, lastSpace) : cut).replace(/[,.;:\s]+$/, "")}…`;
+}
+
+type SocialImage = { url: string; alt?: string };
+
+/**
+ * Full per-page metadata. Next.js replaces (rather than merges) the parent's
+ * openGraph/twitter objects, so every page gets the complete set here.
+ * Pass `title: null` for the home page to keep the root default title.
+ */
+export function pageMetadata({
+  title,
+  description,
+  path,
+  images,
+}: {
+  title: string | null;
+  description: string;
+  path: string;
+  images?: SocialImage[];
+}): Metadata {
+  const socialTitle = title ? `${title} | ${SITE.name}` : DEFAULT_TITLE;
+  const ogImages = images?.length
+    ? images
+    : [{ url: SITE.ogImage, alt: "Handcrafted copper bathtub by Ilavioo, Tumang" }];
+  return {
+    ...(title ? { title } : {}),
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      siteName: SITE.name,
+      locale: "en_US",
+      url: path,
+      title: socialTitle,
+      description,
+      images: ogImages,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description,
+      images: ogImages.map((i) => i.url),
+    },
+  };
 }

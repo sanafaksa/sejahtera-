@@ -27,7 +27,7 @@ import {
 import { getProductList } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
-import { SITE, SITE_URL, absoluteUrl } from "@/lib/site";
+import { SITE, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/site";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
@@ -61,10 +61,11 @@ const CARD_DOTS = [
 ];
 
 // Products shown first on the home page, in this order (by slug).
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-  openGraph: { url: "/" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: null,
+  description: SITE.description,
+  path: "/",
+});
 
 const ORGANIZATION_LD = {
   "@context": "https://schema.org",

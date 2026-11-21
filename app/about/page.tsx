@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import FadeInView from "@/components/animations/FadeInView";
 import StaggerContainer, {
@@ -22,13 +23,13 @@ const HERITAGE_VIDEO_SRC =
   process.env.NEXT_PUBLIC_HERITAGE_VIDEO_URL ||
   "https://res.cloudinary.com/dqcdwv7du/video/upload/v1794803666/ilavioo/videos/by-aksa.mp4";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "About Us: 30+ Years of Tumang Copper Craft",
   description:
     "Learn about our 30+ years of heritage in handcrafted copper and brass artistry from Tumang, Boyolali, Indonesia.",
-  alternates: { canonical: "/about" },
-  openGraph: { url: "/about" },
-};
+  path: "/about",
+  images: [{ url: "/assets/about.jpg", alt: "Ilavioo artisans in Tumang" }],
+});
 
 export default function AboutPage() {
   return (

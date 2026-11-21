@@ -1,4 +1,5 @@
 import { getProductList } from "@/lib/public-data";
+import { pageMetadata } from "@/lib/site";
 import ProductCard from "@/components/ProductCard";
 import FadeInView from "@/components/animations/FadeInView";
 import StaggerContainer, {
@@ -30,13 +31,12 @@ async function getProducts(searchParams: SearchParams) {
   }
 }
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Handcrafted Copper & Brass Products",
   description:
     "Explore handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia. Bespoke sizes and worldwide shipping.",
-  alternates: { canonical: "/products" },
-  openGraph: { url: "/products" },
-};
+  path: "/products",
+});
 
 function ProductsLoadingSkeleton() {
   return (

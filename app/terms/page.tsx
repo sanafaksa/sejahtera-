@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
   description:
     "Terms for using the Ilavioo website and ordering handcrafted copper and brass products from PT. Ilavioo Nusantara Sejahtera.",
-  alternates: { canonical: "/terms" },
-  openGraph: { url: "/terms" },
-};
+  path: "/terms",
+});
 
 const EMAIL = "marketing@ilavioo.com";
 
