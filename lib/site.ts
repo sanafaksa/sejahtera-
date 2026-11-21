@@ -4,16 +4,14 @@ import type { Metadata } from "next";
  * Public site identity used for SEO: canonical URLs, Open Graph, sitemap and
  * structured data (JSON-LD).
  *
- * The base URL comes from NEXT_PUBLIC_SITE_URL when set (use this once the
- * custom domain is live), otherwise from the production domain Vercel exposes
- * at build time, and finally the current Vercel address.
+ * The official domain is ilavioo.com (the property registered in Google
+ * Search Console). NEXT_PUBLIC_SITE_URL can override it, e.g. for staging.
  */
+const OFFICIAL_SITE_URL = "https://ilavioo.com";
+
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (explicit) return explicit.replace(/\/+$/, "");
-  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
-  if (vercel) return `https://${vercel.replace(/\/+$/, "")}`;
-  return "https://sejahtera-one.vercel.app";
+  return (explicit || OFFICIAL_SITE_URL).replace(/\/+$/, "");
 }
 
 export const SITE_URL = resolveSiteUrl();
