@@ -654,8 +654,9 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
             {/* Card 1: Living & Garden Accents */}
             <FadeInView direction="up" delay={0.1}>
-              <div className="flex flex-col group">
-                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-200 ring-1 ring-stone-200 mb-4 shadow-[0_18px_40px_-18px_rgba(60,30,10,0.35)]">
+              {/* Glass frame around the photo, glass caption panel over it */}
+              <div className="group rounded-[28px] p-2 bg-white/35 backdrop-blur-xl ring-1 ring-white/70 shadow-[0_24px_50px_-22px_rgba(60,30,10,0.45)] transition-transform duration-500 hover:-translate-y-1">
+                <div className="relative aspect-[3/4] rounded-[22px] overflow-hidden bg-stone-200">
                   <Image
                     src="/assets/products/copper-5.jpg"
                     alt="Hand-hammered copper planter with a monstera"
@@ -663,21 +664,24 @@ export default async function Home() {
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-                </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/60 backdrop-blur-xl ring-1 ring-white/80 shadow-[0_8px_30px_-10px_rgba(30,15,5,0.35)] p-4 sm:p-5">
+                    <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-1.5">
                   Living & Garden Accents
-                </h3>
-                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-sm">
+                    </h3>
+                    <p className="text-sm text-stone-700 leading-relaxed">
                   Hand-hammered copper planters and vessels that bring warmth and a living patina to homes, terraces and hotel lobbies.
-                </p>
+                    </p>
+                  </div>
+                </div>
               </div>
             </FadeInView>
 
             {/* Card 2: Decor & Tableware */}
             <FadeInView direction="up" delay={0.2}>
-              <div className="flex flex-col group">
-                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-200 ring-1 ring-stone-200 mb-4 shadow-[0_18px_40px_-18px_rgba(60,30,10,0.35)]">
+              {/* Glass frame around the photo, glass caption panel over it */}
+              <div className="group rounded-[28px] p-2 bg-white/35 backdrop-blur-xl ring-1 ring-white/70 shadow-[0_24px_50px_-22px_rgba(60,30,10,0.45)] transition-transform duration-500 hover:-translate-y-1">
+                <div className="relative aspect-[3/4] rounded-[22px] overflow-hidden bg-stone-200">
                   <Image
                     src="/assets/hero-2.jpg"
                     alt="Copper and brass decor, bowls and vessels in the Ilavioo showroom"
@@ -685,21 +689,24 @@ export default async function Home() {
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-                </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/60 backdrop-blur-xl ring-1 ring-white/80 shadow-[0_8px_30px_-10px_rgba(30,15,5,0.35)] p-4 sm:p-5">
+                    <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-1.5">
                   Decor & Tableware
-                </h3>
-                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-sm">
+                    </h3>
+                    <p className="text-sm text-stone-700 leading-relaxed">
                   Wall art, mirrors, bowls and serving pieces in copper and brass, each finished by hand to make a room feel welcoming.
-                </p>
+                    </p>
+                  </div>
+                </div>
               </div>
             </FadeInView>
 
             {/* Card 3: Made by Tumang Artisans */}
             <FadeInView direction="up" delay={0.3}>
-              <div className="flex flex-col group">
-                <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-200 ring-1 ring-stone-200 mb-4 shadow-[0_18px_40px_-18px_rgba(60,30,10,0.35)]">
+              {/* Glass frame around the photo, glass caption panel over it */}
+              <div className="group rounded-[28px] p-2 bg-white/35 backdrop-blur-xl ring-1 ring-white/70 shadow-[0_24px_50px_-22px_rgba(60,30,10,0.45)] transition-transform duration-500 hover:-translate-y-1">
+                <div className="relative aspect-[3/4] rounded-[22px] overflow-hidden bg-stone-200">
                   <Image
                     src="/assets/products/copper-3.jpg"
                     alt="A Tumang artisan hand-hammering a copper vessel"
@@ -707,14 +714,16 @@ export default async function Home() {
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-                </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/60 backdrop-blur-xl ring-1 ring-white/80 shadow-[0_8px_30px_-10px_rgba(30,15,5,0.35)] p-4 sm:p-5">
+                    <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-1.5">
                   Made by Tumang Artisans
-                </h3>
-                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-sm">
+                    </h3>
+                    <p className="text-sm text-stone-700 leading-relaxed">
                   Every piece is shaped in our Boyolali workshop by coppersmiths using techniques passed down through generations.
-                </p>
+                    </p>
+                  </div>
+                </div>
               </div>
             </FadeInView>
           </div>
