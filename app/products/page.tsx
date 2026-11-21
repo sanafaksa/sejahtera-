@@ -31,9 +31,11 @@ async function getProducts(searchParams: SearchParams) {
 }
 
 export const metadata = {
-  title: "Our Products - Ilavio Copper Crafts",
+  title: "Handcrafted Copper & Brass Products",
   description:
-    "Explore our collection of handcrafted copper products from Tumang, Indonesia",
+    "Explore handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia. Bespoke sizes and worldwide shipping.",
+  alternates: { canonical: "/products" },
+  openGraph: { url: "/products" },
 };
 
 function ProductsLoadingSkeleton() {

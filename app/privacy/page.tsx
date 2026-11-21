@@ -3,9 +3,11 @@ import Link from "next/link";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Ilavioo",
+  title: "Privacy Policy",
   description:
     "How PT. Ilavioo Nusantara Sejahtera collects, uses and protects information when you visit our website or order handcrafted copper from Tumang.",
+  alternates: { canonical: "/privacy" },
+  openGraph: { url: "/privacy" },
 };
 
 const EMAIL = "marketing@ilavioo.com";

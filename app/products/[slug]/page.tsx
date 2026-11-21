@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { SITE, SITE_URL, absoluteUrl, metaDescription } from "@/lib/site";
 import {
   getProductBySlug,
   getRelatedProducts as getRelatedProductsCached,
@@ -38,15 +41,74 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
+  const description = metaDescription(
+    product.description || `Handcrafted ${product.name} from Tumang, Indonesia.`
+  );
+  const path = `/products/${product.slug}`;
+  const images = product.images.slice(0, 1).map((img) => ({
+    url: img.imageUrl,
+    alt: product.name,
+  }));
   return {
-    title: `${product.name} - Ilavio Copper Crafts`,
-    description:
-      product.description ||
-      `Handcrafted ${product.name} from Tumang, Indonesia`,
+    title: product.name,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      url: path,
+      title: product.name,
+      description,
+      ...(images.length ? { images } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description,
+      ...(images.length ? { images: images.map((i) => i.url) } : {}),
+    },
   };
+}
+
+type DetailProduct = Awaited<ReturnType<typeof getProduct>>;
+
+/** schema.org Product + BreadcrumbList. Prices are quoted on request, so no Offer is emitted. */
+function productStructuredData(product: DetailProduct) {
+  const url = absoluteUrl(`/products/${product.slug}`);
+  const spec = product.specifications;
+  const additionalProperty = [
+    spec?.size && { "@type": "PropertyValue", name: "Size", value: spec.size },
+    spec?.finishing && { "@type": "PropertyValue", name: "Finishing", value: spec.finishing },
+  ].filter(Boolean);
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": `${url}#product`,
+      name: product.name,
+      url,
+      ...(product.description ? { description: product.description } : {}),
+      ...(product.images.length
+        ? { image: product.images.slice(0, 6).map((img) => absoluteUrl(img.imageUrl)) }
+        : {}),
+      ...(spec?.material ? { material: spec.material } : {}),
+      ...(additionalProperty.length ? { additionalProperty } : {}),
+      brand: { "@type": "Brand", name: SITE.name },
+      manufacturer: { "@id": `${SITE_URL}/#organization` },
+      countryOfOrigin: "ID",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name: "Products", item: absoluteUrl("/products") },
+        { "@type": "ListItem", position: 3, name: product.name, item: url },
+      ],
+    },
+  ];
 }
 
 export default async function ProductDetailPage({
@@ -60,6 +122,7 @@ export default async function ProductDetailPage({
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
+      <JsonLd data={productStructuredData(product)} />
       {/* Breadcrumb Section */}
       <section className="bg-white border-b border-gray-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">

@@ -3,9 +3,11 @@ import Link from "next/link";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Ilavioo",
+  title: "Terms of Service",
   description:
     "Terms for using the Ilavioo website and ordering handcrafted copper and brass products from PT. Ilavioo Nusantara Sejahtera.",
+  alternates: { canonical: "/terms" },
+  openGraph: { url: "/terms" },
 };
 
 const EMAIL = "marketing@ilavioo.com";

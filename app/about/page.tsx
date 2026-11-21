@@ -23,9 +23,11 @@ const HERITAGE_VIDEO_SRC =
   "https://res.cloudinary.com/dqcdwv7du/video/upload/v1794803666/ilavioo/videos/by-aksa.mp4";
 
 export const metadata = {
-  title: "About Us - Ilavio Copper Crafts",
+  title: "About Us: 30+ Years of Tumang Copper Craft",
   description:
-    "Learn about our 30+ years of heritage in handcrafted copper artistry from Tumang, Boyolali, Indonesia",
+    "Learn about our 30+ years of heritage in handcrafted copper and brass artistry from Tumang, Boyolali, Indonesia.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about" },
 };
 
 export default function AboutPage() {

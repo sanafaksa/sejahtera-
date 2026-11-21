@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import FadeInView from "@/components/animations/FadeInView";
@@ -25,6 +26,8 @@ import {
 } from "react-icons/si";
 import { getProductList } from "@/lib/public-data";
 import FaqSection from "@/components/FaqSection";
+import JsonLd from "@/components/JsonLd";
+import { SITE, SITE_URL, absoluteUrl } from "@/lib/site";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
@@ -58,6 +61,38 @@ const CARD_DOTS = [
 ];
 
 // Products shown first on the home page, in this order (by slug).
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { url: "/" },
+};
+
+const ORGANIZATION_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE_URL,
+  logo: absoluteUrl(SITE.logo),
+  email: SITE.email,
+  description: SITE.description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: SITE.address.locality,
+    addressRegion: SITE.address.region,
+    addressCountry: SITE.address.country,
+  },
+};
+
+const WEBSITE_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: SITE.name,
+  url: SITE_URL,
+  publisher: { "@id": `${SITE_URL}/#organization` },
+};
+
 const HOME_FEATURED_SLUGS = [
   "imperial-nabawi-brass-grand-entrance-door",
   "tumang-fluted-copper-urn-planter",
@@ -100,6 +135,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-[#faf6f1] text-[#1a120b]">
+      <JsonLd data={[ORGANIZATION_LD, WEBSITE_LD]} />
       {/* =========================================================================
           HERO SECTION - EXACT MATCH TO REFERENCE MOCKUP
           ========================================================================= */}

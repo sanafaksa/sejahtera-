@@ -39,6 +39,16 @@ const nextConfig: NextConfig = {
 
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
 
+  // Keep the admin area out of search results.
+  async headers() {
+    return [
+      {
+        source: "/ilv-studio/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
+
   eslint: {
     ignoreDuringBuilds: false,
   },

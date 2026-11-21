@@ -7,9 +7,11 @@ import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Gallery | Ilavio - Tumang Copper Crafts",
+  title: "Gallery: Copper & Brass Projects",
   description:
     "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Tumang, Boyolali.",
+  alternates: { canonical: "/gallery" },
+  openGraph: { url: "/gallery" },
 };
 
 async function getGalleryItems(): Promise<GalleryAssetItem[]> {
