@@ -27,7 +27,7 @@ export const SITE = {
   social: {
     instagram: "https://www.instagram.com/ilavioocopper_art",
     threads: "https://www.threads.net/@ilavioocopper_art",
-    tiktok: "https://www.tiktok.com/@ilavioocopper",
+    tiktok: "https://www.tiktok.com/@ilavioocopper_art",
   },
   /** E.164, same number as the footer / contact page and WhatsApp. */
   telephone: "+6281213696772",
