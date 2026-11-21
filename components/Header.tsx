@@ -4,17 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, Grid } from "lucide-react";
+import { Menu, X, ArrowUpRight, Grid, Mail, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+
+/** Height of the contact bar above the header (lg and up), in px. */
+const TOP_BAR_HEIGHT = 36;
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  // The contact bar scrolls away with the page; the fixed header follows it up.
+  const [topOffset, setTopOffset] = useState(TOP_BAR_HEIGHT);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      setTopOffset(Math.max(0, TOP_BAR_HEIGHT - window.scrollY));
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -41,9 +49,33 @@ export default function Header() {
     return pathname.startsWith(href);
   };
 
+  const phoneDisplay = "+62 8121-3696-772";
+  const whatsapp = `https://wa.me/${SITE.telephone.replace(/\D/g, "")}`;
+
   return (
+    <>
+    {/* Contact bar (desktop); on smaller screens the same details are in the menu and footer */}
+    <div className="hidden lg:block bg-[#3E2723] text-white/90 text-[13px]" style={{ height: TOP_BAR_HEIGHT }}>
+      <div className="container mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#e5be9c] transition-colors">
+            <WhatsAppIcon className="w-3.5 h-3.5" />
+            {phoneDisplay}
+          </a>
+          <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 hover:text-[#e5be9c] transition-colors">
+            <Mail className="w-3.5 h-3.5" />
+            {SITE.email}
+          </a>
+        </div>
+        <p className="inline-flex items-center gap-2">
+          <Clock className="w-3.5 h-3.5" />
+          Mon – Fri: 08:00 – 17:00 <span className="text-white/60">(GMT+7)</span>
+        </p>
+      </div>
+    </div>
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-xs ${
+      style={{ "--top-bar-offset": `${topOffset}px` } as React.CSSProperties}
+      className={`fixed top-0 lg:top-[var(--top-bar-offset)] left-0 right-0 z-50 transition-[padding,box-shadow] duration-300 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-xs ${
         isScrolled ? "py-2.5 sm:py-3 shadow-sm" : "py-3 sm:py-4"
       }`}
     >
@@ -74,7 +106,7 @@ export default function Header() {
           </Link>
 
           {/* Center Navigation Links (Like Mockup: Home About Services Products Blog Vendors) */}
-          <div className="hidden md:flex items-center gap-7 lg:gap-9">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-9">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -94,7 +126,7 @@ export default function Header() {
           </div>
 
           {/* Right: Pill Button + 3x3 Dot Grid Icon (Exact Mockup Match) */}
-          <div className="hidden md:flex items-center gap-3.5">
+          <div className="hidden lg:flex items-center gap-3.5">
             <Link
               href="/contact"
               className="inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-white hover:bg-stone-50 text-[#17120d] border border-stone-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-md transition-all duration-300 group"
@@ -121,7 +153,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-[60] p-2 text-stone-800 hover:text-[#b87333] transition-colors"
+            className="lg:hidden relative z-[60] p-2 text-stone-800 hover:text-[#b87333] transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -138,7 +170,7 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm md:hidden z-[55]"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm lg:hidden z-[55]"
               onClick={() => setIsOpen(false)}
             />
 
@@ -147,7 +179,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full max-w-xs bg-[#fcf9f5] border-l border-stone-200 shadow-2xl md:hidden overflow-y-auto z-[60] p-6 flex flex-col justify-between"
+              className="fixed top-0 right-0 bottom-0 w-full max-w-xs bg-[#fcf9f5] border-l border-stone-200 shadow-2xl lg:hidden overflow-y-auto z-[60] p-6 flex flex-col justify-between"
               style={{ height: "100vh" }}
             >
               <div>
@@ -210,5 +242,6 @@ export default function Header() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }
