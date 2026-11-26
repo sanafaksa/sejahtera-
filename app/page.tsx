@@ -29,6 +29,13 @@ import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import { SITE, SITE_KEYWORDS, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/site";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
+import Product360Viewer from "@/components/product/Product360Viewer";
+
+// Number of 360° frames in /public/assets/360/copper-tub (frame-001…).
+// 0 = keep the static bathtub. Set NEXT_PUBLIC_HERO_360_FRAMES once frames
+// are added to switch the hero to the spinnable 360° viewer.
+const HERO_360_FRAMES = Number(process.env.NEXT_PUBLIC_HERO_360_FRAMES) || 0;
+const HERO_360_EXT = process.env.NEXT_PUBLIC_HERO_360_EXT || "webp";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
 const HERITAGE_CARDS = [
@@ -293,7 +300,17 @@ export default async function Home() {
                 delay={0.25}
                 className="w-full flex justify-center lg:justify-end items-center relative z-20"
               >
-                <HeroBathtubAnimated />
+                {HERO_360_FRAMES > 0 ? (
+                  <Product360Viewer
+                    basePath="/assets/360/copper-tub"
+                    frameCount={HERO_360_FRAMES}
+                    ext={HERO_360_EXT}
+                    alt="Handcrafted 100% solid red copper bathtub, 360° view"
+                    watermark="ilavioo.com"
+                  />
+                ) : (
+                  <HeroBathtubAnimated />
+                )}
               </FadeInView>
             </div>
           </div>
