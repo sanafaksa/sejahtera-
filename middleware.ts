@@ -8,11 +8,25 @@ import {
   setVisitCookies,
 } from "@/lib/analytics/collect";
 import { TRACK_KEY_HEADER, trackingKey } from "@/lib/analytics/track-key";
+import { clientIp, isBlockedBot, isRateLimited } from "@/lib/security";
 
 const ADMIN_PREFIX = "/ilv-studio";
 const ADMIN_LOGIN = "/ilv-studio/login";
 
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
+  // Anti-scrape: block known AI crawlers / scraper libraries, then throttle
+  // bursts from a single IP. Both run before anything else.
+  const ua = req.headers.get("user-agent");
+  if (isBlockedBot(ua)) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
+  if (isRateLimited(clientIp(req.headers))) {
+    return new NextResponse("Too Many Requests", {
+      status: 429,
+      headers: { "retry-after": "60" },
+    });
+  }
+
   const { pathname } = req.nextUrl;
   if (pathname === ADMIN_PREFIX || pathname.startsWith(`${ADMIN_PREFIX}/`)) {
     return protectAdmin(req);

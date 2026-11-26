@@ -54,7 +54,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#140b06] text-[#d4b59c] border-t border-[#3d2719]/80 overflow-hidden">
+    <footer className="relative bg-[#140b06] text-[#d4b59c] overflow-hidden rounded-t-[1.75rem] sm:rounded-t-[2.25rem]">
       {/* Semi-transparent background showing authentic copper crafts in showroom */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <Image

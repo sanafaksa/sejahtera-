@@ -27,7 +27,7 @@ export default function GalleryError({
         <div className="flex items-center justify-center gap-3">
           <button
             onClick={() => reset()}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#b87333] hover:bg-[#a0632a] text-white text-xs font-bold uppercase tracking-wider transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full copper-metal text-white text-xs font-bold uppercase tracking-wider relative overflow-hidden hover:brightness-[1.06] transition-[filter]"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Try Again</span>

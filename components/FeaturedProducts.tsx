@@ -50,7 +50,7 @@ export default async function FeaturedProducts() {
       <div className="text-center">
         <Link
           href="/products"
-          className="inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          className="inline-flex items-center px-8 py-4 copper-metal text-white rounded-full font-semibold relative overflow-hidden transition-[filter] duration-300 hover:brightness-[1.06]"
         >
           View All Products
           <ChevronRight className="ml-2 w-5 h-5" />

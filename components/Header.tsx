@@ -228,7 +228,11 @@ export default function Header() {
               >
                 {link.name}
                 {isActive(link.href) && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-[#17120d] rounded-full" />
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-[#17120d] rounded-full"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
                 )}
               </Link>
             ))}
@@ -238,12 +242,12 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3.5">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-white hover:bg-stone-50 text-[#17120d] border border-stone-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-md transition-all duration-300 group"
+              className="copper-metal inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full relative overflow-hidden transition-[filter,box-shadow] duration-300 hover:brightness-[1.06] group"
             >
-              <span className="text-xs sm:text-sm font-semibold tracking-wide">
+              <span className="relative z-10 text-xs sm:text-sm font-semibold tracking-wide drop-shadow-[0_1px_1px_rgba(60,25,8,0.4)]">
                 Contact Us
               </span>
-              <span className="w-8 h-8 rounded-full bg-[#17120d] text-white flex items-center justify-center group-hover:bg-[#b87333] transition-colors">
+              <span className="relative z-10 w-8 h-8 rounded-full bg-[#2a1707] text-[#ffe9d4] flex items-center justify-center ring-1 ring-black/20 shadow-inner transition-colors">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </Link>
@@ -334,7 +338,7 @@ export default function Header() {
               <div className="pt-6 border-t border-stone-200 space-y-3">
                 <Link
                   href="/contact"
-                  className="flex items-center justify-between w-full px-5 py-3 rounded-full bg-[#17120d] text-white text-xs uppercase tracking-wider font-semibold shadow-md"
+                  className="flex items-center justify-between w-full px-5 py-3 rounded-full copper-metal text-white text-xs uppercase tracking-wider font-semibold relative overflow-hidden"
                 >
                   <span>Contact Us</span>
                   <ArrowUpRight className="w-4 h-4" />

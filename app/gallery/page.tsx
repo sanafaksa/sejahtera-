@@ -93,14 +93,14 @@ export default async function GalleryPage() {
               <div className="relative z-10 flex flex-wrap gap-3.5 justify-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#17120d] hover:bg-[#faf6f1] text-xs font-bold uppercase tracking-wider shadow-lg shadow-black/15 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full copper-metal text-white text-xs font-bold uppercase tracking-wider relative overflow-hidden hover:brightness-[1.06] transition-[filter]"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Inquire Custom Work</span>
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider transition-colors ring-1 ring-white/35"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full leather-texture text-[#f3e3d2] text-xs font-bold uppercase tracking-wider relative overflow-hidden transition-[filter] ring-1 ring-white/25 hover:brightness-110"
                 >
                   <span>Explore Catalog</span>
                   <ArrowUpRight className="w-4 h-4" />

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import VisitTracker from "@/components/VisitTracker";
 import WhatsAppBubble from "@/components/WhatsAppBubble";
 import LocationConsent from "@/components/LocationConsent";
+import PopupModal from "@/components/PopupModal";
 
 export default function ConditionalLayout({
   children,
@@ -32,6 +33,7 @@ export default function ConditionalLayout({
       <Footer />
       <WhatsAppBubble />
       <LocationConsent />
+      <PopupModal />
     </>
   );
 }

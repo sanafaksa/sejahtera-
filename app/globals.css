@@ -103,6 +103,62 @@ body {
     background-clip: text;
   }
 
+  /* Hammered copper metal surface (for buttons like "Contact Us") */
+  .copper-metal {
+    position: relative;
+    isolation: isolate;
+    background-color: #a9652f;
+    background-image:
+      radial-gradient(120% 140% at 25% 18%, rgba(255, 226, 190, 0.55) 0%, rgba(255, 226, 190, 0) 42%),
+      radial-gradient(120% 150% at 82% 88%, rgba(74, 38, 16, 0.6) 0%, rgba(74, 38, 16, 0) 52%),
+      linear-gradient(145deg, #c88a52 0%, #9e5b24 48%, #7d441a 100%);
+    color: #fff6ec;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 236, 214, 0.6),
+      inset 0 -3px 8px rgba(60, 25, 8, 0.55),
+      0 8px 20px -8px rgba(90, 45, 15, 0.7);
+  }
+  /* Beaten-metal grain overlay */
+  .copper-metal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23h)'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+    mix-blend-mode: soft-light;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Matte leather surface (for secondary buttons) */
+  .leather-texture {
+    position: relative;
+    isolation: isolate;
+    background-color: #2a1a10;
+    background-image:
+      radial-gradient(130% 120% at 28% 18%, rgba(140, 95, 60, 0.35) 0%, rgba(140, 95, 60, 0) 48%),
+      linear-gradient(160deg, #3b2619 0%, #241309 100%);
+    color: #f3e3d2;
+    box-shadow:
+      inset 0 1px 0 rgba(190, 140, 100, 0.25),
+      inset 0 -3px 7px rgba(0, 0, 0, 0.5),
+      0 4px 12px -6px rgba(20, 11, 6, 0.6);
+  }
+  .leather-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.016' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
   /* Copper shimmer effect */
   .copper-shimmer {
     position: relative;

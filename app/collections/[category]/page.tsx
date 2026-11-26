@@ -181,7 +181,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ cat
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#17120d] text-white font-semibold hover:bg-[#2a2018] transition-colors"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full copper-metal text-white font-semibold relative overflow-hidden hover:brightness-[1.06] transition-[filter,box-shadow]"
             >
               Request a quote <ArrowRight className="w-4 h-4" />
             </Link>
@@ -189,7 +189,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ cat
               href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-stone-900 font-semibold ring-1 ring-stone-300 hover:ring-[#A8602A] transition"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full leather-texture text-[#f3e3d2] font-semibold relative overflow-hidden ring-1 ring-black/30 hover:brightness-110 transition-[filter]"
             >
               <MessageCircle className="w-4 h-4" /> WhatsApp us
             </a>

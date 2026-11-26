@@ -288,13 +288,13 @@ export default function AboutPage() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Link
                     href="/products"
-                    className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-[#17120d] hover:bg-[#faf6f1] rounded-full font-semibold shadow-lg shadow-black/15 transition-colors duration-300"
+                    className="inline-flex items-center justify-center px-8 py-3.5 copper-metal text-white rounded-full font-semibold relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300"
                   >
                     Browse Products
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center px-8 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold transition-colors duration-300 ring-1 ring-white/35"
+                    className="inline-flex items-center justify-center px-8 py-3.5 leather-texture text-[#f3e3d2] rounded-full font-semibold relative overflow-hidden transition-[filter] duration-300 ring-1 ring-white/25 hover:brightness-110"
                   >
                     Contact Us
                   </Link>

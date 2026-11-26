@@ -283,7 +283,7 @@ export default async function ProductDetailPage({
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/contact"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#b87333] hover:bg-[#a0632a] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 copper-metal text-white rounded-full font-semibold relative overflow-hidden transition-[filter] duration-300 hover:brightness-[1.06]"
                   >
                     <Mail className="w-5 h-5" />
                     Request Quote

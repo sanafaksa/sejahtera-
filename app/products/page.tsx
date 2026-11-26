@@ -96,14 +96,14 @@ async function ProductsList({
           {hasSearch ? (
             <Link
               href="/products"
-              className="inline-flex items-center px-6 py-3 bg-[#b87333] hover:bg-[#a0632a] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 py-3 copper-metal text-white rounded-full font-semibold relative overflow-hidden transition-[filter] duration-300 hover:brightness-[1.06]"
             >
               View All Products
             </Link>
           ) : (
             <Link
               href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-[#b87333] hover:bg-[#a0632a] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 py-3 copper-metal text-white rounded-full font-semibold relative overflow-hidden transition-[filter] duration-300 hover:brightness-[1.06]"
             >
               <Sparkles className="w-5 h-5 mr-2" />
               Request Custom Order
@@ -211,14 +211,14 @@ export default async function ProductsPage({
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link
                       href="/contact"
-                      className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-[#17120d] hover:bg-[#faf6f1] rounded-full font-semibold shadow-lg shadow-black/15 transition-colors duration-300"
+                      className="inline-flex items-center justify-center px-8 py-3.5 copper-metal text-white rounded-full font-semibold relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300"
                     >
                       <Sparkles className="w-5 h-5 mr-2" />
                       Request Custom Design
                     </Link>
                     <Link
                       href="/gallery"
-                      className="inline-flex items-center justify-center px-8 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold transition-colors duration-300 ring-1 ring-white/35"
+                      className="inline-flex items-center justify-center px-8 py-3.5 leather-texture text-[#f3e3d2] rounded-full font-semibold relative overflow-hidden transition-[filter] duration-300 ring-1 ring-white/25 hover:brightness-110"
                     >
                       View Gallery
                     </Link>

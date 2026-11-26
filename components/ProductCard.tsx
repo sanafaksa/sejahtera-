@@ -62,7 +62,7 @@ export default function ProductCard({
 
           {/* "View Details" overlay on hover */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#b87333] hover:bg-[#a0632a] text-white font-semibold rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-sm">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 copper-metal text-white font-semibold rounded-full relative overflow-hidden transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-sm">
               View Details
               <ArrowRight className="w-4 h-4" />
             </span>

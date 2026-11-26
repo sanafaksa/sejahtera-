@@ -267,12 +267,12 @@ export default async function Home() {
                 <div className="flex items-center gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full bg-white hover:bg-stone-50 border border-stone-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-md transition-all duration-300 group"
+                    className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full copper-metal relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300 group"
                   >
-                    <span className="text-sm font-semibold text-stone-900 group-hover:text-[#b87333] transition-colors">
+                    <span className="text-sm font-semibold text-white">
                       Contact Us
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-[#18100a] group-hover:bg-[#b87333] text-white flex items-center justify-center transition-colors shadow-sm">
+                    <span className="w-8 h-8 rounded-full copper-metal relative overflow-hidden ring-1 ring-black/25 flex items-center justify-center shadow-sm">
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                   </Link>
@@ -409,12 +409,12 @@ export default async function Home() {
                 <div>
                   <Link
                     href="/products"
-                    className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full bg-white hover:bg-stone-50 border border-stone-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-md transition-all duration-300 group"
+                    className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full copper-metal relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300 group"
                   >
-                    <span className="text-sm font-semibold text-stone-900 group-hover:text-[#b87333] transition-colors">
+                    <span className="text-sm font-semibold text-white">
                       Explore Living
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-[#18100a] group-hover:bg-[#b87333] text-white flex items-center justify-center transition-colors shadow-sm">
+                    <span className="w-8 h-8 rounded-full copper-metal relative overflow-hidden ring-1 ring-black/25 flex items-center justify-center shadow-sm">
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                   </Link>
@@ -510,7 +510,7 @@ export default async function Home() {
                     </span>
                     <span
                       aria-hidden
-                      className="w-8 h-8 rounded-full bg-[#17120d] group-hover:bg-[#b87333] text-white flex items-center justify-center transition-colors shadow-sm shrink-0"
+                      className="w-8 h-8 rounded-full copper-metal relative overflow-hidden ring-1 ring-black/25 flex items-center justify-center shadow-sm shrink-0"
                     >
                       <ArrowUpRight className="w-4 h-4" />
                     </span>
@@ -524,12 +524,12 @@ export default async function Home() {
           <div className="text-center">
             <Link
               href="/products"
-              className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-white hover:bg-stone-50 text-[#17120d] border border-stone-200 shadow-md hover:shadow-lg transition-all duration-300 group"
+              className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full copper-metal text-white relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300 group"
             >
               <span className="text-xs sm:text-sm font-semibold tracking-wide">
                 View All Collections
               </span>
-              <span className="w-8 h-8 rounded-full bg-[#18100a] group-hover:bg-[#b87333] text-white flex items-center justify-center transition-colors shadow-sm">
+              <span className="w-8 h-8 rounded-full copper-metal relative overflow-hidden ring-1 ring-black/25 flex items-center justify-center shadow-sm">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </Link>
@@ -582,7 +582,7 @@ export default async function Home() {
                   </p>
                   <Link
                     href="/about"
-                    className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full bg-[#17120d] hover:bg-[#b87333] text-white transition-all duration-300 group shadow-md"
+                    className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full copper-metal text-white relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300 group"
                   >
                     <span className="text-sm font-semibold tracking-wide">
                       Our Craftsmanship
