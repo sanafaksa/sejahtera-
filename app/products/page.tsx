@@ -13,6 +13,7 @@ import PageHero from "@/components/PageHero";
 import { Suspense } from "react";
 import { Package, Sparkles } from "lucide-react";
 import Link from "next/link";
+import HeroBackdrop from "@/components/HeroBackdrop";
 
 // Dynamic because of searchParams; data itself comes from the tagged cache.
 export const dynamic = "force-dynamic";
@@ -194,27 +195,30 @@ export default async function ProductsPage({
 
           {products.length > 0 && (
             <FadeInView direction="up" className="mt-16">
-              <div className="bg-gradient-to-r from-green-600 to-forest-600 rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden">
+              <div className="bg-[#3E2723] rounded-3xl px-6 py-12 sm:p-12 text-white text-center relative overflow-hidden">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+                  <HeroBackdrop />
+                </div>
                 <div className="relative z-10">
                   <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
                     Can&apos;t Find What You&apos;re Looking For?
                   </h2>
-                  <p className="text-xl text-green-50 mb-8 max-w-2xl mx-auto">
+                  <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
                     We specialize in custom copper crafts tailored to your
                     unique specifications. Let&apos;s create something
                     extraordinary together.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link
                       href="/contact"
-                      className="inline-flex items-center justify-center px-8 py-4 bg-white text-green-600 hover:bg-cream-50 rounded-full font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                      className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-[#17120d] hover:bg-[#faf6f1] rounded-full font-semibold shadow-lg shadow-black/15 transition-colors duration-300"
                     >
                       <Sparkles className="w-5 h-5 mr-2" />
                       Request Custom Design
                     </Link>
                     <Link
                       href="/gallery"
-                      className="inline-flex items-center justify-center px-8 py-4 bg-green-700/50 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 border-2 border-white/30"
+                      className="inline-flex items-center justify-center px-8 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold transition-colors duration-300 ring-1 ring-white/35"
                     >
                       View Gallery
                     </Link>

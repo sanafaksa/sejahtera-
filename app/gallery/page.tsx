@@ -6,6 +6,7 @@ import { getGalleryAssets } from "@/lib/public-data";
 import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import HeroBackdrop from "@/components/HeroBackdrop";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = pageMetadata({
@@ -73,7 +74,10 @@ export default async function GalleryPage() {
         {/* Refined Bespoke Custom Work CTA */}
         <div className="mt-20 pt-12 border-t border-stone-200/80">
           <FadeInView direction="up">
-            <div className="bg-[#17120d] text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+            <div className="bg-[#3E2723] text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+                <HeroBackdrop />
+              </div>
               <div className="relative z-10 max-w-xl text-center md:text-left">
                 <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#e5be9c]">
                   Bespoke Architectural Craftsmanship
@@ -81,7 +85,7 @@ export default async function GalleryPage() {
                 <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-3">
                   Have a Custom Design in Mind?
                 </h3>
-                <p className="text-stone-300 text-sm leading-relaxed">
+                <p className="text-white/80 text-sm leading-relaxed">
                   Every piece in our gallery can be customized to your architectural drawings and specifications. Consult directly with our master copper smiths in Tumang, Boyolali.
                 </p>
               </div>
@@ -89,14 +93,14 @@ export default async function GalleryPage() {
               <div className="relative z-10 flex flex-wrap gap-3.5 justify-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#b87333] hover:bg-[#a0632a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#17120d] hover:bg-[#faf6f1] text-xs font-bold uppercase tracking-wider shadow-lg shadow-black/15 transition-colors"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Inquire Custom Work</span>
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider transition-all border border-white/20"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider transition-colors ring-1 ring-white/35"
                 >
                   <span>Explore Catalog</span>
                   <ArrowUpRight className="w-4 h-4" />

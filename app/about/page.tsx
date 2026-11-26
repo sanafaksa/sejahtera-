@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { pageMetadata, webPageStructuredData } from "@/lib/site";
 import Link from "next/link";
+import HeroBackdrop from "@/components/HeroBackdrop";
 import FadeInView from "@/components/animations/FadeInView";
 import StaggerContainer, {
   StaggerItem,
 } from "@/components/animations/StaggerContainer";
 import CountUpNumber from "@/components/animations/CountUpNumber";
+import ParallaxSection from "@/components/animations/ParallaxSection";
 import {
   Award,
   Heart,
@@ -110,6 +112,7 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <ParallaxSection offset={-96} className="lg:[&>*]:will-change-transform">
             <FadeInView direction="left">
               <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-[#17120d]">
                 <video
@@ -132,7 +135,9 @@ export default function AboutPage() {
                 </div>
               </div>
             </FadeInView>
+            </ParallaxSection>
 
+            <ParallaxSection offset={48}>
             <FadeInView direction="right">
               <div>
                 <span className="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">
@@ -167,6 +172,7 @@ export default function AboutPage() {
                 </div>
               </div>
             </FadeInView>
+            </ParallaxSection>
           </div>
         </div>
       </section>
@@ -222,6 +228,7 @@ export default function AboutPage() {
       <section className="py-20 bg-gradient-to-br from-green-50 to-copper-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
+            <ParallaxSection offset={-56}>
             <FadeInView direction="left">
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-green-100 h-full">
                 <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mb-6">
@@ -239,7 +246,9 @@ export default function AboutPage() {
                 </p>
               </div>
             </FadeInView>
+            </ParallaxSection>
 
+            <ParallaxSection offset={56}>
             <FadeInView direction="right">
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-copper-100 h-full">
                 <div className="w-16 h-16 bg-copper-600 rounded-2xl flex items-center justify-center mb-6">
@@ -256,6 +265,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </FadeInView>
+            </ParallaxSection>
           </div>
         </div>
       </section>
@@ -263,25 +273,28 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInView direction="up">
-            <div className="bg-gradient-to-r from-green-600 to-forest-600 rounded-3xl p-12 text-white text-center relative overflow-hidden">
+            <div className="bg-[#3E2723] rounded-3xl px-6 py-12 sm:p-12 text-white text-center relative overflow-hidden">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+                  <HeroBackdrop />
+                </div>
               <div className="relative z-10">
                 <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
                   Ready to Experience Tumang Craftsmanship?
                 </h2>
-                <p className="text-xl text-green-50 mb-8 max-w-2xl mx-auto">
+                <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
                   Explore our collection or contact us for custom designs
                   tailored to your unique vision.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Link
                     href="/products"
-                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-green-600 hover:bg-cream-50 rounded-full font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                    className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-[#17120d] hover:bg-[#faf6f1] rounded-full font-semibold shadow-lg shadow-black/15 transition-colors duration-300"
                   >
                     Browse Products
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center px-8 py-4 bg-green-700/50 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 border-2 border-white/30"
+                    className="inline-flex items-center justify-center px-8 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold transition-colors duration-300 ring-1 ring-white/35"
                   >
                     Contact Us
                   </Link>

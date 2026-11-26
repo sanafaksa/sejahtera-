@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import FadeInView from "@/components/animations/FadeInView";
+import ParallaxSection from "@/components/animations/ParallaxSection";
 import StaggerContainer, {
   StaggerItem,
 } from "@/components/animations/StaggerContainer";
@@ -311,10 +312,11 @@ export default async function Home() {
             </div>
             <div className="container mx-auto relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <ParallaxSection offset={-50} className="lg:col-span-4 xl:col-span-4">
                 <FadeInView
                   direction="up"
                   delay={0.2}
-                  className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between space-y-6"
+                  className="flex flex-col justify-between space-y-6"
                 >
                   <div>
                     <span className="text-[11px] font-semibold tracking-widest text-[#9e5b24] uppercase block mb-3">
@@ -339,11 +341,13 @@ export default async function Home() {
                     </div>
                   </div>
                 </FadeInView>
+                </ParallaxSection>
 
                 <div className="lg:col-span-8 xl:col-span-8">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
                     {HERITAGE_CARDS.map((card, i) => (
-                      <FadeInView key={card.title} direction="up" delay={0.35 + i * 0.15} className="h-full">
+                      <ParallaxSection key={card.title} offset={[-72, -40, -8][i] ?? -40} className="h-full">
+                      <FadeInView direction="up" delay={0.35 + i * 0.15} className="h-full">
                         <div className="h-full rounded-[26px] bg-[#f6f1eb] p-4 text-[#1a120b] shadow-[10px_10px_24px_rgba(166,138,110,0.35),-10px_-10px_24px_rgba(255,255,255,0.95)] hover:shadow-[inset_6px_6px_14px_rgba(166,138,110,0.3),inset_-6px_-6px_14px_rgba(255,255,255,0.9)] transition-all duration-300 group flex flex-col justify-between">
                           <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-stone-100 mb-3 shadow-[inset_3px_3px_8px_rgba(166,138,110,0.3),inset_-3px_-3px_8px_rgba(255,255,255,0.8)]">
                             <Image
@@ -364,6 +368,7 @@ export default async function Home() {
                           </div>
                         </div>
                       </FadeInView>
+                      </ParallaxSection>
                     ))}
                   </div>
                 </div>
