@@ -19,6 +19,8 @@ export interface VisitPayload extends VisitSource {
   country: string | null;
   region: string | null;
   city: string | null;
+  latitude: number | null;
+  longitude: number | null;
   timezone: string | null;
   device: "mobile" | "tablet" | "desktop";
   os: string | null;
@@ -87,6 +89,13 @@ function decodeHeader(value: string | null): string | null {
   }
 }
 
+/** Parse an IP-geolocation coordinate header; null if missing or out of range. */
+function toCoord(value: string | null, max: number): number | null {
+  if (!value) return null;
+  const n = Number.parseFloat(value);
+  return Number.isFinite(n) && Math.abs(n) <= max ? n : null;
+}
+
 export function collectVisit(input: {
   headers: Headers;
   cookies: CookieReader;
@@ -119,6 +128,8 @@ export function collectVisit(input: {
       country: h.get("x-vercel-ip-country"),
       region: h.get("x-vercel-ip-country-region"),
       city: decodeHeader(h.get("x-vercel-ip-city")),
+      latitude: toCoord(h.get("x-vercel-ip-latitude"), 90),
+      longitude: toCoord(h.get("x-vercel-ip-longitude"), 180),
       timezone: h.get("x-vercel-ip-timezone"),
       device: ua.device,
       os: ua.os,

@@ -15,6 +15,8 @@ export const visitSchema = z.object({
   country: optionalText(2).refine((v) => v === null || /^[A-Z]{2}$/.test(v)),
   region: optionalText(16),
   city: optionalText(120),
+  latitude: z.number().finite().gte(-90).lte(90).nullish().transform((v) => v ?? null),
+  longitude: z.number().finite().gte(-180).lte(180).nullish().transform((v) => v ?? null),
   timezone: optionalText(64).refine((v) => v === null || /^[A-Za-z0-9_+\-/]+$/.test(v)),
   device: z.enum(["mobile", "tablet", "desktop"]),
   os: optionalText(40),

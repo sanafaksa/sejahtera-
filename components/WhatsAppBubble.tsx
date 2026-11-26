@@ -13,19 +13,23 @@ export default function WhatsAppBubble() {
   const phone = formatPhone(SITE.telephone);
 
   return (
+    // Collapsed to just the WhatsApp logo; expands to reveal the number on
+    // hover / focus / tap (focus-within covers touch).
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with us on WhatsApp, ${phone}`}
-      className="group fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2.5 rounded-full bg-white pl-1.5 pr-4 py-1.5 shadow-lg ring-1 ring-stone-200 hover:shadow-xl hover:ring-[#25D366]/60 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+      className="group fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center rounded-full p-1 bg-transparent ring-0 shadow-none transition-all duration-300 hover:bg-white hover:shadow-xl hover:ring-1 hover:ring-[#25D366]/50 focus-within:bg-white focus-within:shadow-xl focus-within:ring-1 focus-within:ring-[#25D366]/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 transition-shadow group-hover:shadow-none group-focus-within:shadow-none">
         <WhatsAppIcon className="h-6 w-6" />
       </span>
-      <span className="flex flex-col leading-tight">
-        <span className="text-[11px] font-medium text-stone-500">Chat on WhatsApp</span>
-        <span className="text-sm font-semibold text-stone-900 tabular-nums">{phone}</span>
+      <span className="grid grid-cols-[0fr] opacity-0 transition-all duration-300 group-hover:grid-cols-[1fr] group-hover:opacity-100 group-hover:ml-2.5 group-hover:mr-3 group-focus-within:grid-cols-[1fr] group-focus-within:opacity-100 group-focus-within:ml-2.5 group-focus-within:mr-3">
+        <span className="overflow-hidden whitespace-nowrap flex flex-col leading-tight">
+          <span className="text-[11px] font-medium text-stone-500">Chat on WhatsApp</span>
+          <span className="text-sm font-semibold text-stone-900 tabular-nums">{phone}</span>
+        </span>
       </span>
     </a>
   );

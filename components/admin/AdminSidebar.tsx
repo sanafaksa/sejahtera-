@@ -13,11 +13,15 @@ import {
   BarChart3,
   Clock3,
   FileText,
+  Mail,
+  Settings,
+  Users,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const sections = [
   {
@@ -26,6 +30,7 @@ const sections = [
       { name: "Dashboard", href: "/ilv-studio/dashboard", icon: LayoutDashboard },
       { name: "Products", href: "/ilv-studio/products", icon: Package },
       { name: "Gallery", href: "/ilv-studio/gallery", icon: ImageIcon },
+      { name: "Pesan", href: "/ilv-studio/pesan", icon: Mail, badge: true },
       { name: "Invoice", href: "/ilv-studio/invoice", icon: FileText },
     ],
   },
@@ -38,6 +43,15 @@ const sections = [
   },
 ];
 
+// Shown only to superadmins.
+const superadminSection = {
+  label: "Superadmin",
+  items: [
+    { name: "Pengaturan", href: "/ilv-studio/pengaturan", icon: Settings },
+    { name: "Akun admin", href: "/ilv-studio/pengaturan/akun", icon: Users },
+  ],
+};
+
 interface AdminSidebarProps {
   /** Mobile drawer open. */
   isOpen: boolean;
@@ -49,8 +63,24 @@ interface AdminSidebarProps {
 
 export default function AdminSidebar({ isOpen, onClose, collapsed, onToggleCollapsed }: AdminSidebarProps) {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const isSuperadmin = session?.user?.role === "superadmin";
+  const navSections = isSuperadmin ? [...sections, superadminSection] : sections;
   // Desktop-only hide for labels when folded.
   const label = collapsed ? "lg:hidden" : "";
+
+  // Unread contact messages, refreshed on navigation.
+  const [unread, setUnread] = useState(0);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/admin/messages")
+      .then((r) => (r.ok ? r.json() : { unread: 0 }))
+      .then((d) => alive && setUnread(Number(d?.unread) || 0))
+      .catch(() => undefined);
+    return () => {
+      alive = false;
+    };
+  }, [pathname]);
 
   return (
     <aside
@@ -96,7 +126,7 @@ export default function AdminSidebar({ isOpen, onClose, collapsed, onToggleColla
 
         {/* Navigation */}
         <nav className={`flex-1 overflow-y-auto overflow-x-hidden px-3 pb-3 space-y-5 ${collapsed ? "lg:space-y-3" : ""}`}>
-          {sections.map((section) => (
+          {navSections.map((section) => (
             <div key={section.label}>
               <p
                 className={`px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400 whitespace-nowrap ${label}`}
@@ -108,6 +138,7 @@ export default function AdminSidebar({ isOpen, onClose, collapsed, onToggleColla
                 {section.items.map((item) => {
                   const isActive = pathname === item.href || pathname?.startsWith(item.href + "/");
                   const Icon = item.icon;
+                  const count = "badge" in item && item.badge ? unread : 0;
                   return (
                     <li key={item.href}>
                       <Link
@@ -133,6 +164,15 @@ export default function AdminSidebar({ isOpen, onClose, collapsed, onToggleColla
                           }`}
                         />
                         <span className={`relative whitespace-nowrap ${label}`}>{item.name}</span>
+                        {count > 0 && (
+                          <span
+                            className={`relative ml-auto min-w-5 h-5 px-1.5 rounded-full text-[11px] font-semibold flex items-center justify-center tabular-nums ${
+                              isActive ? "bg-white/25 text-white" : "bg-[#A8602A] text-white"
+                            } ${collapsed ? "lg:absolute lg:top-1 lg:right-1 lg:ml-0" : ""}`}
+                          >
+                            {count > 99 ? "99+" : count}
+                          </span>
+                        )}
                       </Link>
                     </li>
                   );

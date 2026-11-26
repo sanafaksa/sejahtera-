@@ -29,13 +29,7 @@ import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import { SITE, SITE_KEYWORDS, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/site";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
-import Product360Viewer from "@/components/product/Product360Viewer";
-
-// Number of 360° frames in /public/assets/360/copper-tub (frame-001…).
-// 0 = keep the static bathtub. Set NEXT_PUBLIC_HERO_360_FRAMES once frames
-// are added to switch the hero to the spinnable 360° viewer.
-const HERO_360_FRAMES = Number(process.env.NEXT_PUBLIC_HERO_360_FRAMES) || 0;
-const HERO_360_EXT = process.env.NEXT_PUBLIC_HERO_360_EXT || "webp";
+import CopperTubShowcase from "@/components/hero/CopperTubShowcase";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
 const HERITAGE_CARDS = [
@@ -300,17 +294,7 @@ export default async function Home() {
                 delay={0.25}
                 className="w-full flex justify-center lg:justify-end items-center relative z-20"
               >
-                {HERO_360_FRAMES > 0 ? (
-                  <Product360Viewer
-                    basePath="/assets/360/copper-tub"
-                    frameCount={HERO_360_FRAMES}
-                    ext={HERO_360_EXT}
-                    alt="Handcrafted 100% solid red copper bathtub, 360° view"
-                    watermark="ilavioo.com"
-                  />
-                ) : (
-                  <HeroBathtubAnimated />
-                )}
+                <HeroBathtubAnimated />
               </FadeInView>
             </div>
           </div>
@@ -404,27 +388,12 @@ export default async function Home() {
       <section className="py-20 sm:py-28 bg-[#faf6f1] relative overflow-hidden border-t border-stone-200/50">
         <div className="container mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left Column: Organic Warm Blob Shape with Floating Copper Product (Exact Mockup Match) */}
+            {/* Left Column: Organic Warm Blob Shape with interactive 3D / 360° Copper Product */}
             <div className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[340px] sm:min-h-[400px]">
-              {/* Organic warm blob shape behind the product (Exact Mockup Match) */}
-              <div className="absolute w-[90%] max-w-[440px] h-[280px] sm:h-[340px] bg-[#ecd8c7] rounded-[55%_45%_65%_35%/40%_60%_40%_60%] blur-[1px] -rotate-3 transition-transform duration-700 hover:rotate-0 shadow-sm" />
+              {/* Organic warm blob shape behind the product */}
+              <div className="absolute w-[90%] max-w-[440px] h-[280px] sm:h-[340px] bg-[#ecd8c7] rounded-[55%_45%_65%_35%/40%_60%_40%_60%] blur-[1px] -rotate-3 shadow-sm" />
 
-              {/* Main Product Cutout Container */}
-              <div className="relative z-10 w-full max-w-[480px] h-[260px] sm:h-[320px] flex items-center justify-center p-2 group">
-                <Image
-                  src="/assets/hero-copper-bathtub.png"
-                  alt="Handcrafted Luxury Copper Bath"
-                  fill
-                  className="object-contain filter drop-shadow-[0_20px_30px_rgba(40,20,10,0.22)] transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 95vw, 45vw"
-                />
-
-                {/* Floating Artisan Quality Badge (Exact Mockup Style) */}
-                <div className="absolute bottom-1 right-2 sm:right-6 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-stone-200 shadow-md flex items-center gap-2 text-[11px] font-semibold text-stone-800">
-                  <span className="w-2 h-2 rounded-full bg-[#b87333] animate-pulse" />
-                  <span>100% Solid Red Copper</span>
-                </div>
-              </div>
+              <CopperTubShowcase />
             </div>
 
             {/* Right Column: Title, Subtitle & Pill Button */}

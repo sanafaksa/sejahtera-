@@ -13,10 +13,26 @@ model User {
   email     String   @unique
   name      String?
   password  String
+  role      String   @default("admin") @db.VarChar(20) // "admin" | "superadmin"
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+// Submissions from the public contact form, shown in the admin dashboard.
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(120)
+  email     String   @db.VarChar(160)
+  phone     String?  @db.VarChar(40)
+  subject   String   @db.VarChar(120)
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@map("contact_messages")
 }
 
 model Product {
@@ -96,6 +112,10 @@ model PageVisit {
   country      String?  @db.VarChar(2) // ISO 3166-1 alpha-2
   region       String?  @db.VarChar(16) // ISO 3166-2 subdivision code (without country)
   city         String?  @db.VarChar(120)
+  latitude     Float?   // approximate (IP) or precise (GPS) — see geoPrecise
+  longitude    Float?
+  geoPrecise   Boolean  @default(false) @map("geo_precise") // true = from the visitor's GPS (consented)
+  accuracyM    Int?     @map("accuracy_m") // GPS accuracy in metres, when precise
   timezone     String?  @db.VarChar(64) // IANA name, e.g. "Europe/Berlin"
   device       String   @db.VarChar(16) // "mobile" | "tablet" | "desktop"
   os           String?  @db.VarChar(40)

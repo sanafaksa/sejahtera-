@@ -18,9 +18,10 @@ export const authOptions: NextAuthOptions = {
 
         let user = null;
         try {
-          user = await prisma.user.findUnique({
-            where: { email: credentials.email },
-          });
+          const email = credentials.email;
+          user =
+            (await prisma.user.findUnique({ where: { email } })) ??
+            (await prisma.user.findUnique({ where: { email: email.toLowerCase() } }));
         } catch (dbError) {
           console.warn("Prisma user lookup error (database might not be connected):", dbError);
         }
@@ -36,6 +37,7 @@ export const authOptions: NextAuthOptions = {
               id: user.id,
               email: user.email,
               name: user.name,
+              role: user.role,
             };
           }
         }
@@ -50,6 +52,7 @@ export const authOptions: NextAuthOptions = {
             id: "default-admin-id",
             email: "admin@ilavio.com",
             name: "Admin Ilavio",
+            role: "superadmin",
           };
         }
 
@@ -61,12 +64,14 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.role = (token.role as string) ?? "admin";
       }
       return session;
     },

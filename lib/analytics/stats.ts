@@ -12,6 +12,9 @@ export interface VisitRow {
   country: string | null;
   region: string | null;
   city: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  geoPrecise: boolean;
   timezone: string | null;
   device: string;
   os: string | null;
@@ -165,4 +168,66 @@ export function breakdowns(rows: VisitRow[]) {
     sources: toCounts(tally(rows, (r) => r.source)),
     pages: toCounts(tally(rows, (r) => r.path), 10),
   };
+}
+
+/** Friendly names for known non-product routes. */
+const PAGE_LABELS: Record<string, string> = {
+  "/": "Beranda",
+  "/about": "Tentang",
+  "/products": "Produk (katalog)",
+  "/gallery": "Galeri",
+  "/contact": "Kontak",
+  "/craftsmanship": "Craftsmanship",
+  "/export": "Export",
+  "/bali": "Bali",
+};
+
+export function pageLabel(path: string): string {
+  if (PAGE_LABELS[path]) return PAGE_LABELS[path];
+  if (path.startsWith("/collections/")) return `Koleksi: ${path.split("/")[2] ?? ""}`;
+  if (path.startsWith("/products/")) return `Produk: ${path.split("/")[2] ?? ""}`;
+  return path;
+}
+
+/** Split page views into product pages and everything else (non-product). */
+export function pagesSplit(rows: VisitRow[]): { products: Count[]; others: Count[] } {
+  const products = rows.filter((r) => r.productSlug);
+  const others = rows.filter((r) => !r.productSlug);
+  return {
+    products: toCounts(tally(products, (r) => pageLabel(r.path)), 10),
+    others: toCounts(tally(others, (r) => pageLabel(r.path)), 10),
+  };
+}
+
+export interface GeoPoint {
+  lat: number;
+  lng: number;
+  count: number;
+  precise: boolean;
+  label: string;
+}
+
+/** Cluster visits that carry coordinates into map points (precise kept finer). */
+export function geoPoints(rows: VisitRow[]): GeoPoint[] {
+  const m = new Map<string, GeoPoint>();
+  for (const r of rows) {
+    if (r.latitude == null || r.longitude == null) continue;
+    const dp = r.geoPrecise ? 4 : 2; // ~11 m precise, ~1 km approximate
+    const lat = Number(r.latitude.toFixed(dp));
+    const lng = Number(r.longitude.toFixed(dp));
+    const key = `${lat},${lng},${r.geoPrecise ? 1 : 0}`;
+    const existing = m.get(key);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      m.set(key, {
+        lat,
+        lng,
+        count: 1,
+        precise: r.geoPrecise,
+        label: [r.city, r.country].filter(Boolean).join(", ") || "Tidak diketahui",
+      });
+    }
+  }
+  return [...m.values()].sort((a, b) => b.count - a.count);
 }

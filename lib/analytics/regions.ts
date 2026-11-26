@@ -68,3 +68,9 @@ export function countryFlag(code: string | null | undefined): string {
       .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)
   );
 }
+
+/** Google Maps search link for a place, e.g. mapsUrl(["Boyolali","Jawa Tengah"]). */
+export function mapsUrl(parts: Array<string | null | undefined>): string {
+  const q = parts.filter((p) => p && p !== "??").join(", ");
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+}

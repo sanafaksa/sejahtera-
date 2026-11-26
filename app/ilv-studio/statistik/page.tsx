@@ -7,12 +7,17 @@ import {
   daily,
   inScope,
   overview,
+  pagesSplit,
   places,
+  geoPoints,
   DEVICE_LABELS,
   type Scope,
   type VisitRow,
 } from "@/lib/analytics/stats";
-import { countryFlag, countryName, provinceName } from "@/lib/analytics/regions";
+import VisitorMap from "@/components/admin/stats/VisitorMap";
+import { countryName, mapsUrl, provinceName } from "@/lib/analytics/regions";
+import Flag from "@/components/admin/stats/Flag";
+import StatsRegionFilter from "@/components/admin/stats/StatsRegionFilter";
 import { ADMIN_TZ, addDays, dateKey, formatDateTime, isValidTimeZone, startOfZonedDay } from "@/lib/timezones";
 import DailyChart from "@/components/admin/stats/DailyChart";
 import BarList from "@/components/admin/stats/BarList";
@@ -39,6 +44,9 @@ async function loadVisits(days: number): Promise<VisitRow[]> {
         country: true,
         region: true,
         city: true,
+        latitude: true,
+        longitude: true,
+        geoPrecise: true,
         timezone: true,
         device: true,
         os: true,
@@ -75,7 +83,7 @@ function StatCard({
 }: {
   icon: typeof Eye;
   label: string;
-  value: string;
+  value: React.ReactNode;
   hint?: string;
 }) {
   return (
@@ -93,12 +101,13 @@ function StatCard({
 export default async function StatistikPage({
   searchParams,
 }: {
-  searchParams: Promise<{ range?: string; tab?: string }>;
+  searchParams: Promise<{ range?: string; tab?: string; region?: string }>;
 }) {
   await requireAdminPage();
   const params = await searchParams;
   const range = RANGES.find((r) => String(r) === params.range) ?? 30;
   const tab: Scope = params.tab === "intl" ? "intl" : "id";
+  const region = params.region ?? "";
 
   const [rows, products, clock] = await Promise.all([
     loadVisits(range),
@@ -109,8 +118,29 @@ export default async function StatistikPage({
   const hour12 = clock.hour12;
   const ov = overview(rows);
   const points = daily(rows, range);
-  const scoped = rows.filter((r) => inScope(r, tab));
+
+  // Rows for the active tab, then optionally narrowed to one province/country.
+  const scopedAll = rows.filter((r) => inScope(r, tab));
+  const regionKey = (r: VisitRow) => (tab === "id" ? r.region : r.country);
+  const scoped = region ? scopedAll.filter((r) => regionKey(r) === region) : scopedAll;
+
+  // Region filter options (most-visited first), built from the unfiltered tab rows.
+  const regionCounts = new Map<string, number>();
+  for (const r of scopedAll) {
+    const k = regionKey(r);
+    if (k) regionCounts.set(k, (regionCounts.get(k) ?? 0) + 1);
+  }
+  const regionOptions = [...regionCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([value, count]) => ({
+      value,
+      label: `${tab === "id" ? provinceName(value) : countryName(value)} (${count})`,
+    }));
+
   const parts = breakdowns(scoped);
+  const pages = pagesSplit(scoped);
+  const mapPoints = geoPoints(scoped);
+  const preciseCount = scoped.filter((r) => r.geoPrecise).length;
   const placeRows =
     tab === "id" ? places(scoped, (r) => r.region) : places(scoped, (r) => r.country);
   const recent = scoped.slice(0, 25);
@@ -153,7 +183,15 @@ export default async function StatistikPage({
         <StatCard
           icon={MapPin}
           label="Negara / kota teratas"
-          value={ov.topCountry ? `${countryFlag(ov.topCountry.code)} ${countryName(ov.topCountry.code)}` : "–"}
+          value={
+            ov.topCountry ? (
+              <span className="inline-flex items-center gap-1.5">
+                <Flag code={ov.topCountry.code} /> {countryName(ov.topCountry.code)}
+              </span>
+            ) : (
+              "–"
+            )
+          }
           hint={ov.topCity ? `${ov.topCity.city} (${ov.topCity.visits} kunjungan)` : undefined}
         />
         <StatCard
@@ -173,8 +211,9 @@ export default async function StatistikPage({
         <DailyChart points={points} />
       </div>
 
-      {/* Tabs */}
-      <div className="border-b border-gray-200 flex gap-6" role="tablist">
+      {/* Tabs + region filter */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+      <div className="border-b border-gray-200 flex gap-6 flex-1" role="tablist">
         {(
           [
             ["id", "Indonesia"],
@@ -198,6 +237,36 @@ export default async function StatistikPage({
             </span>
           </Link>
         ))}
+      </div>
+        {regionOptions.length > 0 && (
+          <StatsRegionFilter
+            value={region}
+            options={regionOptions}
+            basePath={href({})}
+            label={tab === "id" ? "Provinsi" : "Negara"}
+          />
+        )}
+      </div>
+
+      {/* Visitor map */}
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-5 sm:px-6 pt-5 pb-3">
+          <div>
+            <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-[#A8602A]" /> Peta pengunjung
+            </h2>
+            <p className="text-xs text-gray-500 mt-0.5">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#A8602A]" /> perkiraan (IP)
+              </span>
+              <span className="inline-flex items-center gap-1 ml-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-600" /> presisi (GPS,{" "}
+                {preciseCount.toLocaleString("id-ID")})
+              </span>
+            </p>
+          </div>
+        </div>
+        <VisitorMap points={mapPoints} />
       </div>
 
       {/* Places table */}
@@ -224,13 +293,33 @@ export default async function StatistikPage({
                 {placeRows.slice(0, 30).map((p) => (
                   <tr key={p.code} className="border-b border-gray-50 last:border-0">
                     <td className="px-5 sm:px-6 py-2.5 font-medium text-gray-900 whitespace-nowrap">
-                      {tab === "id"
-                        ? p.code === "??"
-                          ? "Tidak diketahui"
-                          : provinceName(p.code)
-                        : `${countryFlag(p.code)} ${countryName(p.code === "??" ? null : p.code)}`}
+                      <span className="inline-flex items-center gap-1.5">
+                        {tab === "intl" && <Flag code={p.code} />}
+                        {tab === "id"
+                          ? p.code === "??"
+                            ? "Tidak diketahui"
+                            : provinceName(p.code)
+                          : countryName(p.code === "??" ? null : p.code)}
+                      </span>
                     </td>
-                    <td className="px-3 py-2.5 whitespace-nowrap">{p.topCity ?? "–"}</td>
+                    <td className="px-3 py-2.5 whitespace-nowrap">
+                      {p.topCity ? (
+                        <a
+                          href={mapsUrl([
+                            p.topCity,
+                            tab === "id" ? provinceName(p.code) : countryName(p.code === "??" ? null : p.code),
+                          ])}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[#A8602A] hover:underline"
+                        >
+                          <MapPin className="w-3.5 h-3.5 shrink-0" />
+                          {p.topCity}
+                        </a>
+                      ) : (
+                        "–"
+                      )}
+                    </td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{p.visits}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{p.unique}</td>
                     <td className="px-3 py-2.5">
@@ -257,7 +346,18 @@ export default async function StatistikPage({
         <BarList title="Browser" items={parts.browsers} />
         <BarList title="Dibuka dari" items={parts.sources} />
       </div>
-      <BarList title="Halaman paling sering dibuka" items={parts.pages} />
+      <div className="grid md:grid-cols-2 gap-4">
+        <BarList
+          title="Halaman non-produk"
+          items={pages.others}
+          empty="Belum ada kunjungan halaman non-produk."
+        />
+        <BarList
+          title="Halaman produk"
+          items={pages.products}
+          empty="Belum ada kunjungan halaman produk."
+        />
+      </div>
 
       {/* Recent visits */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
@@ -287,10 +387,36 @@ export default async function StatistikPage({
                       </td>
                     )}
                     <td className="px-3 py-2.5 whitespace-nowrap">
-                      {countryFlag(r.country)}{" "}
-                      {[r.city, r.country === "ID" ? provinceName(r.region) : countryName(r.country)]
-                        .filter(Boolean)
-                        .join(", ")}
+                      {(() => {
+                        const placeName = [
+                          r.city,
+                          r.country === "ID" ? provinceName(r.region) : countryName(r.country),
+                        ]
+                          .filter(Boolean)
+                          .join(", ");
+                        const inner = (
+                          <span className="inline-flex items-center gap-1.5">
+                            <Flag code={r.country} />
+                            {placeName || "Tidak diketahui"}
+                          </span>
+                        );
+                        return placeName ? (
+                          <a
+                            href={mapsUrl([
+                              r.city,
+                              r.country === "ID" ? provinceName(r.region) : countryName(r.country),
+                            ])}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-[#A8602A] hover:underline"
+                            title="Buka di Google Maps"
+                          >
+                            {inner}
+                          </a>
+                        ) : (
+                          inner
+                        );
+                      })()}
                     </td>
                     <td className="px-3 py-2.5 max-w-56 truncate" title={r.path}>{r.path}</td>
                     <td className="px-3 py-2.5 whitespace-nowrap">

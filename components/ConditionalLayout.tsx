@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import VisitTracker from "@/components/VisitTracker";
 import WhatsAppBubble from "@/components/WhatsAppBubble";
+import LocationConsent from "@/components/LocationConsent";
 
 export default function ConditionalLayout({
   children,
@@ -30,6 +31,7 @@ export default function ConditionalLayout({
       <main className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppBubble />
+      <LocationConsent />
     </>
   );
 }

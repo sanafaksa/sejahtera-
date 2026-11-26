@@ -8,26 +8,64 @@ import { Menu, X, ArrowUpRight, Grid, Mail, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { DEFAULT_HEADER_SETTINGS, type HeaderSettings } from "@/lib/header-settings";
+import { DEFAULT_ANNOUNCEMENT, type Announcement } from "@/lib/announcement";
 
-/** Height of the contact bar above the header, in px. */
-const TOP_BAR_HEIGHT = 36;
+/** Height of the contact bar above the header, in px (a little vertical breathing room). */
+const TOP_BAR_HEIGHT = 44;
+/** Height of the announcement bar when shown, in px. */
+const ANN_HEIGHT = 40;
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  // Contact bar config (editable by superadmin); starts from the defaults.
+  const [bar, setBar] = useState<HeaderSettings>(DEFAULT_HEADER_SETTINGS);
+  const [ann, setAnn] = useState<Announcement>(DEFAULT_ANNOUNCEMENT);
+  const [annDismissed, setAnnDismissed] = useState(false);
+  const showAnn = ann.enabled && ann.text.trim().length > 0 && !annDismissed;
+  const barHeight = (bar.enabled ? TOP_BAR_HEIGHT : 0) + (showAnn ? ANN_HEIGHT : 0);
   // The contact bar scrolls away with the page; the fixed header follows it up.
   const [topOffset, setTopOffset] = useState(TOP_BAR_HEIGHT);
   const pathname = usePathname();
 
   useEffect(() => {
+    fetch("/api/header-settings")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => d && setBar((prev) => ({ ...prev, ...d })))
+      .catch(() => undefined);
+    fetch("/api/announcement")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: Announcement | null) => {
+        if (!d) return;
+        setAnn((prev) => ({ ...prev, ...d }));
+        try {
+          if (d.dismissible && localStorage.getItem("ilv_ann") === d.text) setAnnDismissed(true);
+        } catch {
+          /* ignore */
+        }
+      })
+      .catch(() => undefined);
+  }, []);
+
+  const dismissAnn = () => {
+    try {
+      localStorage.setItem("ilv_ann", ann.text);
+    } catch {
+      /* ignore */
+    }
+    setAnnDismissed(true);
+  };
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      setTopOffset(Math.max(0, TOP_BAR_HEIGHT - window.scrollY));
+      setTopOffset(Math.max(0, barHeight - window.scrollY));
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [barHeight]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -49,30 +87,101 @@ export default function Header() {
     return pathname.startsWith(href);
   };
 
-  const phoneDisplay = "+62 8121-3696-772";
   const whatsapp = `https://wa.me/${SITE.telephone.replace(/\D/g, "")}`;
+  const customText = bar.customText?.trim();
+
+  const phoneLink = (
+    <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 sm:gap-2 shrink-0 hover:text-[#e5be9c] transition-colors">
+      <WhatsAppIcon className="w-3.5 h-3.5" />
+      {bar.phone}
+    </a>
+  );
+  const emailLink = (
+    <a href={`mailto:${bar.email}`} className="inline-flex items-center gap-1.5 sm:gap-2 min-w-0 hover:text-[#e5be9c] transition-colors">
+      <Mail className="w-3.5 h-3.5 shrink-0" />
+      <span className="truncate">{bar.email}</span>
+    </a>
+  );
+  const hoursText = bar.showHours ? (
+    <span className="inline-flex items-center gap-2 shrink-0">
+      <Clock className="w-3.5 h-3.5" />
+      {bar.hours} {bar.tzLabel && <span className="text-white/60">({bar.tzLabel})</span>}
+    </span>
+  ) : null;
 
   return (
     <>
-    {/* Contact bar; office hours are hidden on phones to fit the width */}
-    <div className="bg-[#3E2723] text-white/90 text-xs sm:text-[13px]" style={{ height: TOP_BAR_HEIGHT }}>
-      <div className="container mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center justify-between">
-        <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 sm:gap-2 shrink-0 hover:text-[#e5be9c] transition-colors">
-            <WhatsAppIcon className="w-3.5 h-3.5" />
-            {phoneDisplay}
-          </a>
-          <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-1.5 sm:gap-2 min-w-0 hover:text-[#e5be9c] transition-colors">
-            <Mail className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">{SITE.email}</span>
-          </a>
+    {/* Announcement bar (superadmin-managed) */}
+    {showAnn && (
+      <div
+        className="bg-[#A8602A] text-white text-xs sm:text-[13px] font-medium"
+        style={{ height: ANN_HEIGHT }}
+      >
+        <div className="container mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center justify-center gap-3 text-center">
+          <span className="truncate">
+            {ann.text}
+            {ann.link && (
+              <a
+                href={ann.link}
+                target={ann.link.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="ml-2 underline underline-offset-2 font-semibold hover:text-[#ffe9d4] whitespace-nowrap"
+              >
+                {ann.linkLabel || "Selengkapnya"}
+              </a>
+            )}
+          </span>
+          {ann.dismissible && (
+            <button
+              onClick={dismissAnn}
+              aria-label="Tutup pengumuman"
+              className="shrink-0 p-1 rounded-md hover:bg-white/15 transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
-        <p className="hidden md:inline-flex items-center gap-2 shrink-0">
-          <Clock className="w-3.5 h-3.5" />
-          Mon – Fri: 08:00 – 17:00 <span className="text-white/60">(GMT+7)</span>
-        </p>
       </div>
+    )}
+    {/* Contact bar; superadmin can show a custom text, otherwise the default info.
+        `group` + play-state lets the marquee pause while hovered so it can be read/copied. */}
+    {bar.enabled && (
+    <div className="group bg-[#3E2723] text-white/90 text-xs sm:text-[13px] overflow-hidden" style={{ height: TOP_BAR_HEIGHT }}>
+      {customText ? (
+        bar.marquee ? (
+          <div className="animate-marquee h-full items-center whitespace-nowrap group-hover:[animation-play-state:paused]">
+            {[0, 1].map((n) => (
+              <span key={n} className="px-8" aria-hidden={n === 1}>
+                {customText}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <div className="container mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center justify-center text-center">
+            <span className="truncate">{customText}</span>
+          </div>
+        )
+      ) : bar.marquee ? (
+        <div className="animate-marquee h-full items-center gap-10 whitespace-nowrap group-hover:[animation-play-state:paused]">
+          {[0, 1].map((n) => (
+            <div key={n} className="flex items-center gap-10 px-5" aria-hidden={n === 1}>
+              {phoneLink}
+              {emailLink}
+              {hoursText}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="container mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center justify-between">
+          <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+            {phoneLink}
+            {emailLink}
+          </div>
+          {hoursText && <p className="hidden md:inline-flex">{hoursText}</p>}
+        </div>
+      )}
     </div>
+    )}
     <header
       style={{ top: topOffset }}
       className={`fixed left-0 right-0 z-50 transition-[padding,box-shadow] duration-300 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-xs ${

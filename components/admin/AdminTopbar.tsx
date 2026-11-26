@@ -22,6 +22,7 @@ export default function AdminTopbar({ session, onMenuClick }: AdminTopbarProps) 
   const pathname = usePathname() ?? "";
   const title = TITLES.find(([href]) => pathname.startsWith(href))?.[1] ?? "Studio";
   const name = session?.user?.name || "Admin";
+  const roleLabel = session?.user?.role === "superadmin" ? "Superadmin" : "Administrator";
 
   return (
     <header className="sticky top-0 z-30 px-4 sm:px-6 lg:px-8 pt-3 pb-3">
@@ -56,7 +57,7 @@ export default function AdminTopbar({ session, onMenuClick }: AdminTopbarProps) 
         <div className="flex items-center gap-2.5 pl-2 sm:pl-3 sm:border-l border-stone-900/10">
           <div className="text-right hidden sm:block">
             <p className="text-sm font-semibold text-stone-900 leading-tight">{name}</p>
-            <p className="text-xs text-stone-500">Administrator</p>
+            <p className="text-xs text-stone-500">{roleLabel}</p>
           </div>
           <div className="relative">
             <div className="admin-chip w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm">
