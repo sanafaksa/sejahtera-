@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
+  verification: {
+    google: "g0mIDYqQE4u5bZ7KtmyBhyyEBdhVQwNGjweHWf4Tr1k",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
