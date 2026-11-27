@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-// Typing cadence. Kept a touch gentler so it reads as smooth on phones too.
-
 const PHRASES = [
   "Global Artisanry",
   "Handcrafted Luxury",
@@ -21,14 +19,22 @@ const BETWEEN_MS = 350; // pause before typing the next phrase
 /**
  * Hero headline typed out like a typewriter, cycling through phrases. A stable
  * sr-only title carries the accessible name / SEO text; the typed word is
- * decorative. Types smoothly on every screen (phones included); only the OS
- * "reduce motion" setting makes it stay static.
+ * decorative. On phones (and with reduced motion) it stays static.
  */
 export default function RotatingHeadline({ className = "" }: { className?: string }) {
   const [text, setText] = useState(PHRASES[0]);
   const reduce = useReducedMotion();
-  const noAnim = !!reduce;
+  const [isMobile, setIsMobile] = useState(false);
+  const noAnim = reduce || isMobile;
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (noAnim) {
