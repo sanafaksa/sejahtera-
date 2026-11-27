@@ -89,10 +89,14 @@ export default function HeaderSettingsForm({ initial }: { initial: HeaderSetting
           ) : text ? (
             s.marquee ? (
               <div className="animate-marquee h-full items-center whitespace-nowrap group-hover:[animation-play-state:paused]">
-                {[0, 1].map((n) => (
-                  <span key={n} className="px-8">
-                    {text}
-                  </span>
+                {[0, 1].map((half) => (
+                  <div key={half} className="flex items-center shrink-0">
+                    {[0, 1, 2].map((i) => (
+                      <span key={i} className="px-8">
+                        {text}
+                      </span>
+                    ))}
+                  </div>
                 ))}
               </div>
             ) : (

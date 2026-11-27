@@ -146,14 +146,20 @@ export default function Header() {
     {/* Contact bar; superadmin can show a custom text, otherwise the default info.
         `group` + play-state lets the marquee pause while hovered so it can be read/copied. */}
     {bar.enabled && (
-    <div className="group bg-[#3E2723] text-white/90 text-xs sm:text-[13px] overflow-hidden" style={{ height: TOP_BAR_HEIGHT }}>
+    <div className="group leather-grain bg-[#3E2723] text-white/90 text-xs sm:text-[13px] overflow-hidden" style={{ height: TOP_BAR_HEIGHT }}>
       {customText ? (
         bar.marquee ? (
+          // Two identical halves (each repeats the text) so the loop is seamless
+          // even when the text is shorter than the screen. -50% == one half.
           <div className="animate-marquee h-full items-center whitespace-nowrap group-hover:[animation-play-state:paused]">
-            {[0, 1].map((n) => (
-              <span key={n} className="px-8" aria-hidden={n === 1}>
-                {customText}
-              </span>
+            {[0, 1].map((half) => (
+              <div key={half} className="flex items-center shrink-0" aria-hidden={half === 1}>
+                {[0, 1, 2].map((i) => (
+                  <span key={i} className="px-8">
+                    {customText}
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
         ) : (

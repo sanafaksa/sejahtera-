@@ -159,6 +159,37 @@ body {
     pointer-events: none;
   }
 
+  /* Typewriter caret blink */
+  .caret-blink {
+    animation: caret-blink 1s step-end infinite;
+  }
+  @keyframes caret-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Leather grain overlay only (keeps the element's own background colour) */
+  .leather-grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .leather-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='lg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.018' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23lg)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   /* Copper shimmer effect */
   .copper-shimmer {
     position: relative;

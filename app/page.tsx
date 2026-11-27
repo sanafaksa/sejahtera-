@@ -29,6 +29,7 @@ import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import { SITE, SITE_KEYWORDS, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/site";
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
+import RotatingHeadline from "@/components/hero/RotatingHeadline";
 import CopperTubShowcase from "@/components/hero/CopperTubShowcase";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
@@ -155,18 +156,18 @@ export default async function Home() {
       {/* =========================================================================
           HERO SECTION - EXACT MATCH TO REFERENCE MOCKUP
           ========================================================================= */}
-      <section className="relative overflow-hidden bg-[#faf6f1] pt-24 sm:pt-28 lg:pt-32">
+      <section className="relative overflow-hidden bg-[#eef0f2] pt-24 sm:pt-28 lg:pt-32">
         {/* Semi-transparent showroom background image */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
             src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=60"
             alt="Modern Showroom Living Interior Background"
             fill
-            className="object-cover object-center opacity-22 filter saturate-90"
+            className="object-cover object-center opacity-[0.14] filter grayscale"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#faf6f1]/80 via-[#f8f2ea]/88 to-[#f3e7dc]/95 backdrop-blur-[0.5px]" />
-          <div className="absolute top-1/4 left-1/3 w-[650px] h-[650px] bg-gradient-to-br from-[#f8e6d5]/55 to-transparent rounded-full blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#eef0f2]/80 via-[#e9ebee]/88 to-[#e1e4e8]/95 backdrop-blur-[0.5px]" />
+          <div className="absolute top-1/4 left-1/3 w-[650px] h-[650px] bg-gradient-to-br from-[#dfe3e8]/55 to-transparent rounded-full blur-3xl" />
         </div>
 
         {/* Floating Vertical Social Media Dock on the far right edge */}
@@ -204,10 +205,7 @@ export default async function Home() {
           {/* 1. Giant Bold Text Across The Top */}
           <FadeInView direction="up" delay={0.05}>
             <div className="overflow-visible mb-2 sm:mb-4">
-              <h1 className="font-extrabold uppercase tracking-tight text-[#16120e] text-[12vw] sm:text-[10.5vw] lg:text-[7.2rem] xl:text-[8.4rem] leading-[0.88] select-none text-left font-display">
-                CRAFTED LUXURY
-                <span className="sr-only">: handcrafted copper and brass from Tumang, Indonesia</span>
-              </h1>
+              <RotatingHeadline className="font-bold tracking-tight text-[#16120e] text-[clamp(1.2rem,5.3vw,4.25rem)] leading-[1.08] whitespace-nowrap select-none text-left font-display" />
             </div>
           </FadeInView>
 
@@ -270,7 +268,7 @@ export default async function Home() {
                     className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full copper-metal relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300 group"
                   >
                     <span className="text-sm font-semibold text-white">
-                      Contact Us
+                      Custom Inquiry
                     </span>
                     <span className="w-8 h-8 rounded-full copper-metal relative overflow-hidden ring-1 ring-black/25 flex items-center justify-center shadow-sm">
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
