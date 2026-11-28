@@ -84,7 +84,7 @@ export default function BaliPage() {
   return (
     <MarketLandingPage
       path="/bali"
-      name="Bali"
+      name="Bali Villas & Resorts"
       heroTitle="Handcrafted Copper & Brass for Bali Villas, Hotels & Resorts"
       heroDescription={DESCRIPTION}
       intro={
@@ -115,10 +115,8 @@ export default function BaliPage() {
         "sovereign-brass-double-slipper-bathtub",
         "artisanal-copper-countertop-wash-basin",
         "imperial-nabawi-brass-grand-entrance-door",
-        "tumang-hand-spun-copper-pendant-dome",
-        "moroccan-filigree-brass-chandelier",
         "sculptural-kaligrafi-copper-wall-panel",
-        "tumang-fluted-copper-urn-planter",
+        "moroccan-filigree-brass-chandelier",
       ]}
       extraContent={
         <>

@@ -40,6 +40,8 @@ export default function ExportPage() {
           <p>
             Browse the <Link href="/products">product catalog</Link>, see how pieces are made on{" "}
             <Link href="/craftsmanship">our craftsmanship page</Link>, or <Link href="/contact">request a quotation</Link>.
+            Working on a project in Bali? See our{" "}
+            <Link href="/bali">copper products for Bali villas and resorts</Link>.
           </p>
         </>
       }

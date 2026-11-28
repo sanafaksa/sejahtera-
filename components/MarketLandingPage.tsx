@@ -100,7 +100,7 @@ export default async function MarketLandingPage({
   return (
     <main className="min-h-screen bg-[#faf8f5]">
       <JsonLd data={structuredData} />
-      <PageHero title={heroTitle} description={heroDescription} fadeTo="#faf8f5" />
+      <PageHero crumb={name} title={heroTitle} description={heroDescription} fadeTo="#faf8f5" />
 
       {/* Intro */}
       <section className="pb-12 sm:pb-16">
