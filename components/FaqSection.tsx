@@ -17,7 +17,7 @@ const FAQ_DATA: FaqItem[] = [
     category: "Bespoke & Custom Orders",
     question: "Does Ilavioo accept custom commissions based on architectural drawings?",
     answer:
-      "Yes, absolutely. The majority of our creations are tailored custom commissions (bespoke). You can share rough sketches, architectural elevations, 2D/3D CAD blueprints, or reference imagery with specific dimensions. Our technical team and master coppersmiths in Tumang carefully assess sheet thickness, internal steel reinforcement, and on-site mounting practicalities before hand-hammering commences.",
+      "Yes, absolutely. The majority of our creations are tailored custom commissions (bespoke). You can share rough sketches, architectural elevations, 2D/3D CAD blueprints, or reference imagery with specific dimensions. Our technical team and master coppersmiths in Boyolali carefully assess sheet thickness, internal steel reinforcement, and on-site mounting practicalities before hand-hammering commences.",
   },
   {
     category: "Materials & Purity",
@@ -35,7 +35,7 @@ const FAQ_DATA: FaqItem[] = [
     category: "Shipping & Global Export",
     question: "How do you handle domestic shipping and international export freight?",
     answer:
-      "We have extensive experience dispatching handcrafted pieces throughout Indonesia and exporting to over 16 countries across North America, Europe, the Middle East, and Asia. Every item is protected with multi-layered high-density foam, heavy cushioning, and custom ISPM-15 certified fumigated wooden crates, fully backed by door-to-door transit insurance from our Tumang workshop directly to your project destination.",
+      "We have extensive experience dispatching handcrafted pieces throughout Indonesia and exporting to over 16 countries across North America, Europe, the Middle East, and Asia. Every item is protected with multi-layered high-density foam, heavy cushioning, and custom ISPM-15 certified fumigated wooden crates, fully backed by door-to-door transit insurance from our Boyolali workshop directly to your project destination.",
   },
   {
     category: "Care & Maintenance",
@@ -51,9 +51,9 @@ const FAQ_DATA: FaqItem[] = [
   },
   {
     category: "Workshop Visits & Gallery",
-    question: "Can I visit your artisan workshop and showroom in Tumang?",
+    question: "Can I visit your artisan workshop and showroom in Boyolali?",
     answer:
-      "Yes, we warmly welcome architects, interior designers, and collectors to experience our heritage forging process firsthand at our workshop in Tumang, Boyolali, Central Java. However, to ensure that our master craftsmen and architectural consultants are available to guide you and prepare relevant material samples, workshop visits are by appointment only. Please contact us in advance to schedule your visit before traveling.",
+      "Yes, we warmly welcome architects, interior designers, and collectors to experience our heritage forging process firsthand at our workshop in Boyolali, Central Java. However, to ensure that our master craftsmen and architectural consultants are available to guide you and prepare relevant material samples, workshop visits are by appointment only. Please contact us in advance to schedule your visit before traveling.",
     highlightNote:
       "Notice: Workshop visits are strictly by appointment only. Please contact us via WhatsApp or email prior to your visit so our team can prepare to welcome you.",
   },

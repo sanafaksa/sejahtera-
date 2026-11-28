@@ -322,7 +322,7 @@ export default function ContactPage() {
                           Address
                         </p>
                         <p className="text-gray-700">
-                          Jl. Raya Boyolali - Semarang, Tumang
+                          Jl. Raya Boyolali - Semarang, Boyolali
                           <br />
                           Boyolali, Central Java, Indonesia
                         </p>
@@ -348,7 +348,7 @@ export default function ContactPage() {
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-100">
                   <div className="aspect-video bg-gray-100">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56347862248!2d110.59373845820312!3d-7.470445900000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1418e0a9be29%3A0x5027a76b021e0!2sTumang%2C%20Cepogo%2C%20Boyolali%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1234567890"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56347862248!2d110.59373845820312!3d-7.470445900000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1418e0a9be29%3A0x5027a76b021e0!2sBoyolali%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1234567890"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}

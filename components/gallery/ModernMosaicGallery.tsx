@@ -179,7 +179,7 @@ export default function ModernMosaicGallery({ initialItems = [] }: Props) {
                         {item.title || "Handcrafted Masterpiece"}
                       </h4>
                       <p className="text-xs text-stone-300 line-clamp-1">
-                        {item.description || "Authentic Tumang Copper Craft"}
+                        {item.description || "Authentic Boyolali Copper Craft"}
                       </p>
                     </div>
                     <span className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">

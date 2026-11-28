@@ -41,7 +41,7 @@ const gallerySeedData = [
     isFeatured: false,
   },
   {
-    title: "Tumang Master Coppersmith Craftsmanship",
+    title: "Boyolali Master Coppersmith Craftsmanship",
     description: "Behind the scenes of our master artisans shaping raw metal with heat, anvil, and hammer.",
     url: "/assets/by-aksa.mp4",
     type: "video",
@@ -68,7 +68,7 @@ const gallerySeedData = [
     isFeatured: true,
   },
   {
-    title: "Bespoke Tumang Dome Pendant Fixture",
+    title: "Bespoke Boyolali Dome Pendant Fixture",
     description: "Hand-spun copper dome lamp with antique burnished exterior.",
     url: "/assets/products/catalog-craft-69.jpg",
     type: "image",

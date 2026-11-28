@@ -76,7 +76,7 @@ export default function RotatingHeadline({ className = "" }: { className?: strin
   return (
     <h1 className={className}>
       <span className="sr-only">
-        Ilavioo — handcrafted copper and brass from Tumang, Indonesia
+        Ilavioo — handcrafted copper and brass from Boyolali, Indonesia
       </span>
       <span aria-hidden="true">
         {text}

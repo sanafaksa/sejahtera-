@@ -6,16 +6,16 @@ import JsonLd from "@/components/JsonLd";
 import { CATEGORIES } from "@/lib/categories";
 import { SITE, pageMetadata, webPageStructuredData } from "@/lib/site";
 
-const TITLE = "Copper Craftsmanship: Handmade in Tumang, Indonesia";
+const TITLE = "Copper Craftsmanship: Handmade in Boyolali, Indonesia";
 const DESCRIPTION =
-  "Hand-hammered copper and brass craftsmanship from Tumang, Indonesia's copper village. See how our artisans shape, emboss and finish every piece by hand.";
+  "Hand-hammered copper and brass craftsmanship from Boyolali, Indonesia's copper village. See how our artisans shape, emboss and finish every piece by hand.";
 
 export const metadata = pageMetadata({
   title: TITLE,
   description: DESCRIPTION,
   path: "/craftsmanship",
   keywords: ["handmade craftsmanship","hand-hammered copper","repousse","traditional metalworking","artisan made","coppersmith"],
-  images: [{ url: "/assets/copper-hero-craft.jpg", alt: "Coppersmith hammering a copper piece in Tumang" }],
+  images: [{ url: "/assets/copper-hero-craft.jpg", alt: "Coppersmith hammering a copper piece in Boyolali" }],
 });
 
 const steps = [
@@ -58,12 +58,12 @@ const steps = [
 
 const qa = [
   {
-    q: "What makes Tumang copper craftsmanship special?",
-    a: "Tumang, in Cepogo, Boyolali, Central Java, is a village where copper and brass have been worked by hand for generations. Skills such as raising, hammering and repoussé are passed from one craftsman to the next, which is why the village is known across Indonesia for metalwork.",
+    q: "What makes Boyolali copper craftsmanship special?",
+    a: "Boyolali, in Central Java, is an area where copper and brass have been worked by hand for generations. Skills such as raising, hammering and repoussé are passed from one craftsman to the next, which is why the village is known across Indonesia for metalwork.",
   },
   {
     q: "Is every Ilavioo piece really handmade?",
-    a: "Yes. Pieces are shaped, hammered and finished by hand in our workshop in Tumang. Because of that, no two pieces are exactly the same: small variations in hammer marks and colour are a sign of handwork, not a defect.",
+    a: "Yes. Pieces are shaped, hammered and finished by hand in our workshop in Boyolali. Because of that, no two pieces are exactly the same: small variations in hammer marks and colour are a sign of handwork, not a defect.",
   },
   {
     q: "Can you make a custom design?",
@@ -94,8 +94,8 @@ export default function CraftsmanshipPage() {
       />
       <PageHero
         title="Copper Craftsmanship"
-        titleAccent="from Tumang"
-        description="Every Ilavioo piece is hammered, embossed and finished by hand by coppersmiths in Tumang, Indonesia's copper village."
+        titleAccent="from Boyolali"
+        description="Every Ilavioo piece is hammered, embossed and finished by hand by coppersmiths in Boyolali, Indonesia's copper village."
         fadeTo="#faf8f5"
       />
 
@@ -108,7 +108,7 @@ export default function CraftsmanshipPage() {
             and from every angle.
           </p>
           <p>
-            Ilavioo works in Tumang, a village in Cepogo, Boyolali, Central Java, where copper and brass have been
+            Ilavioo works in Boyolali, Central Java, where copper and brass have been
             worked by hand for generations. Our craftsmen bring more than 30 years of experience to making
             bathtubs, sinks, doors, wall panels, lighting and decor for homes, hotels and villas in Bali and around the
             world.

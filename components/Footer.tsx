@@ -59,7 +59,7 @@ export default function Footer() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <Image
           src="/assets/copper-showroom-gallery.jpg"
-          alt="Tumang Copper Showroom Gallery"
+          alt="Boyolali Copper Showroom Gallery"
           fill
           className="object-cover object-center opacity-65 sm:opacity-70 filter saturate-125 contrast-105"
           sizes="100vw"
@@ -96,7 +96,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-[#c7ad99] leading-relaxed mb-6 font-medium drop-shadow-xs">
-              Preserving the heritage of Tumang copper craftsmanship through
+              Preserving the heritage of Boyolali copper craftsmanship through
               generations of skilled artisans creating timeless pieces.
             </p>
             <div className="flex gap-3">
@@ -166,14 +166,14 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Tumang%2C+Cepogo%2C+Boyolali%2C+Central+Java%2C+Indonesia"
+                  href="https://www.google.com/maps/search/?api=1&query=Boyolali%2C+Central+Java%2C+Indonesia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 text-[#c7ad99] hover:text-[#e8b58f] transition-colors duration-300 font-medium"
                 >
                   <MapPin className="w-5 h-5 text-[#b87333] flex-shrink-0 mt-0.5" />
                   <span className="leading-relaxed">
-                    Tumang, Boyolali
+                    Boyolali
                     <br />
                     Central Java, Indonesia
                   </span>

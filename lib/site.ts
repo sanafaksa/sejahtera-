@@ -19,9 +19,9 @@ export const SITE_URL = resolveSiteUrl();
 export const SITE = {
   name: "Ilavioo",
   legalName: "PT. Ilavioo Nusantara Sejahtera",
-  tagline: "Handcrafted Copper & Brass from Tumang",
+  tagline: "Handcrafted Copper & Brass from Boyolali",
   description:
-    "Handcrafted copper and brass bathtubs, basins, lighting and doors from Tumang, Indonesia. Made to order for Bali villas and clients in 16+ countries.",
+    "Handcrafted copper and brass bathtubs, basins, lighting and doors from Boyolali, Indonesia. Made to order for Bali villas and clients in 16+ countries.",
   email: "marketing@ilavioo.com",
   /** Official profiles (same as the footer). Used for links and schema sameAs. */
   social: {
@@ -34,7 +34,7 @@ export const SITE = {
   logo: "/assets/ilavioo-logo-horizontal.png",
   ogImage: "/assets/hero-luxury-bath-suite.jpg",
   address: {
-    locality: "Tumang, Cepogo, Boyolali",
+    locality: "Boyolali",
     region: "Central Java",
     country: "ID",
   },
@@ -51,7 +51,7 @@ export const SITE_KEYWORDS = [
   "handmade copper and brass",
   "copper bathtub manufacturer",
   "Indonesian copper craft",
-  "Tumang copper village",
+  "Boyolali copper village",
   "copper products exporter Indonesia",
   "copper bathtub Bali",
   "worldwide shipping",
@@ -98,7 +98,7 @@ export function pageMetadata({
   const socialTitle = title ? `${title} | ${SITE.name}` : DEFAULT_TITLE;
   const ogImages = images?.length
     ? images
-    : [{ url: SITE.ogImage, alt: "Handcrafted copper bathtub by Ilavioo, Tumang" }];
+    : [{ url: SITE.ogImage, alt: "Handcrafted copper bathtub by Ilavioo, Boyolali" }];
   return {
     ...(title ? { title } : {}),
     description,

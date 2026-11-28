@@ -43,7 +43,7 @@ const HERITAGE_CARDS = [
   },
   {
     tag: "Living Accents",
-    title: "Tumang Heritage Sculptures",
+    title: "Boyolali Heritage Sculptures",
     image: "/assets/products/copper-5.jpg",
     alt: "Handcrafted Copper Living Furniture",
   },
@@ -244,7 +244,7 @@ export default async function Home() {
                       125+
                     </span>
                     <span className="text-[11px] sm:text-xs text-stone-500 font-medium">
-                      Happy customers worldwide
+                      Happy clients worldwide
                     </span>
                   </div>
                 </div>
@@ -258,7 +258,7 @@ export default async function Home() {
 
               <FadeInView direction="up" delay={0.35}>
                 <p className="text-sm sm:text-base text-stone-600 leading-relaxed mb-8 max-w-lg">
-                  Bespoke copper, brass, and aluminium creations forged by master artisans with over three decades of heritage. Tailored to your exact specifications and exported across the globe.
+                  Bespoke copper, brass, and aluminium pieces forged by master artisans with over 30 years of heritage in Boyolali, Indonesia. Because every piece is shaped entirely by hand, no two creations are ever identical.
                 </p>
               </FadeInView>
 
@@ -269,7 +269,7 @@ export default async function Home() {
                     className="inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full copper-metal relative overflow-hidden hover:brightness-[1.06] transition-[filter] duration-300 group"
                   >
                     <span className="text-sm font-semibold text-white">
-                      Custom Inquiry
+                      Custom Enquiry
                     </span>
                     <span className="w-8 h-8 rounded-full copper-metal relative overflow-hidden ring-1 ring-black/25 flex items-center justify-center shadow-sm">
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -280,7 +280,7 @@ export default async function Home() {
                     href="/products"
                     className="text-xs sm:text-sm font-semibold text-stone-600 hover:text-[#b87333] underline-offset-4 hover:underline transition-colors px-2 py-2"
                   >
-                    Browse Catalog
+                    Browse Catalogue
                   </Link>
                 </div>
               </FadeInView>
@@ -313,61 +313,61 @@ export default async function Home() {
             <div className="container mx-auto relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <ParallaxSection offset={-50} className="lg:col-span-4 xl:col-span-4">
-                <FadeInView
-                  direction="up"
-                  delay={0.2}
-                  className="flex flex-col justify-between space-y-6"
-                >
-                  <div>
-                    <span className="text-[11px] font-semibold tracking-widest text-[#9e5b24] uppercase block mb-3">
-                      Tumang Craft Heritage
-                    </span>
-                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#17120d] leading-tight">
-                      Modern Copper For Stylish Interiors
-                    </h3>
-                  </div>
-
-                  <div className="flex items-center gap-4 pt-2">
-                    <div className="w-14 h-14 rounded-2xl bg-[#f6f1eb] shadow-[5px_5px_12px_rgba(166,138,110,0.35),-5px_-5px_12px_rgba(255,255,255,0.95)] flex items-center justify-center text-[#b87333]">
-                      <Armchair className="w-7 h-7 text-[#b87333]" />
-                    </div>
+                  <FadeInView
+                    direction="up"
+                    delay={0.2}
+                    className="flex flex-col justify-between space-y-6"
+                  >
                     <div>
-                      <div className="font-display text-2xl sm:text-3xl font-bold text-[#17120d]">
-                        150+
+                      <span className="text-[11px] font-semibold tracking-widest text-[#9e5b24] uppercase block mb-3">
+                        Boyolali Craft Heritage
+                      </span>
+                      <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#17120d] leading-tight">
+                        Modern Copper For Stylish Interiors
+                      </h3>
+                    </div>
+
+                    <div className="flex items-center gap-4 pt-2">
+                      <div className="w-14 h-14 rounded-2xl bg-[#f6f1eb] shadow-[5px_5px_12px_rgba(166,138,110,0.35),-5px_-5px_12px_rgba(255,255,255,0.95)] flex items-center justify-center text-[#b87333]">
+                        <Armchair className="w-7 h-7 text-[#b87333]" />
                       </div>
-                      <div className="text-xs text-stone-500 font-medium">
-                        Luxury items in stock
+                      <div>
+                        <div className="font-display text-2xl sm:text-3xl font-bold text-[#17120d]">
+                          150+
+                        </div>
+                        <div className="text-xs text-stone-500 font-medium">
+                          Luxury items in stock
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </FadeInView>
+                  </FadeInView>
                 </ParallaxSection>
 
                 <div className="lg:col-span-8 xl:col-span-8">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
                     {HERITAGE_CARDS.map((card, i) => (
                       <ParallaxSection key={card.title} offset={[-72, -40, -8][i] ?? -40} className="h-full">
-                      <FadeInView direction="up" delay={0.35 + i * 0.15} className="h-full">
-                        <div className="h-full rounded-[26px] bg-[#f6f1eb] p-4 text-[#1a120b] shadow-[10px_10px_24px_rgba(166,138,110,0.35),-10px_-10px_24px_rgba(255,255,255,0.95)] hover:shadow-[inset_6px_6px_14px_rgba(166,138,110,0.3),inset_-6px_-6px_14px_rgba(255,255,255,0.9)] transition-all duration-300 group flex flex-col justify-between">
-                          <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-stone-100 mb-3 shadow-[inset_3px_3px_8px_rgba(166,138,110,0.3),inset_-3px_-3px_8px_rgba(255,255,255,0.8)]">
-                            <Image
-                              src={card.image}
-                              alt={card.alt}
-                              fill
-                              className="object-cover group-hover:scale-108 transition-transform duration-500"
-                              sizes="(max-width: 768px) 100vw, 25vw"
-                            />
+                        <FadeInView direction="up" delay={0.35 + i * 0.15} className="h-full">
+                          <div className="h-full rounded-[26px] bg-[#f6f1eb] p-4 text-[#1a120b] shadow-[10px_10px_24px_rgba(166,138,110,0.35),-10px_-10px_24px_rgba(255,255,255,0.95)] hover:shadow-[inset_6px_6px_14px_rgba(166,138,110,0.3),inset_-6px_-6px_14px_rgba(255,255,255,0.9)] transition-all duration-300 group flex flex-col justify-between">
+                            <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-stone-100 mb-3 shadow-[inset_3px_3px_8px_rgba(166,138,110,0.3),inset_-3px_-3px_8px_rgba(255,255,255,0.8)]">
+                              <Image
+                                src={card.image}
+                                alt={card.alt}
+                                fill
+                                className="object-cover group-hover:scale-108 transition-transform duration-500"
+                                sizes="(max-width: 768px) 100vw, 25vw"
+                              />
+                            </div>
+                            <div>
+                              <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] block mb-0.5">
+                                {card.tag}
+                              </span>
+                              <h4 className="text-sm font-bold text-stone-900 group-hover:text-[#b87333] transition-colors leading-snug">
+                                {card.title}
+                              </h4>
+                            </div>
                           </div>
-                          <div>
-                            <span className="text-[10px] uppercase font-bold tracking-wider text-[#9e5b24] block mb-0.5">
-                              {card.tag}
-                            </span>
-                            <h4 className="text-sm font-bold text-stone-900 group-hover:text-[#b87333] transition-colors leading-snug">
-                              {card.title}
-                            </h4>
-                          </div>
-                        </div>
-                      </FadeInView>
+                        </FadeInView>
                       </ParallaxSection>
                     ))}
                   </div>
@@ -658,10 +658,10 @@ export default async function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/60 backdrop-blur-xl ring-1 ring-white/80 shadow-[0_8px_30px_-10px_rgba(30,15,5,0.35)] p-4 sm:p-5">
                     <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-1.5">
-                  Living & Garden Accents
+                      Living & Garden Accents
                     </h3>
                     <p className="text-sm text-stone-700 leading-relaxed">
-                  Hand-hammered copper planters and vessels that bring warmth and a living patina to homes, terraces and hotel lobbies.
+                      Hand-hammered copper planters and vessels that bring warmth and a living patina to homes, terraces and hotel lobbies.
                     </p>
                   </div>
                 </div>
@@ -683,24 +683,24 @@ export default async function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/60 backdrop-blur-xl ring-1 ring-white/80 shadow-[0_8px_30px_-10px_rgba(30,15,5,0.35)] p-4 sm:p-5">
                     <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-1.5">
-                  Decor & Tableware
+                      Decor & Tableware
                     </h3>
                     <p className="text-sm text-stone-700 leading-relaxed">
-                  Wall art, mirrors, bowls and serving pieces in copper and brass, each finished by hand to make a room feel welcoming.
+                      Wall art, mirrors, bowls and serving pieces in copper and brass, each finished by hand to make a room feel welcoming.
                     </p>
                   </div>
                 </div>
               </div>
             </FadeInView>
 
-            {/* Card 3: Made by Tumang Artisans */}
+            {/* Card 3: Made by Boyolali Artisans */}
             <FadeInView direction="up" delay={0.3}>
               {/* Glass frame around the photo, glass caption panel over it */}
               <div className="group rounded-[28px] p-2 bg-white/35 backdrop-blur-xl ring-1 ring-white/70 shadow-[0_24px_50px_-22px_rgba(60,30,10,0.45)] transition-transform duration-500 hover:-translate-y-1">
                 <div className="relative aspect-[3/4] rounded-[22px] overflow-hidden bg-stone-200">
                   <Image
                     src="/assets/products/copper-3.jpg"
-                    alt="A Tumang artisan hand-hammering a copper vessel"
+                    alt="A Boyolali artisan hand-hammering a copper vessel"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -708,10 +708,10 @@ export default async function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/60 backdrop-blur-xl ring-1 ring-white/80 shadow-[0_8px_30px_-10px_rgba(30,15,5,0.35)] p-4 sm:p-5">
                     <h3 className="font-display text-lg sm:text-xl font-semibold text-[#17120d] group-hover:text-[#A8602A] transition-colors mb-1.5">
-                  Made by Tumang Artisans
+                      Made by Boyolali Artisans
                     </h3>
                     <p className="text-sm text-stone-700 leading-relaxed">
-                  Every piece is shaped in our Boyolali workshop by coppersmiths using techniques passed down through generations.
+                      Every piece is shaped in our Boyolali workshop by coppersmiths using techniques passed down through generations.
                     </p>
                   </div>
                 </div>

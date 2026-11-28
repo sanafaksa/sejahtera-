@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/site";
 export const revalidate = 3600;
 
 const DESCRIPTION =
-  "Handcrafted copper bathtubs, basins, lighting and brass doors for Bali villas, resorts and homes. Made to order in Tumang, Java and delivered to Bali.";
+  "Handcrafted copper bathtubs, basins, lighting and brass doors for Bali villas, resorts and homes. Made to order in Boyolali, Central Java and delivered to Bali.";
 
 export const metadata: Metadata = pageMetadata({
   title: "Copper Bathtubs & Brass Doors for Bali Villas",
@@ -26,7 +26,7 @@ export default function BaliPage() {
       intro={
         <>
           <p>
-            Ilavioo makes copper and brass pieces by hand in <strong>Tumang, Boyolali (Central Java)</strong>, a village
+            Ilavioo makes copper and brass pieces by hand in <strong>Boyolali, Central Java</strong>, a village
             known for generations of coppersmiths. For villa owners, resort and hotel developers, interior designers and
             architects in <strong>Bali</strong>, we produce statement pieces that suit tropical, open-air living: freestanding
             copper bathtubs, hammered basins and sinks, pendant lights and chandeliers, carved brass entrance doors and
@@ -66,7 +66,7 @@ export default function BaliPage() {
           text: "We review the design and send a quotation with price, production time for that type of piece, and delivery to your Bali address.",
         },
         {
-          title: "Hand-made in Tumang",
+          title: "Hand-made in Boyolali",
           text: "Our coppersmiths shape, hammer and finish your piece by hand in solid copper or brass.",
         },
         {
@@ -77,7 +77,7 @@ export default function BaliPage() {
       qa={[
         {
           q: "Do you deliver to Bali?",
-          a: "Yes. We send handcrafted pieces throughout Indonesia, including Bali. Delivery is arranged from our workshop in Tumang, Central Java to your address, with protective crating and transit insurance. The delivery cost is stated in your quotation.",
+          a: "Yes. We send handcrafted pieces throughout Indonesia, including Bali. Delivery is arranged from our workshop in Boyolali, Central Java to your address, with protective crating and transit insurance. The delivery cost is stated in your quotation.",
         },
         {
           q: "How long does production take?",
@@ -97,7 +97,7 @@ export default function BaliPage() {
         },
         {
           q: "Can I see the workshop?",
-          a: "Yes, you are welcome to visit our workshop in Tumang, Boyolali, Central Java by appointment. Please contact us before you travel so our team can prepare for your visit.",
+          a: "Yes, you are welcome to visit our workshop in Boyolali, Central Java by appointment. Please contact us before you travel so our team can prepare for your visit.",
         },
       ]}
       ctaTitle="Planning a villa, resort or renovation in Bali?"

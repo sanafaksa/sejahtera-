@@ -26,7 +26,7 @@ export default function ExportPage() {
       intro={
         <>
           <p>
-            Ilavioo (PT. Ilavioo Nusantara Sejahtera) is a copper and brass workshop in <strong>Tumang, Boyolali, Central
+            Ilavioo (PT. Ilavioo Nusantara Sejahtera) is a copper and brass workshop in <strong>Boyolali, Central
             Java, Indonesia</strong>. We hand-make bathtubs, basins and sinks, pendant lights and chandeliers, carved brass
             doors, wall panels and decor for clients abroad, and have exported to <strong>more than 16 countries</strong>{" "}
             across North America, Europe, the Middle East and Asia.
@@ -66,7 +66,7 @@ export default function ExportPage() {
         },
         {
           title: "Handmade production",
-          text: "Your order is shaped, hammered and finished by hand in our Tumang workshop in solid copper or brass.",
+          text: "Your order is shaped, hammered and finished by hand in our Boyolali workshop in solid copper or brass.",
         },
         {
           title: "Crating and export",

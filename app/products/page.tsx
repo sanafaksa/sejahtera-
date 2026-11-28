@@ -38,7 +38,7 @@ async function getProducts(searchParams: SearchParams) {
 const PRODUCTS_META = pageMetadata({
   title: "Handcrafted Copper & Brass Products",
   description:
-    "Explore handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia. Bespoke sizes and worldwide shipping.",
+    "Explore handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Boyolali, Indonesia. Bespoke sizes and worldwide shipping.",
   path: "/products",
   keywords: ["copper bathtubs","copper sinks","brass doors","copper lamps","copper home decor","buy handmade copper"],
 });
@@ -158,7 +158,7 @@ export default async function ProductsPage({
             path: "/products",
             name: "Products",
             description:
-              "Handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Tumang, Indonesia.",
+              "Handcrafted copper and brass bathtubs, basins, lighting, doors and decor from Boyolali, Indonesia.",
             extra: {
               mainEntity: {
                 "@type": "ItemList",
@@ -176,7 +176,7 @@ export default async function ProductsPage({
       )}
       <PageHero
         title="Copper & Brass Products"
-        description="Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Tumang, Boyolali."
+        description="Discover bespoke architectural fixtures, soaking tubs, chandeliers, and vessels forged by master artisans from Boyolali."
         fadeTo="#faf8f5"
       >
         <ProductsFilter />

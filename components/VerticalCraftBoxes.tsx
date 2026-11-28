@@ -50,7 +50,7 @@ const craftBoxes: CraftBox[] = [
   {
     id: 4,
     src: "/assets/products/showcase-4.jpg",
-    title: "Tumang Artisan Doors",
+    title: "Boyolali Artisan Doors",
     tag: "Heritage Architecture",
     floatY: [0, 7, 0],
     floatDuration: 6.0,

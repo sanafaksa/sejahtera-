@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
                 <div className="relative hidden md:block min-h-[560px] m-2.5 rounded-[1.5rem] overflow-hidden">
                   <Image
                     src="/assets/copper-showroom-gallery.jpg"
-                    alt="Showroom tembaga dan kuningan Ilavioo di Tumang"
+                    alt="Showroom tembaga dan kuningan Ilavioo di Boyolali"
                     fill
                     priority
                     sizes="(min-width: 768px) 460px, 0px"

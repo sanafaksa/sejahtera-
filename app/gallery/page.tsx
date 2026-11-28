@@ -12,7 +12,7 @@ import JsonLd from "@/components/JsonLd";
 export const metadata: Metadata = pageMetadata({
   title: "Gallery: Copper & Brass Projects",
   description:
-    "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Tumang, Boyolali.",
+    "Explore our authentic copper and brass architectural, interior, and luxury bath masterpieces from Boyolali.",
   path: "/gallery",
   keywords: ["copper bathroom ideas","copper interior design","brass door design","copper project gallery"],
   images: [{ url: "/assets/copper-showroom-gallery.jpg", alt: "Ilavioo copper showroom gallery" }],
@@ -58,7 +58,7 @@ export default async function GalleryPage() {
           path: "/gallery",
           name: "Gallery",
           description:
-            "Photos of handcrafted copper and brass architectural, interior and bath pieces made in Tumang, Indonesia.",
+            "Photos of handcrafted copper and brass architectural, interior and bath pieces made in Boyolali, Indonesia.",
         })}
       />
       <PageHero
@@ -86,7 +86,7 @@ export default async function GalleryPage() {
                   Have a Custom Design in Mind?
                 </h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  Every piece in our gallery can be customized to your architectural drawings and specifications. Consult directly with our master copper smiths in Tumang, Boyolali.
+                  Every piece in our gallery can be customized to your architectural drawings and specifications. Consult directly with our master copper smiths in Boyolali.
                 </p>
               </div>
 

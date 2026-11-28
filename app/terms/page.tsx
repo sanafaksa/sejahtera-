@@ -20,7 +20,7 @@ const sections: LegalSection[] = [
       <p>
         These terms apply to your use of this website and to quotations and orders with{" "}
         <strong>PT. Ilavioo Nusantara Sejahtera</strong> (&quot;Ilavioo&quot;, &quot;we&quot;, &quot;us&quot;),
-        Tumang, Cepogo, Boyolali, Central Java, Indonesia. By using the website or placing an order you agree to them.
+        Boyolali, Central Java, Indonesia. By using the website or placing an order you agree to them.
         If a quotation or invoice we send you contains specific conditions, those conditions prevail for that order.
       </p>
     ),
@@ -45,7 +45,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Every piece is hand-hammered and finished by artisans in Tumang. Small differences in shape, texture, hammer
+          Every piece is hand-hammered and finished by artisans in Boyolali. Small differences in shape, texture, hammer
           marks, colour and patina from the photos are part of the character of handmade copper and brass and are not
           defects.
         </p>
@@ -172,7 +172,7 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Terms of Service"
-      description="The terms for using our website and ordering handcrafted copper from Tumang."
+      description="The terms for using our website and ordering handcrafted copper from Boyolali."
       updated="21 November 2026"
       intro={
         <p>

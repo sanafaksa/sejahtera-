@@ -10,8 +10,6 @@ import CountUpNumber from "@/components/animations/CountUpNumber";
 import ParallaxSection from "@/components/animations/ParallaxSection";
 import {
   Award,
-  Heart,
-  Target,
   Users,
   Globe,
   Sparkles,
@@ -27,12 +25,12 @@ const HERITAGE_VIDEO_SRC =
   "https://res.cloudinary.com/dqcdwv7du/video/upload/v1794803666/ilavioo/videos/by-aksa.mp4";
 
 export const metadata = pageMetadata({
-  title: "About Us: 30+ Years of Tumang Copper Craft",
+  title: "About Us: 30+ Years of Boyolali Copper Craft",
   description:
-    "Learn about our 30+ years of heritage in handcrafted copper and brass artistry from Tumang, Boyolali, Indonesia.",
+    "Learn about our 30+ years of heritage in handcrafted copper and brass artistry from Boyolali, Indonesia.",
   path: "/about",
-  keywords: ["Indonesian artisans","Tumang artisans","heritage metalwork","copper craft Central Java"],
-  images: [{ url: "/assets/about.jpg", alt: "Ilavioo artisans in Tumang" }],
+  keywords: ["Indonesian artisans","Boyolali artisans","heritage metalwork","copper craft Central Java"],
+  images: [{ url: "/assets/about.jpg", alt: "Ilavioo artisans in Boyolali" }],
 });
 
 export default function AboutPage() {
@@ -44,12 +42,12 @@ export default function AboutPage() {
           path: "/about",
           name: "About Us",
           description:
-            "The story of Ilavioo and the copper and brass craft heritage of Tumang, Boyolali, Indonesia.",
+            "The story of Ilavioo and the copper and brass craft heritage of Boyolali, Indonesia.",
         })}
       />
       <PageHero
         title="Our Story"
-        description="Bold, handmade centerpieces that define your interior. Over 30 years of heritage from Tumang, Boyolali."
+        description="PT. Ilavioo Nusantara Sejahtera—widely known as ilavioo—where three decades of artisanal devotion meet global architectural excellence."
         fadeTo="#fdfcf9"
       />
 
@@ -130,7 +128,7 @@ export default function AboutPage() {
                 <div className="absolute top-4 left-4 z-10 pointer-events-none">
                   <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium tracking-wide border border-white/10 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-[#b87333] animate-pulse" />
-                    Tumang, Boyolali · Central Java
+                    Boyolali · Central Java
                   </span>
                 </div>
               </div>
@@ -144,30 +142,35 @@ export default function AboutPage() {
                   Our Heritage
                 </span>
                 <h2 className="font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-                  30+ Years of{" "}
-                  <span className="text-green-600">Copper Excellence</span>
+                  Forged in the Highlands,{" "}
+                  <span className="text-green-600">Cherished Across the World</span>
                 </h2>
 
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    Handmade copper products from Tumang, Boyolali, Central
-                    Java, Indonesia have long been recognized as some of the
-                    finest metal crafts in Indonesia. Tumang is well known as
-                    the center of copper and brass handicrafts, with a heritage
-                    handed down through generations.
+                    Our workshop is nestled in Boyolali, Central Java,
+                    Indonesia—a serene highland town blessed with crisp, cool
+                    mountain air at the foot of two iconic giants: the majestic,
+                    active volcano Mount Merapi and the renowned trekking
+                    sanctuary of Mount Merbabu. It is within this inspiring
+                    landscape that our artisans channel the raw energy of fire
+                    and metal, turning sheets of copper, brass, and aluminium
+                    into enduring works of art.
                   </p>
 
                   <p>
-                    Tumang is not just a place; it is a living center of a
-                    handcrafted copper and brass heritage that has been passed
-                    down through families. Each piece is handmade with
-                    meticulous detail and superior quality.
+                    ilavioo was built on the skill and passion of master
+                    craftsmen with more than 30 years of hands-on experience.
+                    For us, metalworking is not merely a manufacturing process;
+                    it is an intimate dialogue between the artisan and the
+                    material.
                   </p>
 
                   <p>
-                    Our artisans combine traditional techniques with modern
-                    design, creating products that are not only visually
-                    stunning but also functional and durable.
+                    Every curve of a copper bathtub, every intricate engraving
+                    on a Nabawi or Mecca mosque door replica, and every delicate
+                    detail on a Javanese Robyong lamp is executed with an
+                    artistic eye and genuine heart.
                   </p>
                 </div>
               </div>
@@ -181,14 +184,16 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInView direction="up" className="text-center mb-12">
             <span className="inline-block px-4 py-1 bg-copper-100 text-copper-700 rounded-full text-sm font-semibold mb-4">
-              Our Expertise
+              Our Craft
             </span>
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              What We Create
+              No Two Pieces Are Ever Alike
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Tumang copper crafts are widely used across various industries and
-              applications
+              In an era of factory-made uniformity, we celebrate the soul of the
+              handmade. Every ilavioo creation is crafted to custom designs and
+              bespoke dimensions—individually shaped, hammered, and finished by
+              hand.
             </p>
           </FadeInView>
 
@@ -215,11 +220,11 @@ export default function AboutPage() {
 
           <FadeInView direction="up" className="text-center mt-12">
             <p className="text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Everything can be crafted to meet international export standards.
-              We take pride in bringing Indonesia&apos;s cultural heritage to
-              the global market. By choosing our products, you are not only
-              receiving high-quality metal crafts but also supporting the
-              sustainability of local tradition and artistry.
+              Because each piece is individually made, slight organic nuances
+              make every creation completely unique. When you own an ilavioo
+              piece, you own an unrepeatable work of art—crafted to
+              international export standards and carrying Indonesia&apos;s
+              cultural heritage into your space.
             </p>
           </FadeInView>
         </div>
@@ -232,17 +237,16 @@ export default function AboutPage() {
             <FadeInView direction="left">
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-green-100 h-full">
                 <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mb-6">
-                  <Target className="w-8 h-8 text-white" />
+                  <Globe className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-display text-3xl font-bold text-gray-900 mb-4">
-                  Our Mission
+                  From Central Java to the World
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-lg">
-                  To preserve and keep alive the legacy of Tumang copper
-                  craftsmanship by creating high-quality pieces that blend
-                  traditional craftsmanship with contemporary design. Every
-                  hammer blow is our promise of excellence, durability, and
-                  timeless beauty.
+                  While we take immense pride in serving esteemed clients across
+                  Indonesia, our craftsmanship knows no borders. Over the years,
+                  ilavioo has successfully exported bespoke metalwork to Asia,
+                  Europe, the Americas, Australia, Africa, and the Middle East.
                 </p>
               </div>
             </FadeInView>
@@ -252,16 +256,16 @@ export default function AboutPage() {
             <FadeInView direction="right">
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-copper-100 h-full">
                 <div className="w-16 h-16 bg-copper-600 rounded-2xl flex items-center justify-center mb-6">
-                  <Heart className="w-8 h-8 text-white" />
+                  <Award className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-display text-3xl font-bold text-gray-900 mb-4">
-                  Our Vision
+                  A Lasting Testament to Indonesian Artistry
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-lg">
-                  We envision a world where every home and living space feels
-                  the warm and authentic touch of handcraft. Our vision is to
-                  weave Tumang&apos;s heritage into the fabric of modern life,
-                  creating a future where art and tradition go hand in hand.
+                  From luxury resorts and private residences to grand mosques
+                  and boutique hotels, our creations stand as lasting testaments
+                  to Indonesian artistry—trusted by discerning projects around
+                  the globe.
                 </p>
               </div>
             </FadeInView>
@@ -279,11 +283,13 @@ export default function AboutPage() {
                 </div>
               <div className="relative z-10">
                 <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-                  Ready to Experience Tumang Craftsmanship?
+                  Let Us Craft Something Extraordinary Together
                 </h2>
                 <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                  Explore our collection or contact us for custom designs
-                  tailored to your unique vision.
+                  Whether you are commissioning a single statement piece or
+                  sourcing a full container for a hospitality project, our export
+                  team is ready to assist you from initial concept to worldwide
+                  delivery.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Link

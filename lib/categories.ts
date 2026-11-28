@@ -52,10 +52,10 @@ export const CATEGORIES: ProductCategory[] = [
     title: "Handmade Copper & Brass Bathtubs",
     heading: "Handmade Copper & Brass Bathtubs",
     description:
-      "Freestanding copper and brass bathtubs hand-hammered in Tumang, Indonesia. Custom sizes and finishes, made to order and shipped worldwide and to Bali.",
+      "Freestanding copper and brass bathtubs hand-hammered in Boyolali, Indonesia. Custom sizes and finishes, made to order and shipped worldwide and to Bali.",
     match: /bath\s?tub|\btub\b|soaking/i,
     intro: [
-      "A copper bathtub is the centrepiece of a bathroom: warm to the eye, heavy and solid, and different in every light. Ilavioo bathtubs are shaped and hammered by hand by coppersmiths in Tumang, Boyolali, a Central Java village with generations of metalworking behind it.",
+      "A copper bathtub is the centrepiece of a bathroom: warm to the eye, heavy and solid, and different in every light. Ilavioo bathtubs are shaped and hammered by hand by coppersmiths in Boyolali, a Central Java village with generations of metalworking behind it.",
       "We make freestanding tubs in solid copper and in brass, in classic roll-top, double-slipper and contemporary forms. Interiors can be left in metal or finished in white enamel, and the outside can be mirror-polished, hammered, antiqued or left to develop a natural patina.",
       "Every tub is made to order, so the length, width and depth can follow your bathroom and the way you like to bathe. Send us a reference photo, a sketch or your architect's drawing.",
     ],
@@ -98,10 +98,10 @@ export const CATEGORIES: ProductCategory[] = [
     title: "Hammered Copper Sinks & Basins",
     heading: "Hammered Copper Sinks & Basins",
     description:
-      "Hand-hammered copper and brass sinks, vessel basins and wash basins from Tumang, Indonesia. Custom sizes for homes, hotels and villas, shipped worldwide.",
+      "Hand-hammered copper and brass sinks, vessel basins and wash basins from Boyolali, Indonesia. Custom sizes for homes, hotels and villas, shipped worldwide.",
     match: /basin|sink|wash\s?bowl|lavatory|vanity/i,
     intro: [
-      "A hammered copper basin turns a washroom, powder room or outdoor shower into something people remember. Ilavioo sinks and basins are raised and hammered by hand in our workshop in Tumang, Boyolali, Central Java.",
+      "A hammered copper basin turns a washroom, powder room or outdoor shower into something people remember. Ilavioo sinks and basins are raised and hammered by hand in our workshop in Boyolali, Central Java.",
       "We make countertop vessel basins, under-mount and drop-in sinks, and larger kitchen and bar sinks in solid copper or brass. Finishes range from bright polished and hammered to antique and natural patina.",
       "Because every basin is made to order, the diameter, depth and drain position can match your vanity, stone top or tap, and we can make matching sets for hotels and villas.",
     ],
@@ -144,10 +144,10 @@ export const CATEGORIES: ProductCategory[] = [
     title: "Brass Doors & Copper Wall Panels",
     heading: "Brass Doors & Copper Wall Panels",
     description:
-      "Hand-made brass entrance doors, repoussé copper wall panels and calligraphy art from Tumang, Indonesia. Custom pieces for homes, hotels and mosques.",
+      "Hand-made brass entrance doors, repoussé copper wall panels and calligraphy art from Boyolali, Indonesia. Custom pieces for homes, hotels and mosques.",
     match: /door|gate|panel|kaligrafi|calligraph|relief|facade|façade/i,
     intro: [
-      "Architectural metalwork is where Tumang craftsmanship shows most: grand brass entrance doors, repoussé copper reliefs and calligraphy panels, made by hand for homes, hotels, villas and places of worship.",
+      "Architectural metalwork is where Boyolali craftsmanship shows most: grand brass entrance doors, repoussé copper reliefs and calligraphy panels, made by hand for homes, hotels, villas and places of worship.",
       "Doors are built on a solid core, such as teak, and clad in brass or copper with hand-worked ornament. Wall panels are hammered from sheet in high relief and finished in polished, antique or oxidised tones.",
       "Nearly every architectural piece is a commission. We work from elevations, CAD drawings or reference photos, and our team checks size, sheet thickness, internal reinforcement and mounting before the coppersmiths start.",
     ],
@@ -190,10 +190,10 @@ export const CATEGORIES: ProductCategory[] = [
     title: "Handmade Copper Pendant Lights & Chandeliers",
     heading: "Handmade Copper Pendant Lights & Chandeliers",
     description:
-      "Hand-spun copper pendant lights and pierced brass chandeliers from Tumang, Indonesia. Made to order for homes, restaurants and hotels, shipped worldwide.",
+      "Hand-spun copper pendant lights and pierced brass chandeliers from Boyolali, Indonesia. Made to order for homes, restaurants and hotels, shipped worldwide.",
     match: /lamp|light|pendant|chandelier|lantern|sconce/i,
     intro: [
-      "Copper and brass light fittings give a room a warm glow that glass and plastic cannot. Ilavioo pendants and chandeliers are spun, hammered and hand-pierced in our workshop in Tumang, Boyolali.",
+      "Copper and brass light fittings give a room a warm glow that glass and plastic cannot. Ilavioo pendants and chandeliers are spun, hammered and hand-pierced in our workshop in Boyolali.",
       "We make single pendant domes for kitchens and bars, clusters for restaurants, and pierced brass chandeliers that throw patterned light across walls and ceilings.",
       "Sizes, finishes and drop lengths are made to order, so a whole series can match across a hotel lobby, restaurant or villa.",
     ],
@@ -236,11 +236,11 @@ export const CATEGORIES: ProductCategory[] = [
     title: "Copper Vases, Planters & Decor",
     heading: "Copper Vases, Planters & Decor",
     description:
-      "Hand-hammered copper and brass vases, urns, planters and decor from Tumang, Indonesia. For homes, hotels and villas; made to order and shipped worldwide.",
+      "Hand-hammered copper and brass vases, urns, planters and decor from Boyolali, Indonesia. For homes, hotels and villas; made to order and shipped worldwide.",
     // Fallback category: anything not matched above lands here.
     match: /vase|urn|planter|pot\b|bowl|decor|tray|jug|vessel/i,
     intro: [
-      "Copper and brass decor brings warmth to a room, a terrace or a hotel lobby. Ilavioo vases, urns, planters and vessels are hand-hammered in our workshop in Tumang, Boyolali, Central Java.",
+      "Copper and brass decor brings warmth to a room, a terrace or a hotel lobby. Ilavioo vases, urns, planters and vessels are hand-hammered in our workshop in Boyolali, Central Java.",
       "Pieces range from tabletop vases and bowls to large fluted urns and floor planters. Finishes include polished, hammered, antique and natural patina, which keeps developing over the years.",
       "Sizes and finishes are made to order, and we make matching sets for hotels, restaurants and villa projects as readily as a single piece for a home.",
     ],

@@ -10,7 +10,7 @@ const productsData = [
     description:
       "Handcrafted from solid heavy-gauge brass with a mirror-polished interior and matte exterior. Engineered for regal comfort and timeless luxury.",
     details:
-      "Every curve of the Sovereign Bathtub is hand-formed by our master artisans in Tumang, Boyolali. The brass interior reflects candlelight beautifully, creating an unmatched tranquil sanctuary experience for luxury villas and upscale residences.",
+      "Every curve of the Sovereign Bathtub is hand-formed by our master artisans in Boyolali. The brass interior reflects candlelight beautifully, creating an unmatched tranquil sanctuary experience for luxury villas and upscale residences.",
     notes: "Custom dimensions and alternative finishes (polished brass, antiqued bronze, satin nickel) are available upon request.",
     specifications: {
       size: "175 x 78 x 72 cm",
@@ -137,7 +137,7 @@ const productsData = [
     ],
   },
   {
-    name: "Tumang Hand-Spun Copper Pendant Dome",
+    name: "Boyolali Hand-Spun Copper Pendant Dome",
     slug: "tumang-hand-spun-copper-pendant-dome",
     description:
       "Minimalist industrial dome pendant hand-beaten on a traditional wooden spinning lathe with warm radiant interior glow.",
@@ -151,7 +151,7 @@ const productsData = [
       price: "Contact for Price",
     },
     highlights: [
-      { icon: "✨", text: "Hand-spun on wooden lathes in Tumang" },
+      { icon: "✨", text: "Hand-spun on wooden lathes in Boyolali" },
       { icon: "🔌", text: "2-meter adjustable woven fabric cable" },
       { icon: "🛡️", text: "Treated with anti-tarnish protective lacquer" },
     ],
@@ -206,7 +206,7 @@ const productsData = [
     description:
       "High-relief repoussé wall art meticulously hammered from the reverse side to create deep three-dimensional calligraphy.",
     details:
-      "A masterpiece of Tumang metal art. Master calligraphers and coppersmiths collaborate over several weeks to shape pure copper plate into spiritual and artistic three-dimensional relief.",
+      "A masterpiece of Boyolali metal art. Master calligraphers and coppersmiths collaborate over several weeks to shape pure copper plate into spiritual and artistic three-dimensional relief.",
     notes: "Includes reinforced aluminum subframe for safe wall hanging.",
     specifications: {
       size: "240 x 120 cm",
@@ -233,7 +233,7 @@ const productsData = [
     ],
   },
   {
-    name: "Tumang Fluted Copper Urn & Planter",
+    name: "Boyolali Fluted Copper Urn & Planter",
     slug: "tumang-fluted-copper-urn-planter",
     description:
       "Grand ornamental copper urn suitable for upscale hotel foyers, terrace landscapes, and architectural courtyards.",

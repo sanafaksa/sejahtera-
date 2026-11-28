@@ -10,9 +10,9 @@ describe("categorizeProduct", () => {
     expect(cat("Artisanal Copper Countertop Wash Basin")).toBe("copper-sinks-basins");
     expect(cat("Imperial Nabawi Brass Grand Entrance Door")).toBe("brass-doors-wall-panels");
     expect(cat("Sculptural Kaligrafi Copper Wall Panel")).toBe("brass-doors-wall-panels");
-    expect(cat("Tumang Hand-Spun Copper Pendant Dome")).toBe("copper-lighting");
+    expect(cat("Boyolali Hand-Spun Copper Pendant Dome")).toBe("copper-lighting");
     expect(cat("Moroccan Filigree Brass Chandelier")).toBe("copper-lighting");
-    expect(cat("Tumang Fluted Copper Urn & Planter")).toBe("copper-decor");
+    expect(cat("Boyolali Fluted Copper Urn & Planter")).toBe("copper-decor");
     expect(cat("Elegant Copper Vase")).toBe("copper-decor");
   });
 

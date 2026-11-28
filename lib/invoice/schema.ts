@@ -88,7 +88,7 @@ export type PaymentMethod = z.infer<typeof paymentMethodSchema>;
 export const DEFAULT_INVOICE_SETTINGS: InvoiceSettings = {
   business: {
     name: "PT. Ilavioo Nusantara Sejahtera",
-    address: "Tumang, Cepogo, Boyolali\nJawa Tengah, Indonesia",
+    address: "Boyolali\nJawa Tengah, Indonesia",
     email: "marketing@ilavioo.com",
     phone: "",
     website: "ilavioo.com",
@@ -102,7 +102,7 @@ export const DEFAULT_INVOICE_SETTINGS: InvoiceSettings = {
   numbering: { prefix: "INV", includeYear: true, padding: 4, resetYearly: true },
   columns: { discount: true, tax: true, shipping: true, sku: false },
   labels: { en: {}, id: {} },
-  footerText: "Thank you for choosing handmade Tumang copper.",
+  footerText: "Thank you for choosing handmade Boyolali copper.",
   defaultTerms: "Payment due within 14 days. Production starts after a 50% deposit.",
   defaultNotes: "",
   defaultCurrency: "USD",

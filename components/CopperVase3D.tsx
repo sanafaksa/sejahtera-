@@ -98,7 +98,7 @@ export default function CopperVase3D() {
 
     // --- 4. Luxury Copper Material ---
     const copperMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xd97c38), // Rich polished Tumang copper
+      color: new THREE.Color(0xd97c38), // Rich polished Boyolali copper
       roughness: 0.22,
       metalness: 0.92,
       bumpMap: bumpTexture,
@@ -113,7 +113,7 @@ export default function CopperVase3D() {
     });
 
     // --- 5. Handcrafted Copper Vase Geometry ---
-    // Define an elegant Tumang artisan vase silhouette
+    // Define an elegant Boyolali artisan vase silhouette
     const points: THREE.Vector2[] = [];
     // Base & foot
     points.push(new THREE.Vector2(0, -1.5));

@@ -35,7 +35,7 @@ async function main() {
       name: "Elegant Copper Vase",
       slug: "elegant-copper-vase",
       description:
-        "The handmade copper vase from Tumang, Boyolali combines traditional artistry with a modern touch. Crafted entirely by skilled artisans, each vase showcases fine details, premium quality, and unique aesthetic value.",
+        "The handmade copper vase from Boyolali combines traditional artistry with a modern touch. Crafted entirely by skilled artisans, each vase showcases fine details, premium quality, and unique aesthetic value.",
       details:
         "Perfect for home decor, hotel interiors, restaurants, and even large-scale architectural projects. Every product is crafted to meet international export standards and ready to be shipped worldwide.",
       notes:

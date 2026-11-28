@@ -53,7 +53,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProduct(slug);
   const description = metaDescription(
-    product.description || `Handcrafted ${product.name} from Tumang, Indonesia.`
+    product.description || `Handcrafted ${product.name} from Boyolali, Indonesia.`
   );
   const images = product.images.slice(0, 1).map((img) => ({
     url: img.imageUrl,

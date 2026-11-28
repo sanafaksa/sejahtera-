@@ -6,7 +6,7 @@ import LegalPage, { type LegalSection } from "@/components/LegalPage";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description:
-    "How PT. Ilavioo Nusantara Sejahtera collects, uses and protects information when you visit our website or order handcrafted copper from Tumang.",
+    "How PT. Ilavioo Nusantara Sejahtera collects, uses and protects information when you visit our website or order handcrafted copper from Boyolali.",
   path: "/privacy",
 });
 
@@ -19,8 +19,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         This website is operated by <strong>PT. Ilavioo Nusantara Sejahtera</strong> (&quot;Ilavioo&quot;,
-        &quot;we&quot;, &quot;us&quot;), a maker of handcrafted copper and brass products based in Tumang, Cepogo,
-        Boyolali, Central Java, Indonesia. We are responsible for the personal data described in this policy. You can
+        &quot;we&quot;, &quot;us&quot;), a maker of handcrafted copper and brass products based in Boyolali, Central Java, Indonesia. We are responsible for the personal data described in this policy. You can
         reach us at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
       </p>
     ),
