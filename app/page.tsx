@@ -31,6 +31,7 @@ import { SITE, SITE_KEYWORDS, SITE_URL, absoluteUrl, pageMetadata } from "@/lib/
 import HeroBathtubAnimated from "@/components/hero/HeroBathtubAnimated";
 import RotatingHeadline from "@/components/hero/RotatingHeadline";
 import CopperTubShowcase from "@/components/hero/CopperTubShowcase";
+import CraftsmanshipSection from "@/components/home/CraftsmanshipSection";
 
 // Cards in the "Modern Copper For Stylish Interiors" banner.
 const HERITAGE_CARDS = [
@@ -251,13 +252,13 @@ export default async function Home() {
 
               <FadeInView direction="up" delay={0.25}>
                 <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-[#1a120b] leading-[1.12] mb-4">
-                  Premium Copper Designed For Everyday Living
+                  Timeless Metal Artistry, Handcrafted from the Heart of Java
                 </h2>
               </FadeInView>
 
               <FadeInView direction="up" delay={0.35}>
                 <p className="text-sm sm:text-base text-stone-600 leading-relaxed mb-8 max-w-lg">
-                  Discover stylish copper pieces crafted for comfort, beauty, and durability. From bespoke bathtubs to modern fixtures, every piece is designed to elevate your home with timeless charm and practical function.
+                  Bespoke copper, brass, and aluminium creations forged by master artisans with over three decades of heritage. Tailored to your exact specifications and exported across the globe.
                 </p>
               </FadeInView>
 
@@ -377,6 +378,9 @@ export default async function Home() {
         </FadeInView>
 
       </section>
+
+      {/* Curated Craftsmanship: portfolio overview + expandable brand story */}
+      <CraftsmanshipSection />
 
       {/* =========================================================================
           SECTION 1 (FROM UPLOADED REFERENCE):
