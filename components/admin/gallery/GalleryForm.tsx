@@ -32,6 +32,10 @@ type Props = {
 export default function GalleryForm({ mode, initial }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [dragOver, setDragOver] = useState(false);
+  const [uploadCount, setUploadCount] = useState(0);
+  const [bulkCategory, setBulkCategory] = useState("");
+  const [bulkTags, setBulkTags] = useState("");
 
   const [items, setItems] = useState<GalleryAssetDTO[]>(
     mode === "edit" && initial
@@ -58,10 +62,10 @@ export default function GalleryForm({ mode, initial }: Props) {
     );
   }
 
-  async function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files?.length) return;
+  function uploadFiles(files: File[]) {
+    if (!files.length) return;
     startTransition(async () => {
-      const files = Array.from(e.target.files!);
+      setUploadCount(files.length);
       const uploaded: GalleryAssetDTO[] = [];
       for (const file of files) {
         try {
@@ -75,14 +79,48 @@ export default function GalleryForm({ mode, initial }: Props) {
             tags: [],
             isFeatured: false,
           });
+          // Show each item the moment it lands, so a long batch feels alive.
+          setItems((prev) => [...prev, uploaded[uploaded.length - 1]]);
+          setUploadCount((n) => Math.max(0, n - 1));
         } catch (err: unknown) {
           const message = err instanceof Error ? err.message : String(err);
           alert(`Gagal upload ${file.name}: ${message}`);
+          setUploadCount((n) => Math.max(0, n - 1));
         }
       }
-      setItems((prev) => [...prev, ...uploaded]);
-      if (e.target) e.target.value = "";
+      setUploadCount(0);
     });
+  }
+
+  function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files?.length) return;
+    uploadFiles(Array.from(e.target.files));
+    e.target.value = "";
+  }
+
+  function onDrop(e: React.DragEvent<HTMLLabelElement>) {
+    e.preventDefault();
+    setDragOver(false);
+    if (isPending) return;
+    const files = Array.from(e.dataTransfer.files).filter(
+      (f) => f.type.startsWith("image/") || f.type.startsWith("video/")
+    );
+    uploadFiles(files);
+  }
+
+  // Apply one category / tag set to every staged item at once.
+  function applyBulk() {
+    const tags = bulkTags
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+    setItems((prev) =>
+      prev.map((it) => ({
+        ...it,
+        category: bulkCategory.trim() || it.category,
+        tags: tags.length ? tags : it.tags,
+      }))
+    );
   }
 
   async function onCreate() {
@@ -180,22 +218,32 @@ export default function GalleryForm({ mode, initial }: Props) {
           <div className="bg-white border border-gray-200 rounded-2xl p-8 mb-8">
             <label
               htmlFor="uploader"
+              onDragOver={(e) => {
+                e.preventDefault();
+                if (!isPending) setDragOver(true);
+              }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={onDrop}
               className={`flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-xl ${
                 isPending
                   ? "bg-gray-100 border-gray-300"
+                  : dragOver
+                  ? "bg-green-50 border-green-500"
                   : "bg-gray-50 hover:bg-gray-100 hover:border-green-500"
               } cursor-pointer transition`}
             >
               {isPending ? (
                 <>
                   <Loader2 className="w-10 h-10 text-green-600 animate-spin mb-2" />
-                  <p className="text-gray-600">Uploading...</p>
+                  <p className="text-gray-600">
+                    Uploading{uploadCount > 0 ? ` ${uploadCount} file…` : "…"}
+                  </p>
                 </>
               ) : (
                 <>
                   <Upload className="w-10 h-10 text-gray-400 mb-2" />
                   <p className="text-gray-600">
-                    Click to upload or drag & drop
+                    Click to upload or drag &amp; drop (pilih banyak sekaligus)
                   </p>
                   <p className="text-xs text-gray-500">
                     Images (JPG/PNG/WEBP) or Videos (MP4/WEBM/MOV)
@@ -211,6 +259,41 @@ export default function GalleryForm({ mode, initial }: Props) {
               accept="image/*,video/*"
               onChange={handleFiles}
             />
+          </div>
+        )}
+
+        {isCreate && items.length > 1 && (
+          <div className="bg-white border border-gray-200 rounded-2xl p-4 mb-6 flex flex-col sm:flex-row sm:items-end gap-3">
+            <div className="flex-1">
+              <label className="text-sm font-semibold text-gray-700 mb-1 block">
+                Kategori (semua)
+              </label>
+              <input
+                value={bulkCategory}
+                onChange={(e) => setBulkCategory(e.target.value)}
+                placeholder="mis. Bathtub"
+                className="w-full px-3 py-2 bg-gray-50 border-2 border-gray-200 rounded-lg text-black focus:border-green-500"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="text-sm font-semibold text-gray-700 mb-1 block">
+                Tags (semua, pisah koma)
+              </label>
+              <input
+                value={bulkTags}
+                onChange={(e) => setBulkTags(e.target.value)}
+                placeholder="copper, handmade"
+                className="w-full px-3 py-2 bg-gray-50 border-2 border-gray-200 rounded-lg text-black focus:border-green-500"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={applyBulk}
+              disabled={!bulkCategory.trim() && !bulkTags.trim()}
+              className="px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-lg font-semibold disabled:opacity-40 whitespace-nowrap"
+            >
+              Terapkan ke semua ({items.length})
+            </button>
           </div>
         )}
 
