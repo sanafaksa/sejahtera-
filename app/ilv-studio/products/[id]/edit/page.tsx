@@ -40,13 +40,6 @@ export default async function EditProductPage({
     highlights: product.highlights,
     specifications: product.specifications || null,
     images: product.images,
-    seoTitle: product.seoTitle,
-    metaDescription: product.metaDescription,
-    imageAlt: product.imageAlt,
-    ogTitle: product.ogTitle,
-    ogDescription: product.ogDescription,
-    seoStatus: product.seoStatus,
-    seoOverrides: product.seoOverrides,
   };
 
   return (

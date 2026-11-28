@@ -18,7 +18,6 @@ import {
 import { uploadMediaFile } from "@/lib/upload";
 import Image from "next/image";
 import Link from "next/link";
-import SeoPanel, { type SeoFieldKey } from "@/components/admin/products/SeoPanel";
 
 interface ProductFormProps {
   product?: {
@@ -41,13 +40,6 @@ interface ProductFormProps {
       isFeatured: boolean;
       isCatalog: boolean;
     }>;
-    seoTitle?: string | null;
-    metaDescription?: string | null;
-    imageAlt?: string | null;
-    ogTitle?: string | null;
-    ogDescription?: string | null;
-    seoStatus?: string | null;
-    seoOverrides?: string[] | null;
   };
 }
 
@@ -94,34 +86,6 @@ export default function ProductForm({ product }: ProductFormProps) {
     })) || []
   );
   const [imageUrl, setImageUrl] = useState("");
-
-  // SEO (auto-generated on save; admin can override individual fields)
-  const [seoValues, setSeoValues] = useState<Record<SeoFieldKey, string>>({
-    seoTitle: product?.seoTitle || "",
-    metaDescription: product?.metaDescription || "",
-    imageAlt: product?.imageAlt || "",
-    ogTitle: product?.ogTitle || "",
-    ogDescription: product?.ogDescription || "",
-  });
-  const [seoOverrides, setSeoOverrides] = useState<Set<string>>(
-    new Set(product?.seoOverrides || [])
-  );
-  const [seoStatus, setSeoStatus] = useState<"published" | "draft">(
-    product?.seoStatus === "draft" ? "draft" : "published"
-  );
-
-  const setSeoField = (field: SeoFieldKey, value: string) =>
-    setSeoValues((prev) => ({ ...prev, [field]: value }));
-  const toggleSeoOverride = (field: SeoFieldKey, on: boolean) =>
-    setSeoOverrides((prev) => {
-      const next = new Set(prev);
-      if (on) next.add(field);
-      else {
-        next.delete(field);
-        setSeoValues((v) => ({ ...v, [field]: "" }));
-      }
-      return next;
-    });
 
   // Helper Functions
   const generateSlug = (text: string) => {
@@ -252,12 +216,6 @@ export default function ProductForm({ product }: ProductFormProps) {
       },
       highlights: highlights.filter((h) => h.text.trim() !== ""),
       images: images,
-      // SEO: send only admin-overridden field values; the server regenerates the rest.
-      seoStatus,
-      seoOverrides: Array.from(seoOverrides),
-      ...Object.fromEntries(
-        Array.from(seoOverrides).map((f) => [f, seoValues[f as SeoFieldKey]])
-      ),
     };
 
     try {
@@ -757,17 +715,6 @@ export default function ProductForm({ product }: ProductFormProps) {
             )}
           </div>
         </div>
-
-        {/* SEO */}
-        <SeoPanel
-          source={{ name, slug, description, material, price }}
-          values={seoValues}
-          overrides={seoOverrides}
-          seoStatus={seoStatus}
-          onField={setSeoField}
-          onToggleOverride={toggleSeoOverride}
-          onStatus={setSeoStatus}
-        />
 
         {/* Form Actions */}
         <div className="flex items-center justify-between gap-4 pt-6 border-t border-gray-200">
