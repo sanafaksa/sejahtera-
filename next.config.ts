@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
+    // Optimization ON: Next serves resized WebP/AVIF via /_next/image for better
+    // mobile Core Web Vitals. All <Image> sources must be whitelisted below.
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: "https",
