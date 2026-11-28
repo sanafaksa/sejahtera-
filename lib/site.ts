@@ -21,7 +21,7 @@ export const SITE = {
   legalName: "PT. Ilavioo Nusantara Sejahtera",
   tagline: "Handcrafted Copper & Brass from Boyolali",
   description:
-    "Handcrafted copper and brass bathtubs, basins, lighting and doors from Boyolali, Indonesia. Made to order for Bali villas and clients in 16+ countries.",
+    "Manufacturer and exporter of handcrafted copper, brass and aluminium bathtubs, basins, lighting and doors—made to order in Boyolali, Indonesia and shipped worldwide to homes, hotels and resorts in 16+ countries.",
   email: "marketing@ilavioo.com",
   /** Official profiles (same as the footer). Used for links and schema sameAs. */
   social: {
@@ -45,16 +45,16 @@ export const SITE = {
  * ignores it, other engines and AI tools may read it) and as schema knowsAbout.
  */
 export const SITE_KEYWORDS = [
-  "handcrafted copper",
-  "copper craftsmanship",
-  "artisan coppersmith Indonesia",
-  "handmade copper and brass",
   "copper bathtub manufacturer",
-  "Indonesian copper craft",
-  "Boyolali copper village",
-  "copper products exporter Indonesia",
-  "copper bathtub Bali",
-  "worldwide shipping",
+  "custom copper bathtub supplier",
+  "copper bathtub exporter Indonesia",
+  "handmade copper and brass",
+  "brass mosque door manufacturer",
+  "wholesale copper decor supplier",
+  "bespoke copper basin supplier",
+  "luxury copper bathtub worldwide shipping",
+  "Indonesian copper handicraft exporter",
+  "hospitality copper and brass supplier",
 ];
 
 export const DEFAULT_TITLE = `${SITE.name} | ${SITE.tagline}`;

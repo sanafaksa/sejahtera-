@@ -68,7 +68,7 @@ export const metadata: Metadata = pageMetadata({
   title: null,
   description: SITE.description,
   path: "/",
-  keywords: ["copper bathtub", "brass door", "copper sink", "copper lighting", "luxury bathroom", "villa interior Bali"],
+  keywords: ["copper bathtub manufacturer", "custom copper bathtub", "brass mosque door replica", "copper sink supplier", "copper lighting exporter", "copper bathtub USA", "copper bathtub Europe", "copper bathtub Middle East"],
 });
 
 const ORGANIZATION_LD = {
@@ -84,6 +84,12 @@ const ORGANIZATION_LD = {
   sameAs: [SITE.social.instagram, SITE.social.threads, SITE.social.tiktok],
   areaServed: [
     { "@type": "Place", name: "Worldwide" },
+    { "@type": "Place", name: "Asia" },
+    { "@type": "Place", name: "Europe" },
+    { "@type": "Place", name: "The Americas" },
+    { "@type": "Place", name: "Australia" },
+    { "@type": "Place", name: "Africa" },
+    { "@type": "Place", name: "The Middle East" },
     { "@type": "AdministrativeArea", name: "Bali, Indonesia" },
   ],
   description: SITE.description,
