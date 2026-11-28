@@ -42,8 +42,21 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
 
   async redirects() {
-    // /process was replaced by /craftsmanship.
-    return [{ source: "/process", destination: "/craftsmanship", permanent: true }];
+    return [
+      // /process was replaced by /craftsmanship.
+      { source: "/process", destination: "/craftsmanship", permanent: true },
+      // Products renamed to drop the "Tumang" slug prefix: keep old URLs alive.
+      {
+        source: "/products/tumang-hand-spun-copper-pendant-dome",
+        destination: "/products/hand-spun-copper-pendant-dome",
+        permanent: true,
+      },
+      {
+        source: "/products/tumang-fluted-copper-urn-planter",
+        destination: "/products/fluted-copper-urn-planter",
+        permanent: true,
+      },
+    ];
   },
 
   async headers() {

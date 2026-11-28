@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { PRODUCTS_TAG } from "@/lib/public-data";
 import { cloudinary } from "@/lib/cloudinary";
+import { computeSeoForSave, normalizeSeoStatus, sanitizeOverrides, slugify } from "@/lib/product-seo";
 
 // Define types for request body
 type HighlightInput = {
@@ -25,6 +26,17 @@ type SpecificationInput = {
   price?: string;
 };
 
+type SeoInput = {
+  seoTitle?: string;
+  metaDescription?: string;
+  imageAlt?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  canonicalUrl?: string;
+  seoStatus?: string;
+  seoOverrides?: string[];
+};
+
 type ProductUpdateBody = {
   name: string;
   slug: string;
@@ -34,7 +46,7 @@ type ProductUpdateBody = {
   specifications?: SpecificationInput;
   highlights: HighlightInput[];
   images: ImageInput[];
-};
+} & SeoInput;
 
 // ✅ FIXED: GET single product - params is now Promise
 export async function GET(
@@ -84,7 +96,6 @@ export async function PUT(
     const body = (await request.json()) as ProductUpdateBody;
     const {
       name,
-      slug,
       description,
       details,
       notes,
@@ -94,6 +105,10 @@ export async function PUT(
     } = body;
 
     const productId = parseInt(id);
+
+    if (!name?.trim()) {
+      return NextResponse.json({ message: "Product name is required" }, { status: 400 });
+    }
 
     // Check if product exists
     const existingProduct = await prisma.product.findUnique({
@@ -107,6 +122,11 @@ export async function PUT(
       );
     }
 
+    const slug = slugify(body.slug || name);
+    if (!slug) {
+      return NextResponse.json({ message: "Could not derive a valid slug" }, { status: 400 });
+    }
+
     // Check if slug is taken by another product
     if (slug !== existingProduct.slug) {
       const slugTaken = await prisma.product.findUnique({
@@ -118,7 +138,30 @@ export async function PUT(
           { status: 400 }
         );
       }
+      // Keep the old URL alive with a 301, and never redirect the new slug to itself.
+      await prisma.productSlugHistory.upsert({
+        where: { slug: existingProduct.slug },
+        create: { slug: existingProduct.slug, productId },
+        update: { productId },
+      });
+      await prisma.productSlugHistory.deleteMany({ where: { slug } });
     }
+
+    // Auto-generate SEO; admin-overridden fields keep their submitted value.
+    const overrides = sanitizeOverrides(body.seoOverrides);
+    const seoStatus = normalizeSeoStatus(body.seoStatus);
+    const seo = computeSeoForSave(
+      { name, slug, description, specifications },
+      overrides,
+      {
+        seoTitle: body.seoTitle,
+        metaDescription: body.metaDescription,
+        imageAlt: body.imageAlt,
+        ogTitle: body.ogTitle,
+        ogDescription: body.ogDescription,
+        canonicalUrl: body.canonicalUrl,
+      }
+    );
 
     // Delete existing related data
     await prisma.productHighlight.deleteMany({
@@ -140,6 +183,14 @@ export async function PUT(
         description,
         details,
         notes,
+        seoTitle: seo.seoTitle,
+        metaDescription: seo.metaDescription,
+        imageAlt: seo.imageAlt,
+        ogTitle: seo.ogTitle,
+        ogDescription: seo.ogDescription,
+        canonicalUrl: seo.canonicalUrl,
+        seoStatus,
+        seoOverrides: overrides,
         specifications:
           specifications &&
           (specifications.size ||

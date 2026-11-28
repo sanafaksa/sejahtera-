@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { PRODUCTS_TAG } from "@/lib/public-data";
+import { computeSeoForSave, normalizeSeoStatus, sanitizeOverrides, slugify } from "@/lib/product-seo";
 
 // Define types for request body
 type HighlightInput = {
@@ -24,6 +25,17 @@ type SpecificationInput = {
   price?: string;
 };
 
+type SeoInput = {
+  seoTitle?: string;
+  metaDescription?: string;
+  imageAlt?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  canonicalUrl?: string;
+  seoStatus?: string;
+  seoOverrides?: string[];
+};
+
 type ProductCreateBody = {
   name: string;
   slug: string;
@@ -33,7 +45,7 @@ type ProductCreateBody = {
   specifications?: SpecificationInput;
   highlights: HighlightInput[];
   images: ImageInput[];
-};
+} & SeoInput;
 
 // GET all products
 export async function GET() {
@@ -67,7 +79,6 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as ProductCreateBody;
     const {
       name,
-      slug,
       description,
       details,
       notes,
@@ -75,6 +86,16 @@ export async function POST(request: NextRequest) {
       highlights,
       images,
     } = body;
+
+    if (!name?.trim()) {
+      return NextResponse.json({ message: "Product name is required" }, { status: 400 });
+    }
+
+    // Normalise the slug server-side (SEO-friendly, never contains "Tumang").
+    const slug = slugify(body.slug || name);
+    if (!slug) {
+      return NextResponse.json({ message: "Could not derive a valid slug" }, { status: 400 });
+    }
 
     // Check if slug already exists
     const existingProduct = await prisma.product.findUnique({
@@ -88,6 +109,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Auto-generate SEO; admin-overridden fields keep their submitted value.
+    const overrides = sanitizeOverrides(body.seoOverrides);
+    const seoStatus = normalizeSeoStatus(body.seoStatus);
+    const seo = computeSeoForSave(
+      { name, slug, description, specifications },
+      overrides,
+      {
+        seoTitle: body.seoTitle,
+        metaDescription: body.metaDescription,
+        imageAlt: body.imageAlt,
+        ogTitle: body.ogTitle,
+        ogDescription: body.ogDescription,
+        canonicalUrl: body.canonicalUrl,
+      }
+    );
+
     // Create product with all related data
     const product = await prisma.product.create({
       data: {
@@ -96,6 +133,14 @@ export async function POST(request: NextRequest) {
         description,
         details,
         notes,
+        seoTitle: seo.seoTitle,
+        metaDescription: seo.metaDescription,
+        imageAlt: seo.imageAlt,
+        ogTitle: seo.ogTitle,
+        ogDescription: seo.ogDescription,
+        canonicalUrl: seo.canonicalUrl,
+        seoStatus,
+        seoOverrides: overrides,
         specifications:
           specifications &&
           (specifications.size ||

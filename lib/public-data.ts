@@ -44,14 +44,18 @@ function orderByFor(sort?: string) {
 
 export const getProductList = unstable_cache(
   async (search: string, sort: string) => {
-    const where = search
-      ? {
-          OR: [
-            { name: { contains: search, mode: "insensitive" as const } },
-            { description: { contains: search, mode: "insensitive" as const } },
-          ],
-        }
-      : {};
+    const where = {
+      // Public surfaces (listings, sitemap, landing pages) show published only.
+      seoStatus: "published" as const,
+      ...(search
+        ? {
+            OR: [
+              { name: { contains: search, mode: "insensitive" as const } },
+              { description: { contains: search, mode: "insensitive" as const } },
+            ],
+          }
+        : {}),
+    };
 
     return prisma.product.findMany({
       where,
@@ -63,9 +67,23 @@ export const getProductList = unstable_cache(
   { tags: [PRODUCTS_TAG], revalidate: REVALIDATE_SECONDS }
 );
 
+/** Current slug for a retired/historical slug, or null. Used for 301 redirects. */
+export const getProductSlugRedirect = unstable_cache(
+  async (slug: string) => {
+    const hit = await prisma.productSlugHistory.findUnique({
+      where: { slug },
+      include: { product: { select: { slug: true } } },
+    });
+    return hit?.product?.slug ?? null;
+  },
+  ["public-product-slug-redirect"],
+  { tags: [PRODUCTS_TAG], revalidate: REVALIDATE_SECONDS }
+);
+
 export const getFeaturedProducts = unstable_cache(
   async () =>
     prisma.product.findMany({
+      where: { seoStatus: "published" },
       take: 4,
       include: { images: cardImages, specifications: true },
       orderBy: { createdAt: "desc" },
@@ -91,7 +109,7 @@ export const getProductBySlug = unstable_cache(
 export const getRelatedProducts = unstable_cache(
   async (currentProductId: number) =>
     prisma.product.findMany({
-      where: { NOT: { id: currentProductId } },
+      where: { seoStatus: "published", NOT: { id: currentProductId } },
       take: 4,
       include: { images: cardImages, specifications: true },
       orderBy: { createdAt: "desc" },

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import { SITE, SITE_URL, absoluteUrl, metaDescription, pageMetadata } from "@/lib/site";
-import { getProductBySlug, getProductList } from "@/lib/public-data";
+import { SITE } from "@/lib/site";
+import { buildProductJsonLd, resolveProductSeo } from "@/lib/product-seo";
+import { getProductBySlug, getProductList, getProductSlugRedirect } from "@/lib/public-data";
 import { categorizeProduct } from "@/lib/categories";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import FadeInView from "@/components/animations/FadeInView";
 import ProductImageGallery from "@/components/products/ProductImageGallery";
@@ -25,6 +26,9 @@ async function getProduct(slug: string) {
   const product = await getProductBySlug(slug);
 
   if (!product) {
+    // The slug may have changed: 301 old URLs to the current product page.
+    const current = await getProductSlugRedirect(slug);
+    if (current && current !== slug) permanentRedirect(`/products/${current}`);
     notFound();
   }
 
@@ -52,63 +56,33 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
-  const description = metaDescription(
-    product.description || `Handcrafted ${product.name} from Boyolali, Indonesia.`
-  );
-  const images = product.images.slice(0, 1).map((img) => ({
-    url: img.imageUrl,
-    alt: product.name,
-  }));
-  return pageMetadata({
-    title: product.name,
-    description,
-    path: `/products/${product.slug}`,
-    images,
+  const seo = resolveProductSeo(product);
+  const path = `/products/${product.slug}`;
+  const firstImage = product.images[0]?.imageUrl ?? SITE.ogImage;
+  const images = [{ url: firstImage, alt: seo.imageAlt }];
+  const draft = product.seoStatus === "draft";
+  return {
+    title: { absolute: seo.seoTitle },
+    description: seo.metaDescription,
     keywords: [product.name, ...categorizeProduct(product).keywords],
-  });
-}
-
-type DetailProduct = Awaited<ReturnType<typeof getProduct>>;
-
-/** schema.org Product + BreadcrumbList. Prices are quoted on request, so no Offer is emitted. */
-function productStructuredData(product: DetailProduct) {
-  const url = absoluteUrl(`/products/${product.slug}`);
-  const category = categorizeProduct(product);
-  const spec = product.specifications;
-  const additionalProperty = [
-    spec?.size && { "@type": "PropertyValue", name: "Size", value: spec.size },
-    spec?.finishing && { "@type": "PropertyValue", name: "Finishing", value: spec.finishing },
-  ].filter(Boolean);
-  return [
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": `${url}#product`,
-      name: product.name,
-      url,
-      ...(product.description ? { description: product.description } : {}),
-      ...(product.images.length
-        ? { image: product.images.slice(0, 6).map((img) => absoluteUrl(img.imageUrl)) }
-        : {}),
-      ...(spec?.material ? { material: spec.material } : {}),
-      ...(additionalProperty.length ? { additionalProperty } : {}),
-      brand: { "@type": "Brand", name: SITE.name },
-      manufacturer: { "@id": `${SITE_URL}/#organization` },
-      countryOfOrigin: "ID",
-      category: category.name,
-      keywords: [product.name, ...category.keywords].join(", "),
+    alternates: { canonical: path },
+    ...(draft ? { robots: { index: false, follow: false } } : {}),
+    openGraph: {
+      type: "website",
+      siteName: SITE.name,
+      locale: "en_US",
+      url: path,
+      title: seo.ogTitle,
+      description: seo.ogDescription,
+      images,
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-        { "@type": "ListItem", position: 2, name: "Products", item: absoluteUrl("/products") },
-        { "@type": "ListItem", position: 3, name: category.name, item: absoluteUrl(`/collections/${category.slug}`) },
-        { "@type": "ListItem", position: 4, name: product.name, item: url },
-      ],
+    twitter: {
+      card: "summary_large_image",
+      title: seo.ogTitle,
+      description: seo.ogDescription,
+      images: images.map((i) => i.url),
     },
-  ];
+  };
 }
 
 export default async function ProductDetailPage({
@@ -123,7 +97,7 @@ export default async function ProductDetailPage({
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-green-50">
-      <JsonLd data={productStructuredData(product)} />
+      <JsonLd data={buildProductJsonLd(product)} />
       {/* Breadcrumb Section (top padding clears the fixed header) */}
       <section className="bg-white border-b border-gray-100 pt-16 md:pt-[78px]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">

@@ -42,13 +42,37 @@ model Product {
   description    String?
   details        String?
   notes          String?
+  // --- SEO fields (auto-generated on save; admin can override) ---
+  seoTitle        String?  @map("seo_title") @db.VarChar(255)
+  metaDescription String?  @map("meta_description") @db.VarChar(320)
+  canonicalUrl    String?  @map("canonical_url")
+  imageAlt        String?  @map("image_alt") @db.VarChar(255)
+  ogTitle         String?  @map("og_title") @db.VarChar(255)
+  ogDescription   String?  @map("og_description") @db.VarChar(320)
+  /// "published" | "draft". Only published products appear in the sitemap and public listings.
+  seoStatus       String   @default("published") @map("seo_status") @db.VarChar(20)
+  /// Names of SEO fields an admin edited by hand; auto-generation never overwrites these.
+  seoOverrides    String[] @default([]) @map("seo_overrides")
   createdAt      DateTime              @default(now()) @map("created_at")
   updatedAt      DateTime              @updatedAt @map("updated_at")
   highlights     ProductHighlight[]
   images         ProductImage[]
   specifications ProductSpecification?
+  slugHistory    ProductSlugHistory[]
 
   @@map("products")
+}
+
+/// Old slugs kept alive after a product is renamed, so previous URLs 301 to the current one.
+model ProductSlugHistory {
+  id        Int      @id @default(autoincrement())
+  productId Int      @map("product_id")
+  slug      String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_slug_history")
 }
 
 model ProductHighlight {

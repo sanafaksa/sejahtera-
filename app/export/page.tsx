@@ -52,9 +52,9 @@ export default function ExportPage() {
         "imperial-nabawi-brass-grand-entrance-door",
         "artisanal-copper-countertop-wash-basin",
         "moroccan-filigree-brass-chandelier",
-        "tumang-hand-spun-copper-pendant-dome",
+        "hand-spun-copper-pendant-dome",
         "sculptural-kaligrafi-copper-wall-panel",
-        "tumang-fluted-copper-urn-planter",
+        "fluted-copper-urn-planter",
       ]}
       stepsHeading="How international orders work"
       steps={[
