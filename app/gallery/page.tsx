@@ -4,8 +4,7 @@ import FadeInView from "@/components/animations/FadeInView";
 import Link from "next/link";
 import { getGalleryAssets } from "@/lib/public-data";
 import ModernMosaicGallery, { GalleryAssetItem } from "@/components/gallery/ModernMosaicGallery";
-import InstagramFeed, { INSTAGRAM_EMBED_URL } from "@/components/gallery/InstagramFeed";
-import { ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import JsonLd from "@/components/JsonLd";
@@ -69,33 +68,8 @@ export default async function GalleryPage() {
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pt-8 sm:pt-12">
-        {INSTAGRAM_EMBED_URL ? (
-          <>
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-copper-600">
-                  Live from Instagram
-                </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#2c1609] mt-1">
-                  Our Latest Work
-                </h2>
-              </div>
-              <a
-                href="https://www.instagram.com/ilavioocopper_art/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full copper-metal text-white text-xs font-bold uppercase tracking-wider relative overflow-hidden hover:brightness-[1.06] transition-[filter] self-start sm:self-auto"
-              >
-                <Instagram className="w-4 h-4" />
-                <span>@ilavioocopper_art</span>
-              </a>
-            </div>
-            <InstagramFeed />
-          </>
-        ) : (
-          /* Modern Mosaic Gallery (database) — fallback until the IG widget is configured */
-          <ModernMosaicGallery initialItems={items} />
-        )}
+        {/* Modern Mosaic Gallery */}
+        <ModernMosaicGallery initialItems={items} />
 
         {/* Refined Bespoke Custom Work CTA */}
         <div className="mt-20 pt-12 border-t border-stone-200/80">
