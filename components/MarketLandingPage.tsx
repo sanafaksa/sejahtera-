@@ -34,8 +34,10 @@ export default async function MarketLandingPage({
   qa,
   ctaTitle,
   ctaText,
+  ctaButtonLabel = "Request a quote",
   serviceName,
   areaServed,
+  extraContent,
 }: {
   path: string;
   /** Short page name used in breadcrumbs and schema. */
@@ -51,8 +53,12 @@ export default async function MarketLandingPage({
   qa: LandingQA[];
   ctaTitle: string;
   ctaText: string;
+  /** Label for the primary CTA button (and hero intent). Defaults to "Request a quote". */
+  ctaButtonLabel?: string;
   serviceName: string;
   areaServed: Record<string, unknown>[] | Record<string, unknown>;
+  /** Optional page-specific sections rendered between the product grid and the ordering steps. */
+  extraContent?: ReactNode;
 }) {
   let products: Awaited<ReturnType<typeof getProductList>> = [];
   try {
@@ -78,6 +84,16 @@ export default async function MarketLandingPage({
       provider: { "@id": `${SITE_URL}/#organization` },
       areaServed,
       url: absoluteUrl(path),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${absoluteUrl(path)}#faq`,
+      mainEntity: qa.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
     },
   ];
 
@@ -121,6 +137,8 @@ export default async function MarketLandingPage({
           </div>
         </section>
       )}
+
+      {extraContent}
 
       {/* How ordering works */}
       <section className="py-14 sm:py-20">
@@ -169,7 +187,7 @@ export default async function MarketLandingPage({
               href="/contact"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full copper-metal text-white font-semibold relative overflow-hidden hover:brightness-[1.06] transition-[filter,box-shadow]"
             >
-              Request a quote <ArrowRight className="w-4 h-4" />
+              {ctaButtonLabel} <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href={whatsapp}
