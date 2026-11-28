@@ -162,7 +162,8 @@ export default async function ExportPage() {
     ...webPageStructuredData({
       type: "WebPage",
       path: "/export",
-      name: "International Projects",
+      // Breadcrumb label for this page: a clear "Export", matching the visible crumb.
+      name: "Export",
       description: DESCRIPTION,
     }),
     {
@@ -181,7 +182,7 @@ export default async function ExportPage() {
     <main className="min-h-screen bg-[#faf8f5]">
       <JsonLd data={structuredData} />
       <PageHero
-        crumb="International Projects"
+        crumb="Export"
         title="Handcrafted Copper and Brass Products for International Projects"
         description="Custom copper and brass, hand-made to order in Boyolali, Indonesia — for architects, hospitality projects and premium homes worldwide."
         fadeTo="#faf8f5"
